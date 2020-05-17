@@ -43,10 +43,17 @@ print "                    <i class=\"nc-icon nc-chart-pie-35\"></i>\n";
 print "                    <p>Gestion de Empresas</p>\n";
 print "                </a>\n";
 print "            </li>\n";
-print "            <li class=\"nav-item active\">\n";
+print "            <li class=\"nav-item\">\n";
 print "                <a class=\"nav-link\" href=\"./user.html\">\n";
 print "                    <i class=\"nc-icon nc-circle-09\"></i>\n";
 print "                    <p>Gestion de Usuarios</p>\n";
+print "                </a>\n";
+print "            </li>\n";
+print "            <li>\n";
+print "            <li class=\"nav-item active\">\n";
+print "                <a class=\"nav-link\" href=\"./useradmin.php\">\n";
+print "                    <i class=\"nc-icon nc-circle-09\"></i>\n";
+print "                    <p>Gestion de Admin</p>\n";
 print "                </a>\n";
 print "            </li>\n";
 print "            <li>\n";
@@ -113,6 +120,7 @@ print "                        </div>\n";
 print "                        <div class=\"card-body table-full-width table-responsive\">\n";
 $Obj = new admin();
 $aux = $Obj->obtenerTodos();
+$aux1 = $Obj->ultimoCodigo();
 print "                            <table class=\"table table-hover table-striped\">\n";
 print "                                <thead>\n";
 print "                                    <th>ID</th>\n";
@@ -127,16 +135,41 @@ print "                                         <td> $fila[0] </td>\n";
 print "                                        <td>$fila[1]</td>\n";
 print "                                        <td>$fila[2]</td>\n";
 print "                                        <td class=\"td-actions text-right\">\n";
-print "                                            <button type=\"button\" rel=\"tooltip\" title=\"Editar\" name = \"editar$fila[0]\" class=\"btn btn-info btn-simple btn-link\">\n";
+//$_SESSION['id'] = $fila[0];
+//$_SESSION['nomb'] = $fila[1];
+//$_SESSION['pass'] = $fila[2];
+print "                                            <button type=\"submit\" onclick=\"location.href='EditarAdmin.php ? pid=$fila[0]&pusuario=$fila[1]'\" rel=\"tooltip\" title=\"Editar\" name = \"editar$fila[0]\" value = \"$fila[0]\" class=\"btn btn-info btn-simple btn-link\">\n";
 print "                                                <i class=\"fa fa-edit\"></i>\n";
 print "                                            </button>\n";
-print "                                            <button type=\"button\" rel=\"tooltip\" title=\"Eliminar\" name = \"eliminar$fila[0]\" class=\"btn btn-danger btn-simple btn-link\">\n";
+print "                                            <button type=\"button\" onclick=\"location.href='../controlador/controladorBorrarAdmin.php ? pid=$fila[0]'\" rel=\"tooltip\" title=\"Eliminar\" name = \"eliminar$fila[0]\" class=\"btn btn-danger btn-simple btn-link\">\n";
 print "                                                <i class=\"fa fa-times\"></i>\n";
 print "                                            </button>\n";
 print "                                        </td>\n";
 print "                                    </tr>\n";
 print "                                    <tr>\n";
 }
+/*for ($i = 0; $i <= $aux1; $i++)
+{
+if(isset($_POST['editar'.$i]))
+{
+    $Obj = new admin();
+    $var = $Obj->buscarCuenta($_POST['editar'.$i]);
+    $ej = $var->fetch_row();
+    $_SESSION['id'] = $ej[0];
+    $_SESSION['nomb'] = $ej[1];
+}
+}*/
+/*for ($i = 1; $i <= $aux1; $i++)
+  {
+    if ($_POST['editar'.$i])
+    {
+    $Obj = new admin();
+    $var = $Obj->buscarCuenta($_POST['editar'.$fila[0]);
+    $ej = $var->fetch_row();
+    $_SESSION['id'] = $ej[0];
+    $_SESSION['nomb'] = $ej[1];
+    }
+  }*/
 print "                                </tbody>\n";
 print "                            </table>\n";
 print "                        </div>\n";

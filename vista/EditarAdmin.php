@@ -1,6 +1,8 @@
-<?php
+﻿<?php
 session_start();
 require_once __DIR__.'/../modelo/AdminModelo.php';
+$userid = $_GET['pid'];
+$usu = $_GET['pusuario'];
 ?>
  <!DOCTYPE html>
 
@@ -103,7 +105,7 @@ require_once __DIR__.'/../modelo/AdminModelo.php';
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Registrar Nuevo Admin</h4>
+                                    <h4 class="card-title">Modificar Admin</h4>
                                 </div>
                                 <div class="card-body">
  <script>
@@ -118,7 +120,7 @@ require_once __DIR__.'/../modelo/AdminModelo.php';
         return true;
     }
 </script>
-                                    <form name="myForm" action="RegistrarAdmin.php" method="POST">
+                                    <form name="myForm" action="EditarAdmin.php" method="POST">
                                         <?php
                                         $Obj = new admin();
                                         $aux = $Obj->ultimoCodigo();
@@ -129,13 +131,13 @@ require_once __DIR__.'/../modelo/AdminModelo.php';
                                             <div class="col-md-1 pr-1">
                                                 <div class="form-group">
                                                     <label>ID</label>
-                                                    <input type="text" class="form-control" readonly="readonly" placeholder="#" value="<?php echo $siguiente; ?>">
+                                                    <input type="text" name="txtId" class="form-control" readonly="readonly" placeholder="#" value="<?php echo $userid; ?>">
                                                 </div>
                                             </div>
                                             <div class="col-md-3 px-1">
                                                 <div class="form-group">
                                                     <label>USUARIO</label>
-                                                    <input type="text" name ="txtUsuario"class="form-control" placeholder="USUARIO" required>
+                                                    <input type="text" name="txtU" class="form-control" readonly="readonly" placeholder="USUARIO" value="<?php echo $usu; ?>" />
                                                 </div>
                                             </div>
                                             <div class="col-md-4 pl-1">
@@ -152,18 +154,16 @@ require_once __DIR__.'/../modelo/AdminModelo.php';
                                             </div>
 
                                         </div>
-                                        <input type="submit" name ="btnAdicionar" class="btn btn-info btn-fill pull-right" value="Registrar Nuevo Usuario" onclick="return verificar();">
+                                        <input type="submit" name ="btnModificar" class="btn btn-info btn-fill pull-right" value="Modificar Admin" onclick="return verificar();">
                                         <div class="clearfix"></div>
                                     </form>
                                     <?php
-                                    if(isset($_POST['btnAdicionar']))
+                                    if(isset($_POST['btnModificar']))
                                         {
                                             require_once __DIR__.'/../modelo/AdminModelo.php';
                                             $Obj = new admin();
-                                            echo "<script>alert('SE ADICIONO EXITOSAMENTE');</script>";
-                                            $Obj->setUsuario($_POST['txtUsuario']);
-                                            $Obj->setContrasena($_POST['txtClave']);
-                                            $Obj->adicionarUsuario();
+                                            echo "<script>alert('SE MODIFICO EXITOSAMENTE');</script>";
+                                            $Obj->modificarUsuario($_POST['txtClave'],$_POST['txtU']);
                                             echo " <script>window.location = '/proyectofinal/vista/useradmin.php';</script>";
                                     }
                                     ?>

@@ -38,7 +38,7 @@ class admin{
     {
       return $this->idAdmin;
     }
-    public function geUsuario()
+    public function getUsuario()
     {
       return $this->usuario;
     }
@@ -80,29 +80,29 @@ class admin{
    
 
 
-    public function modificarUsuario($usu , $con)
+    public function modificarUsuario($contra,$usu)
     {
         $conexion = Conectar::conectarBD();//nos conectamos a la base de datos
         if($conexion != false)
         {
-            $sql = "UPDATE admin SET contrasena = $con  WHERE usuario= '$usu';";
-          
+            $sql = "UPDATE admin SET contrasena= '$contra' WHERE usuario= '$usu';";
+            echo $sql;
             $stmt=$conexion->prepare($sql);
-            $stmt->bind_param('ss',$con ,$usu);
+            $stmt->bind_param('ss',$contra, $usu);
             if($stmt->execute())
             {
                 $conexion->close();
                 return (true);
-
+                
             }
             else
             {
                 $conexion->close();
                 return (false);
             }
-
+          
         }
-
+        
     }
     public function obtenerCuenta($usuario="",$contrasena="") {
         $sql = "SELECT * FROM admin WHERE usuario= '$usuario' AND contrasena= '$contrasena';";
@@ -111,6 +111,14 @@ class admin{
         $conexion->close();
         return ($rows);
      }
+    public function buscarCuenta($id) {
+        $sql = "SELECT * FROM admin WHERE idAdmin='$id';";
+         $conexion = Conectar::conectarBD();
+        $rows = $conexion->query($sql);
+        $conexion->close();
+        return ($rows);
+     }
+
      public function ultimoCodigo()	{
 	  $sql="select max(idAdmin) as maximo from admin;";	  
       $conexion = Conectar::conectarBD();
@@ -118,6 +126,23 @@ class admin{
       $conexion->close();
       return ($rows);
 	}
+     public function borrarAdmin($id)
+    {
+        $sql = "DELETE FROM admin WHERE idAdmin='$id';";
+        $conexion = Conectar::conectarBD();
+        $stmt = $conexion->prepare($sql);
+        $stmt->bind_param('s',$id);
+        if($stmt->execute())
+        {
+            $conexion->close();
+            return 1;
+        }
+        else
+        {
+            $conexion->close();
+            return -1;
+        }
+    }
 
 	
     
