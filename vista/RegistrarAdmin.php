@@ -118,7 +118,7 @@ require_once __DIR__.'/../modelo/AdminModelo.php';
         return true;
     }
 </script>
-                                    <form name="myForm" action="../controlador/admincontrolador.php" method="POST">
+                                    <form name="myForm" action="RegistrarAdmin.php" method="POST">
                                         <?php
                                         $Obj = new admin();
                                         $aux = $Obj->ultimoCodigo();
@@ -152,9 +152,21 @@ require_once __DIR__.'/../modelo/AdminModelo.php';
                                             </div>
                                             
                                         </div>
-                                        <input type="submit" name ="btnAdicionar" class="btn btn-info btn-fill pull-right" value="Registrar Nuevo Usuario" onclick="verificar();">
+                                        <input type="submit" name ="btnAdicionar" class="btn btn-info btn-fill pull-right" value="Registrar Nuevo Usuario" onclick="return verificar();">
                                         <div class="clearfix"></div>
                                     </form>
+                                    <?php
+                                    if(isset($_POST['btnAdicionar']))
+                                        {
+                                            require_once __DIR__.'/../modelo/AdminModelo.php';
+                                            $Obj = new admin();
+                                            echo "<script>alert('SE ADICIONO EXITOSAMENTE');</script>";
+                                            $Obj->setUsuario($_POST['txtUsuario']);
+                                            $Obj->setContrasena($_POST['txtClave']);
+                                            $Obj->adicionarUsuario();
+                                            echo " <script>window.location = '/proyectofinal/vista/useradmin.php';</script>";
+                                    }
+                                    ?>
                                 </div>
                             </div>
                         </div>

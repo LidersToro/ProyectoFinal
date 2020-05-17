@@ -15,10 +15,13 @@ if(isset($_POST['btn_login']))
      $fila=$row->fetch_row();
             if($fila[1]==$_POST['user']&&$fila[2]==$_POST['clave'])
             {
-             header("location: /proyectoFinal/vista/dashboardadmin.php");
+            echo " <script>window.location = '/proyectofinal/vista/dashboardadmin.php';</script>";
+          //   header("location: /proyectoFinal/vista/dashboardadmin.php");
             }else
             {
-             header("location: /proyectoFinal/vista/adminlogin.php");
+            echo "<script>alert('NOMBRE DE USUARIO O CONTRASENA INCORRECTO!');</script>";
+            echo " <script>window.location = '/proyectofinal/vista/adminlogin.php';</script>";
+            // header("location: /proyectoFinal/vista/adminlogin.php");
             }
      }
 }
