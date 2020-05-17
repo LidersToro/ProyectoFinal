@@ -1,0 +1,70 @@
+create table cliente(
+idCliente int AUTO_INCREMENT PRIMARY KEY,
+nombre varchar(30),
+correo varchar(30),
+contrasena varchar(30),
+latitud varchar(30),
+longitud varchar(30),
+telefono varchar(10));
+
+create table empresa(
+idEmpresa int AUTO_INCREMENT PRIMARY KEY,
+nombre varchar(30),
+correo varchar(30),
+contrasena varchar(30),
+latitud varchar(30),
+longitud varchar(30),
+telefono varchar(10));
+
+create table motoquero(
+idMotoquero int AUTO_INCREMENT PRIMARY KEY,
+nombre varchar(30),
+correo varchar(30),
+contrasena varchar(30),
+CI varchar (20),
+placa varchar (30),
+estado varchar (20),
+imagen blob,
+telefono varchar(10));
+
+create table categoria(
+idCategoria int AUTO_INCREMENT PRIMARY KEY,
+nombre varchar(30),
+descripcion varchar(30),
+imagen blob);
+
+create table producto(
+idProducto int AUTO_INCREMENT PRIMARY KEY,
+nombre varchar(30),
+descripcion varchar(30),
+precio float,
+imagen blob,
+idEmpresa int,
+idCategoria int,
+foreign key(idEmpresa) references empresa(idEmpresa),
+foreign key(idCategoria) references categoria(idCategoria));
+
+create table orden(
+idOrden int AUTO_INCREMENT PRIMARY KEY,
+precioTotal float,
+estado varchar(30),
+idEmpresa int,
+idCliente int,
+idMotoquero int,
+foreign key(idEmpresa) references empresa(idEmpresa),
+foreign key(idCliente) references cliente(idCliente),
+foreign key(idMotoquero) references motoquero(idMotoquero));
+
+create table ordenproducto(
+idProducto int,
+idOrden int,
+cantidad int (10),
+precio float,
+primary key(idProducto,idOrden),
+foreign key(idProducto) references producto(idProducto),
+foreign key(idOrden) references orden(idOrden));
+
+create table admin(
+idAdmin int AUTO_INCREMENT PRIMARY KEY,
+usuario varchar(30),
+contrasena varchar(30));

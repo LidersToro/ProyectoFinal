@@ -15,7 +15,7 @@ class Conectar {
     public static function conectarBD()
     {
         $host="localhost";//define el servidor
-        $basededatos="promoupsa";//define el nombre de la base de datos
+        $basededatos="proyectofinal";//define el nombre de la base de datos
         $usuariodb="root";//nombre del usuario autorizado para la BD
         $clavedb="";//password del usuario
 

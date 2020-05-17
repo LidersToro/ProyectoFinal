@@ -1,6 +1,6 @@
-
-
-
+<?php
+session_start();
+?>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Login Page</title>
+	<title>Admin Login Page</title>
    <!--Made with love by Mutiullah Samim -->
    
 
@@ -27,7 +27,7 @@
 	<div class="d-flex justify-content-center h-100">
 		<div class="card">
 			<div class="card-header text-center mt-5">
-				<h3 >  Delivery SLC  </h3>
+				<h3 >  Admin Delivery SLC  </h3>
 				<div class="d-flex justify-content-end social_icon">
 					<span><i class="fab fa-facebook-square"></i></span>
 					<span><i class="fab fa-google-plus-square"></i></span>
@@ -35,7 +35,7 @@
 				</div>
 			</div>
 			<div class="card-body">
-				<form method="POST" action="../controlador/controladorlogin.php">
+				<form method="POST" action="../controlador/controladoradminlogin.php">
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
@@ -50,13 +50,13 @@
 						<input type="password" class="form-control" name="clave" placeholder="Contrase&ntilde;a" required>
 					</div>
 					<div class="form-group">
-						<input type="submit" value="Ingresar" class="btn float-right login_btn" >
+						<input type="submit" name="btn_login" value="Ingresar" class="btn float-right login_btn" >
 					</div>
 				</form>
 			</div>
 			<div class="card-footer">
 				<div class="d-flex justify-content-center">
-					<a href="adminlogin.php">Iniciar como Administrador</a>
+					<a href="login.html">Iniciar como cliente</a>
 				</div>
 			</div>
 		</div>
@@ -64,3 +64,4 @@
 </div>
 </body>
 </html>
+
