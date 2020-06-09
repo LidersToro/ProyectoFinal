@@ -26,6 +26,11 @@ if(isset($_POST['btn_login']))
      }
 }
 
+if(isset($_POST['btn_registrar'])) 
+{
+echo " <script>window.location = '/proyectofinal/vista/RegistraseComoCliente.php';</script>";
+
+}
 
 
 
