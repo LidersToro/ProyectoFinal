@@ -3,7 +3,7 @@
 
 require_once("ConectarDB.php");//incluye una sola vez el contenido del archivo
 class admin{
-    private $idAdmin;
+    private $idAdmin;v
     private $usuario;
     private $contrasena;
 

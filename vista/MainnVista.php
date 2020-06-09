@@ -11,7 +11,7 @@ class MainnVista
     private $view;
     public function __construct()
     {
-        $this->view = file_get_contents(header("location: vista/login.html"));
+        $this->view = file_get_contents(header("location: vista/cliente/index.html"));
     }
     function getView()
     {
