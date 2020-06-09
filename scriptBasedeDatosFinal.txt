@@ -5,6 +5,7 @@ correo varchar(30),
 contrasena varchar(30),
 latitud varchar(30),
 longitud varchar(30),
+direccion varchar(30),
 telefono varchar(10));
 
 create table empresa(
@@ -14,7 +15,8 @@ correo varchar(30),
 contrasena varchar(30),
 latitud varchar(30),
 longitud varchar(30),
-telefono varchar(10));
+telefono varchar(10),
+imagen blob);
 
 create table motoquero(
 idMotoquero int AUTO_INCREMENT PRIMARY KEY,
@@ -31,7 +33,10 @@ create table categoria(
 idCategoria int AUTO_INCREMENT PRIMARY KEY,
 nombre varchar(30),
 descripcion varchar(30),
-imagen blob);
+imagen blob,
+idEmpresa int,
+foreign key(idEmpresa) references empresa(idEmpresa)
+);
 
 create table producto(
 idProducto int AUTO_INCREMENT PRIMARY KEY,
@@ -48,6 +53,7 @@ create table orden(
 idOrden int AUTO_INCREMENT PRIMARY KEY,
 precioTotal float,
 estado varchar(30),
+fecha date,
 idEmpresa int,
 idCliente int,
 idMotoquero int,

@@ -1,8 +1,6 @@
-<?php
+﻿<?php
 session_start();
-require_once __DIR__.'/../modelo/AdminModelo.php';
-$userid = $_GET['pid'];
-$usu = $_GET['pusuario'];
+require_once __DIR__.'/../modelo/EmpresaModelo.php';
 ?>
  <!DOCTYPE html>
 
@@ -32,26 +30,39 @@ $usu = $_GET['pusuario'];
              <div class="sidebar-wrapper">
                  <div class="logo">
                      <a href="#pablo" class="simple-text">
-                         Delivery SLC
+                         Delivery SLC (ADMIN)
+                        
+                         <?php
+                         echo "\n";
+                         echo $_SESSION['user'];
+                         ?>
+
+
                      </a>
                  </div>
                  <ul class="nav">
-                     <li>
-                         <a class="nav-link" href="dashboard.html">
+                     <li class="nav-item active">
+                         <a class="nav-link" href="empresagestion.php">
                              <i class="nc-icon nc-chart-pie-35"></i>
                              <p>Gestion de Empresas</p>
                          </a>
                      </li>
-                     <li class="nav-item active">
+                     <li>
                          <a class="nav-link" href="./user.html">
                              <i class="nc-icon nc-circle-09"></i>
-                             <p>Gestion de Usuarios</p>
+                             <p>Gestion Usuarios</p>
                          </a>
                      </li>
                      <li>
                          <a class="nav-link" href="./maps.html">
                              <i class="nc-icon nc-pin-3"></i>
                              <p>Delivery</p>
+                         </a>
+                     </li>
+                     <li>
+                         <a class="nav-link" href="./useradmin.php">
+                             <i class="nc-icon nc-circle-09"></i>
+                             <p>Gestion de Admin</p>
                          </a>
                      </li>
                      <li class="nav-item active active-pro">
@@ -105,7 +116,7 @@ $usu = $_GET['pusuario'];
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Modificar Admin</h4>
+                                    <h4 class="card-title">Registrar Nueva Empresa</h4>
                                 </div>
                                 <div class="card-body">
  <script>
@@ -120,9 +131,9 @@ $usu = $_GET['pusuario'];
         return true;
     }
 </script>
-                                    <form name="myForm" action="EditarAdmin.php" method="POST">
+                                    <form name="myForm" action="RegistrarEmpresa.php" method="POST">
                                         <?php
-                                        $Obj = new admin();
+                                        $Obj = new empresa();
                                         $aux = $Obj->ultimoCodigo();
                                         $fila = $aux->fetch_row();
                                         $siguiente = $fila[0] + 1;
@@ -131,13 +142,19 @@ $usu = $_GET['pusuario'];
                                             <div class="col-md-1 pr-1">
                                                 <div class="form-group">
                                                     <label>ID</label>
-                                                    <input type="text" name="txtId" class="form-control" readonly="readonly" placeholder="#" value="<?php echo $userid; ?>">
+                                                    <input type="text" class="form-control" readonly="readonly" placeholder="#" value="<?php echo $siguiente; ?>">
                                                 </div>
                                             </div>
                                             <div class="col-md-3 px-1">
                                                 <div class="form-group">
-                                                    <label>USUARIO</label>
-                                                    <input type="text" name="txtU" class="form-control" readonly="readonly" placeholder="USUARIO" value="<?php echo $usu; ?>" />
+                                                    <label>NOMBRE</label>
+                                                    <input type="text" name ="txtNombre"class="form-control" placeholder="NOMBRE" required>
+                                                </div>
+                                            </div>
+                                             <div class="col-md-4 pl-1">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">CORREO</label>
+                                                    <input type="email" name ="txtCorreo" class="form-control" placeholder="CORREO" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-4 pl-1">
@@ -152,18 +169,26 @@ $usu = $_GET['pusuario'];
                                                     <input type="password" name ="txtClave2" class="form-control" placeholder="CONFIRMAR CONTRASENA" required>
                                                 </div>
                                             </div>
+                                             <div class="col-md-4 pl-1">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">CONFIRMAR CONTRASENA</label>
+                                                    <input type="password" name ="txtClave2" class="form-control" placeholder="CONFIRMAR CONTRASENA" required>
+                                                </div>
+                                            </div>
 
                                         </div>
-                                        <input type="submit" name ="btnModificar" class="btn btn-info btn-fill pull-right" value="Modificar Admin" onclick="return verificar();">
+                                        <input type="submit" name ="btnAdicionar" class="btn btn-info btn-fill pull-right" value="Registrar Nueva Empresa" onclick="return verificar();">
                                         <div class="clearfix"></div>
                                     </form>
                                     <?php
-                                    if(isset($_POST['btnModificar']))
+                                    if(isset($_POST['btnAdicionar']))
                                         {
                                             require_once __DIR__.'/../modelo/AdminModelo.php';
                                             $Obj = new admin();
-                                            echo "<script>alert('SE MODIFICO EXITOSAMENTE');</script>";
-                                            $Obj->modificarUsuario($_POST['txtClave'],$_POST['txtU']);
+                                            echo "<script>alert('SE ADICIONO EXITOSAMENTE');</script>";
+                                            $Obj->setUsuario($_POST['txtUsuario']);
+                                            $Obj->setContrasena($_POST['txtClave']);
+                                            $Obj->adicionarUsuario();
                                             echo " <script>window.location = '/proyectofinal/vista/useradmin.php';</script>";
                                     }
                                     ?>

@@ -30,7 +30,14 @@ require_once __DIR__.'/../modelo/AdminModelo.php';
              <div class="sidebar-wrapper">
                  <div class="logo">
                      <a href="#pablo" class="simple-text">
-                         Delivery SLC
+                         Delivery SLC (ADMIN)
+                        
+                         <?php
+                         echo "\n";
+                         echo $_SESSION['user'];
+                         ?>
+
+
                      </a>
                  </div>
                  <ul class="nav">
@@ -40,16 +47,22 @@ require_once __DIR__.'/../modelo/AdminModelo.php';
                              <p>Gestion de Empresas</p>
                          </a>
                      </li>
-                     <li class="nav-item active">
+                     <li>
                          <a class="nav-link" href="./user.html">
                              <i class="nc-icon nc-circle-09"></i>
-                             <p>Gestion de Usuarios</p>
+                             <p>Gestion Usuarios</p>
                          </a>
                      </li>
                      <li>
                          <a class="nav-link" href="./maps.html">
                              <i class="nc-icon nc-pin-3"></i>
                              <p>Delivery</p>
+                         </a>
+                     </li>
+                     <li class="nav-item active">
+                         <a class="nav-link" href="./useradmin.php">
+                             <i class="nc-icon nc-circle-09"></i>
+                             <p>Gestion de Admin</p>
                          </a>
                      </li>
                      <li class="nav-item active active-pro">

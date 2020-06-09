@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 session_start();
-require_once __DIR__.'/../modelo/AdminModelo.php';
+require_once __DIR__.'/../modelo/EmpresaModelo.php';
 print "<!DOCTYPE html>\n";
 print "<html lang=\"en\">\n";
 print "\n";
@@ -37,7 +37,7 @@ echo $_SESSION['user'];
 print "            </a>\n";
 print "        </div>\n";
 print "        <ul class=\"nav\">\n";
-print "            <li >\n";
+print "            <li class=\"nav-item active\">\n";
 print "                <a class=\"nav-link\" href=\"empresagestion.php\">\n";
 print "                    <i class=\"nc-icon nc-chart-pie-35\"></i>\n";
 print "                    <p>Gestion de Empresas</p>\n";
@@ -50,7 +50,7 @@ print "                    <p>Gestion de Usuarios</p>\n";
 print "                </a>\n";
 print "            </li>\n";
 print "            <li>\n";
-print "            <li class=\"nav-item active\">\n";
+print "            <li class=\"nav-item\">\n";
 print "                <a class=\"nav-link\" href=\"./useradmin.php\">\n";
 print "                    <i class=\"nc-icon nc-circle-09\"></i>\n";
 print "                    <p>Gestion de Admin</p>\n";
@@ -75,7 +75,7 @@ print "<div class=\"main-panel\">\n";
 print "    <!-- Navbar -->\n";
 print "    <nav class=\"navbar navbar-expand-lg \" color-on-scroll=\"500\">\n";
 print "        <div class=\"container-fluid\">\n";
-print "            <a class=\"navbar-brand\" href=\"#pablo\"> Gestion de Admin </a>\n";
+print "            <a class=\"navbar-brand\" href=\"#pablo\"> Gestion de Empresas </a>\n";
 print "            <button href=\"\" class=\"navbar-toggler navbar-toggler-right\" type=\"button\" data-toggle=\"collapse\" aria-controls=\"navigation-index\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n";
 print "                <span class=\"navbar-toggler-bar burger-lines\"></span>\n";
 print "                <span class=\"navbar-toggler-bar burger-lines\"></span>\n";
@@ -113,19 +113,25 @@ print "            <div class=\"row\">\n";
 print "                <div class=\"col-md-12\">\n";
 print "                    <div class=\"card strpied-tabled-with-hover\">\n";
 print "                        <div class=\"card-header \">\n";
-print "                            <h4 class=\"card-title\">Lista de los Usuarios Inscritos a nuesto Delivery</h4>\n";
+print "                            <h4 class=\"card-title\">Lista de las Empresas Inscritas a nuesto Delivery</h4>\n";
 print "                            <p class=\"card-category\">Delivery SLC</p>\n";
-print "                            <button type=\"submit\" onclick=\"location.href='RegistrarAdmin.php'\" class=\"btn btn-info btn-fill pull-left\">Registrar Nuevo Admin</button>\n";
+print "                            <button type=\"submit\" onclick=\"location.href='RegistrarEmpresa.php'\" class=\"btn btn-info btn-fill pull-left\">Registrar Nueva Empresa</button>\n";
 print "                        </div>\n";
 print "                        <div class=\"card-body table-full-width table-responsive\">\n";
-$Obj = new admin();
+
+$Obj = new empresa();
 $aux = $Obj->obtenerTodos();
-$aux1 = $Obj->ultimoCodigo();
+//$aux1 = $Obj->ultimoCodigo();
 print "                            <table class=\"table table-hover table-striped\">\n";
 print "                                <thead>\n";
 print "                                    <th>ID</th>\n";
-print "                                    <th>Usuario</th>\n";
+print "                                    <th>Nombre</th>\n";
+print "                                    <th>Correo</th>\n";
 print "                                    <th>Contrasena</th>\n";
+print "                                    <th>Latitud</th>\n";
+print "                                    <th>Longitud</th>\n";
+print "                                    <th>Telefono</th>\n";
+print "                                    <th>Logo</th>\n";
 print "                                </thead>\n";
 print "                                <tbody>\n";
 while($fila = $aux->fetch_row()){
@@ -134,6 +140,11 @@ print "                                    <tr>\n";
 print "                                         <td> $fila[0] </td>\n";
 print "                                        <td>$fila[1]</td>\n";
 print "                                        <td>$fila[2]</td>\n";
+print "                                        <td>$fila[3]</td>\n";
+print "                                        <td>$fila[4]</td>\n";
+print "                                        <td>$fila[5]</td>\n";
+print "                                        <td>$fila[6]</td>\n";
+print "                                        <td>$fila[7]</td>\n";
 print "                                        <td class=\"td-actions text-right\">\n";
 //$_SESSION['id'] = $fila[0];
 //$_SESSION['nomb'] = $fila[1];
@@ -170,6 +181,7 @@ if(isset($_POST['editar'.$i]))
     $_SESSION['nomb'] = $ej[1];
     }
   }*/
+
 print "                                </tbody>\n";
 print "                            </table>\n";
 print "                        </div>\n";
@@ -182,7 +194,7 @@ print "    <footer class=\"footer\">\n";
 print "        <div class=\"container-fluid\">\n";
 print "            <nav>\n";
 print "                <p class=\"copyright text-center\">\n";
-print "                    �\n";
+print "                    ©\n";
 print "                    <script>\n";
 print "                        document.write(new Date().getFullYear())\n";
 print "                    </script>\n";
