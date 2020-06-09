@@ -114,4 +114,3 @@ function placeMarker(location) {
 </script>
 </body>
 </html>
-
