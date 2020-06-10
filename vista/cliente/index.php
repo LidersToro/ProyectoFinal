@@ -58,6 +58,7 @@ session_start();
                                 <a href="#"><i class="fa fa-linkedin"></i></a>
                                 <a href="#"><i class="fa fa-pinterest-p"></i></a>
                             </div>
+                            <div class="header__top__right__social">
                             <div class="header__top__right__auth">
                                 <a href="./../login.html"><i class="fa fa-user"></i>
                                 <?php if ($_SESSION['user'] != "")
@@ -66,6 +67,18 @@ session_start();
                                     echo "Login";                    
 								}
                                 ?></a>
+                            </div>
+                            </div>
+                            <div class="header__top__right__auth">
+                                <?php if ($_SESSION['user'] == "")
+                                {
+                                
+                                
+                                }else{
+                                echo '<a href="./../../controlador/controladorsalirsesion.php"></i>Cerrar Sesión</a>';               
+								}
+                                ?>
+                                
                             </div>
                         </div>
                     </div>

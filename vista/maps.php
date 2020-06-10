@@ -11,7 +11,7 @@
 
 <input id="searchTextField" type="hidden" size="50" style="text-align: left;width:357px;direction: ltr;">
 <br>
-           latitude:<input name="latitude" class="MapLat" value="" type="text" placeholder="Latitude" style="width: 161px;" disabled>
+            latitude:<input name="latitude" class="MapLat" value="" type="text" placeholder="Latitude" style="width: 161px;" disabled>
             longitude:<input name="longitude" class="MapLon" value="" type="text" placeholder="Longitude" style="width: 161px;" disabled>
 
     <div id="map_canvas" style="height: 350px;width: 500px;margin: 0.6em;"></div>
@@ -20,38 +20,6 @@
 
 
 <script>
-
-
-
-    ////////////////////////////////////
-    /*var map = new google.maps.Map(document.getElementById(map_canvas), {
-        center: {
-            lat: 27.72,
-            lng: 85.36
-        },
-        zoom: 15
-    });
-    var marker = new google.maps.Marker({
-        position: {
-            lat: 27.72,
-            lng: 85.36
-        },
-        map: map,
-        draggable: true
-    });
-    google.maps.event.addListener(marker, 'dragend', function () {
-        var lat = marker.getPosition().lat();
-        var lng = marker.getPosition().lng();
-         });
-        $('#lat').val(lat);
-        $('#lng').val(lng);
-
-    });
-
-*/
-
-
-
       $(function () {
           var markers = [];
           var geocoder = new google.maps.Geocoder();
@@ -59,10 +27,6 @@
             lng = -63.176,
             latlng = new google.maps.LatLng(lat, lng),
             image = 'http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png';
-
-        //zoomControl: true,
-        //zoomControlOptions: google.maps.ZoomControlStyle.LARGE,
-
         var mapOptions = {
             center: new google.maps.LatLng(lat, lng),
             zoom: 13,
@@ -101,74 +65,13 @@
                   $('.MapLon').val(lng);
          });
 
-          /////////////
-
-//google.maps.event.addDomListener(window, 'load', initialize);
-
-
-          /////////////
-
-         //google.maps.event.addListener(autocomplete, 'place_changed', function (event) {
-         //    infowindow.close();
-         //    var place = autocomplete.getPlace();
-         //    if (place.geometry.viewport) {
-         //        map.fitBounds(place.geometry.viewport);
-         //    } else {
-         //        map.setCenter(place.geometry.location);
-         //        map.setZoom(17);
-         //    }
-
-         //    moveMarker(place.name, place.geometry.location);
-         //    $('.MapLat').val(place.geometry.location.lat());
-         //    $('.MapLon').val(place.geometry.location.lng());
-         //});
-         //google.maps.event.addListener(map, 'click', function (event) {
-         //    $('.MapLat').val(event.latLng.lat());
-         //    $('.MapLon').val(event.latLng.lng());
-         //    infowindow.close();
-         //            var geocoder = new google.maps.Geocoder();
-         //            geocoder.geocode({
-         //                "latLng":event.latLng
-         //            }, function (results, status) {
-         //                console.log(results, status);
-         //                if (status == google.maps.GeocoderStatus.OK) {
-         //                    console.log(results);
-         //                    var lat = results[0].geometry.location.lat(),
-         //                        lng = results[0].geometry.location.lng(),
-         //                        placeName = results[0].address_components[0].long_name,
-         //                        latlng = new google.maps.LatLng(lat, lng);
-
-         //                    moveMarker(placeName, latlng);
-         //                    $("#searchTextField").val(results[0].formatted_address);
-         //                }
-         //            });
-         //});
+          
         
          function moveMarker(placeName, latlng) {
              marker.setIcon(image);
              marker.setPosition(latlng);
              infowindow.setContent(placeName);
-             //infowindow.open(map, marker);
           }
-
-
-
-
-//         google.maps.event.addListener(map, 'click', function(event) {
-//   placeMarker(event.latLng);
-//         });
-
-
-//function placeMarker(location) {
-//    var marker = new google.maps.Marker({
-//        position: location, 
-//        map: map,
-//        draggable:true,
-
-//    });
-//}
-
-
      }); 
 
     

@@ -144,7 +144,7 @@
                     <div class="breadcrumb__text">
                         <h2>Empresas</h2>
                         <div class="breadcrumb__option">
-                            <a href="./index.html">Inicio&nbsp;</a>
+                            <a href="./index.php">Inicio&nbsp;</a>
                             <span>Empresas</span>
                         </div>
                     </div>
