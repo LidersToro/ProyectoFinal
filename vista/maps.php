@@ -13,6 +13,7 @@
 <br>
            latitude:<input name="latitude" class="MapLat" value="" type="text" placeholder="Latitude" style="width: 161px;" disabled>
             longitude:<input name="longitude" class="MapLon" value="" type="text" placeholder="Longitude" style="width: 161px;" disabled>
+    <input type="button" id="routebtn" value="route" />
 
     <div id="map_canvas" style="height: 350px;width: 500px;margin: 0.6em;"></div>
 
@@ -50,12 +51,10 @@
 
 */
 
-
-
       $(function () {
           var markers = [];
           var geocoder = new google.maps.Geocoder();
-        var lat = -17.749,
+         var lat = -17.749,
             lng = -63.176,
             latlng = new google.maps.LatLng(lat, lng),
             image = 'http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png';
@@ -150,6 +149,49 @@
              infowindow.setContent(placeName);
              //infowindow.open(map, marker);
           }
+         function mapLocation() {
+    var directionsDisplay;
+    var directionsService = new google.maps.DirectionsService();
+    var map;
+
+    function initialize() {
+        directionsDisplay = new google.maps.DirectionsRenderer();
+        var chicago = new google.maps.LatLng(37.334818, -121.884886);
+        var mapOptions = {
+            zoom: 7,
+            center: chicago
+        };
+        map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+        directionsDisplay.setMap(map);
+        google.maps.event.addDomListener(document.getElementById('routebtn'), 'click', calcRoute);
+    }
+
+    function calcRoute() {
+        var start = new google.maps.LatLng(37.334818, -121.884886);
+        //var end = new google.maps.LatLng(38.334818, -181.884886);
+        var end = new google.maps.LatLng(37.441883, -122.143019);
+        var bounds = new google.maps.LatLngBounds();
+        bounds.extend(start);
+        bounds.extend(end);
+        map.fitBounds(bounds);
+        var request = {
+            origin: start,
+            destination: end,
+            travelMode: google.maps.TravelMode.DRIVING
+        };
+        directionsService.route(request, function (response, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(response);
+                directionsDisplay.setMap(map);
+            } else {
+                alert("Directions Request from " + start.toUrlValue(6) + " to " + end.toUrlValue(6) + " failed: " + status);
+            }
+        });
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+}
+mapLocation();
 
 
 
