@@ -100,7 +100,7 @@
                                 <div id="map_canvas" style="height: 350px;width: 500px;margin: 0.6em;"></div>
                             </div>
                             <div class="text-right">
-                             <input type="submit" name ="btnAdicionar" class="site-btn te" value="Registrar Nuevo Cliente" onclick="return verificar();">
+                             <input type="submit" name ="btnAdicionar" class="site-btn te" value="Registrar Nuevo Cliente" onclick="return verificar();"> 
                             </div>
                         </div>
                     </div>
