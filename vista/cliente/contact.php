@@ -70,16 +70,16 @@
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li><a href="./index.html">Inicio</a></li>
-                            <li><a href="./shop-grid.html">Empresas</a></li>
-                            <li class="active"><a href="./contact.html">Contáctanos</a></li>
+                            <li><a href="./index.php">Inicio</a></li>
+                            <li><a href="./shop-grid.php">Empresas</a></li>
+                            <li class="active"><a href="./contact.php">Contáctanos</a></li>
                         </ul>
                     </nav>
                 </div>
                 <div class="col-lg-3">
                     <div class="header__cart">
                         <ul>
-                            <li><a href="./shoping-cart.html"><i class="fa fa-shopping-bag"></i></a></li>
+                            <li><a href="./shoping-cart.php"><i class="fa fa-shopping-bag"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -147,7 +147,7 @@
                     <div class="breadcrumb__text">
                         <h2>Contáctanos</h2>
                         <div class="breadcrumb__option">
-                            <a href="./index.html">Inicio &nbsp;</a>
+                            <a href="./index.php">Inicio &nbsp;</a>
                             <span>Contátanos</span>
                         </div>
                     </div>

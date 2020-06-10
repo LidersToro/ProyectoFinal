@@ -26,6 +26,16 @@
 </head>
 
 <body>
+    <script>
+        function verificar() {
+
+            if (myForm.contra.value != myForm.contra1.value) {
+                alert("No Coinciden las contrasenas!");
+                return false;
+            }
+            return true;
+        }
+    </script>
 
 
     <!-- Breadcrumb Section Begin -->
@@ -51,47 +61,69 @@
 
             <div class="checkout__form">
                 <h4>DETALLES DE TU CUENTA</h4>
-                <form action="#">
+                <form action="RegistrarseComoCliente.php" name="myForm"  method="POST">
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Nombre de Usuario<span>*</span></p>
-                                        <input type="text" name="nombre">
+                                        <input type="text" name="nombre" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Correo<span>*</span></p>
-                                        <input type="email" name="correo">
+                                        <input type="email" name="correo" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="checkout__input">
                                 <p>Dirección<span>*</span></p>
-                                <input type="text">
+                                <input type="text" name="direccion"required>
                             </div>
                             <div class="checkout__input">
                                 <p>Teléfono<span>*</span></p>
-                                <input type="text">
+                                <input type="text" name="telefono" required>
                             </div>
                             <div class="checkout__input">
                                 <p>Contraseña<span>*</span></p>
-                                <input type="text" name="contra" placeholder="Escribe una contraseña">
+                                <input type="password" name="contra" placeholder="Escribe una contraseña" required>
                                 <br /><br />
-                                <input type="text" placeholder="Reescribe tu misma contraseña">
+                                <input type="password" name="contra1" placeholder="Reescribe tu misma contraseña" required>
                             </div>
                             <div class="checkout__input">
                                 <p>Dirección GPS<span>*</span></p>
-                                <input type="text" name="MapLat" class="MapLat" placeholder="Latitud" readonly>
+                                <input type="text" name="latitud" class="MapLat" placeholder="Latitud" readonly required>
                                 <br /><br />
-                                <input type="text" name="longitude" class="MapLon" placeholder="Logitud" readonly>
+                                <input type="text" name="longitud" class="MapLon" placeholder="Logitud" readonly required>
                                 <div id="map_canvas" style="height: 350px;width: 500px;margin: 0.6em;"></div>
+                            </div>
+                            <div class="text-right">
+                             <input type="submit" name ="btnAdicionar" class="site-btn te" value="Registrar Nuevo Cliente" onclick="return verificar();">
                             </div>
                         </div>
                     </div>
                 </form>
+                <?php
+                
+                if(isset($_POST['btnAdicionar']))
+                {
+                
+                require_once __DIR__.'/../../modelo/clienteModelo.php';
+                $Obj = new cliente();
+                echo "<script>alert('SE ADICIONO EXITOSAMENTE');</script>";
+                $Obj->setnombre($_POST['nombre']);
+                $Obj->setcorreo($_POST['correo']);
+                $Obj->setdireccion($_POST['direccion']);
+                $Obj->settelefono($_POST['telefono']);
+                $Obj->setlongitud($_POST['latitud']);
+                $Obj->setlatitud($_POST['longitud']);
+                $Obj->setcontrasena($_POST['contra']);
+                $Obj->adicionarCliente();
+                echo "<script>window.location = '/proyectofinal/vista/login.html';</script>";
+                }
+                ?>
             </div>
         </div>
     </section>

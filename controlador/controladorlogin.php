@@ -1,12 +1,26 @@
 <?php
+session_start();
+$user = $_POST['nombre'];
+$clave = $_POST['contra'];
+$_SESSION['user'] = $user;
+$_SESSION['clave'] = $clave;
 
-$user=$_POST['user'];
-$contra = $_POST['clave'];
-if($user =='lider' && $contra == '1234' || $user =='sebas' && $contra == '1234' || $user =='ceci' && $contra == '1234' ){
+require_once __DIR__.'/../modelo/clienteModelo.php';
+$Obj = new cliente();
+if(isset($_POST['btn_login'])) 
+{                      
+     $row = $Obj->obtenerCuenta($user,$clave);
+     $fila=$row->fetch_row();
+            if($fila[1]==$user && $fila[3]==$clave)
+            {
+            echo " <script>window.location = '/proyectoFinal/vista/cliente/index.php';</script>";
+         
+            }else
+            {
+            echo "<script>alert('NOMBRE DE USUARIO O CONTRASENA INCORRECTO!');</script>";
+            echo " <script>window.location = '/proyectoFinal/vista/login.html';</script>";
+           
+            }
      
-   
-    header("location: /proyectoFinal/vista/dashboard.html");
-    
-	}else{
-	header("location: /proyectoFinal");  
-	}
+}
+

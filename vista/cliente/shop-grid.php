@@ -63,22 +63,22 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                        <a href="./index.php"><img src="img/logo.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li><a href="./index.html">Inicio</a></li>
-                            <li class="active"><a href="./shop-grid.html">Empresas</a></li>
-                            <li><a href="./contact.html">Contáctanos</a></li>
+                            <li><a href="./index.php">Inicio</a></li>
+                            <li class="active"><a href="./shop-grid.php">Empresas</a></li>
+                            <li><a href="./contact.php">Contáctanos</a></li>
                         </ul>
                     </nav>
                 </div>
                 <div class="col-lg-3">
                     <div class="header__cart">
                         <ul>
-                            <li><a href="./shoping-cart.html"><i class="fa fa-shopping-bag"></i></a></li>
+                            <li><a href="./shoping-cart.php"><i class="fa fa-shopping-bag"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -189,20 +189,20 @@
                     <div class="row">
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
-                                <a href="./company-grid.html"><div class="product__item__pic set-bg" data-setbg="img/product/product-1.jpg">
+                                <a href="./company-grid.php"><div class="product__item__pic set-bg" data-setbg="img/product/product-1.jpg">
                                 </div></a>
                                 <div class="product__item__text">
-                                    <h6><a href="./company-grid.html">Pollos Kiky - UPSA</a></h6>
+                                    <h6><a href="./company-grid.php">Pollos Kiky - UPSA</a></h6>
                                     <h5>Abierto</h5>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
-                                <a href="./company-grid.html"><div class="product__item__pic set-bg" data-setbg="img/product/product-1.jpg">
+                                <a href="./company-grid.php"><div class="product__item__pic set-bg" data-setbg="img/product/product-1.jpg">
                                 </div></a>
                                 <div class="product__item__text">
-                                    <h6><a href="./company-grid.html">Pollos Kiky - UPSA</a></h6>
+                                    <h6><a href="./company-grid.php">Pollos Kiky - UPSA</a></h6>
                                     <h5>Abierto</h5>
                                 </div>
                             </div>
