@@ -84,15 +84,11 @@
                             </div>
                             <div class="checkout__input">
                                 <p>Dirección GPS<span>*</span></p>
-                                <input type="text" name="MapLat" class="MapLat" placeholder="Latitud">
+                                <input type="text" name="MapLat" class="MapLat" placeholder="Latitud" readonly>
                                 <br /><br />
-                                <input type="text" name="longitude" class="MapLon" placeholder="Logitud">
+                                <input type="text" name="longitude" class="MapLon" placeholder="Logitud" readonly>
                                 <div id="map_canvas" style="height: 350px;width: 500px;margin: 0.6em;"></div>
                             </div>
-
-
-
-
                         </div>
                     </div>
                 </form>
