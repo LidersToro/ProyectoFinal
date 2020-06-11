@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 session_start();
 
 
@@ -60,7 +60,7 @@ session_start();
                             </div>
                             <div class="header__top__right__social">
                             <div class="header__top__right__auth">
-                                <a href="./../login.html"><i class="fa fa-user"></i>
+                                <a href="./../../../proyectoFinal/vista/login.html"><i class="fa fa-user"></i>
                                 <?php if ($_SESSION['user'] != "")
                                 { echo $_SESSION['user'];
                                 }else{

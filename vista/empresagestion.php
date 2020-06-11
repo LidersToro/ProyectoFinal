@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 session_start();
 require_once __DIR__.'/../modelo/EmpresaModelo.php';
 print "<!DOCTYPE html>\n";
@@ -144,7 +144,7 @@ print "                                        <td>$fila[3]</td>\n";
 print "                                        <td>$fila[4]</td>\n";
 print "                                        <td>$fila[5]</td>\n";
 print "                                        <td>$fila[6]</td>\n";
-print "                                        <td>$fila[7]</td>\n";
+echo '                                        <td><img src="data:image/jpeg;base64,'.base64_encode( $fila[7] ).'"height="200" width="200" class="img-thumnail"/></td>';
 print "                                        <td class=\"td-actions text-right\">\n";
 //$_SESSION['id'] = $fila[0];
 //$_SESSION['nomb'] = $fila[1];

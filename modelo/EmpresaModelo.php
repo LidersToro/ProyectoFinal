@@ -104,7 +104,7 @@ class empresa{
         {
             $sql = "INSERT INTO empresa(nombre, correo, contrasena, latitud, longitud, telefono, imagen) VALUES(?,?,?,?,?,?,?);";
             $stmt = $conexion->prepare($sql);
-            $stmt->bind_param('ssssssb', $this->nombre, $this->correo, $this->contrasena, $this->latitud, $this->longitud, $this->telefono, $this->imagen);
+            $stmt->bind_param('sssssss', $this->nombre, $this->correo, $this->contrasena, $this->latitud, $this->longitud, $this->telefono, $this->imagen);
             if($stmt->execute())
             {
                 return(true);
@@ -117,6 +117,37 @@ class empresa{
             $conexion->close();
         }
     }
+        public function insertarImagen($id,$img)
+    {
+        $conexion = Conectar::conectarBD();//nos conectamos a la base de datos
+        if($conexion != false)
+        {
+            $sql = "UPDATE empresa SET imagen= '$img' WHERE idEmpresa= '$id';";
+            $stmt=$conexion->prepare($sql);
+            $stmt->bind_param('sb',$id, $img);
+            if($stmt->execute())
+            {
+                $conexion->close();
+                return (true);
+                
+            }
+            else
+            {
+                $conexion->close();
+                return (false);
+            }
+          
+        }
+        
+    }
+      public function obtenerEmpleado($id)	{
+	  $sql="select * from empresa where idEmpresa='$id';";	  
+      $conexion = Conectar::conectarBD();
+      $rows = $conexion->query($sql);
+      $conexion->close();
+      return ($rows);
+	}
+
       public function ultimoCodigo()	{
 	  $sql="select max(idEmpresa) as maximo from empresa;";	  
       $conexion = Conectar::conectarBD();

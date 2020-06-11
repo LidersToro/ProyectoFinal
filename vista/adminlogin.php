@@ -56,7 +56,7 @@ session_start();
 			</div>
 			<div class="card-footer">
 				<div class="d-flex justify-content-center">
-					<a href="login.html">Iniciar como cliente</a>
+					<a href="../vista/login.html">Iniciar como cliente</a>
 				</div>
 			</div>
 		</div>

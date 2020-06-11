@@ -1,6 +1,7 @@
-﻿<?php
+<?php
 session_start();
 require_once __DIR__.'/../modelo/EmpresaModelo.php';
+//require_once("ConectarDB.php");
 ?>
  <!DOCTYPE html>
 
@@ -8,6 +9,8 @@ require_once __DIR__.'/../modelo/EmpresaModelo.php';
 
  <head>
      <meta charset="utf-8" />
+    <script src="http://maps.google.com/maps/api/js?libraries=places&region=uk&language=en&sensor=true"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
      <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
      <link rel="icon" type="image/png" href="../assets/img/favicon.ico">
      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -78,7 +81,7 @@ require_once __DIR__.'/../modelo/EmpresaModelo.php';
              <!-- Navbar -->
              <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                  <div class="container-fluid">
-                     <a class="navbar-brand" href="#pablo"> Gestion de Admin </a>
+                     <a class="navbar-brand" href="#pablo"> Gestion de Empresa </a>
                      <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                          <span class="navbar-toggler-bar burger-lines"></span>
                          <span class="navbar-toggler-bar burger-lines"></span>
@@ -99,7 +102,7 @@ require_once __DIR__.'/../modelo/EmpresaModelo.php';
                                  </a>
                              </li>
 
-                             </li>
+                             
                              <li class="nav-item">
                                  <a class="nav-link" href="adminlogin.php">
                                      <span class="no-icon">Cerrar Sesi&oacute;n</span>
@@ -119,6 +122,7 @@ require_once __DIR__.'/../modelo/EmpresaModelo.php';
                                     <h4 class="card-title">Registrar Nueva Empresa</h4>
                                 </div>
                                 <div class="card-body">
+
  <script>
     function verificar()
     {
@@ -128,17 +132,24 @@ require_once __DIR__.'/../modelo/EmpresaModelo.php';
             alert("No Coinciden las contrasenas!");
             return false;
         }
+        if (myForm.latitud.value == "" || myForm.longitud.value == "")
+        {
+            alert("Falta poner su Ubicacion en GOOGLE MAPS!");
+            return false;
+        }
         return true;
     }
 </script>
-                                    <form name="myForm" action="RegistrarEmpresa.php" method="POST">
+
+                                    <form name="myForm" action="RegistrarEmpresa.php" method="POST" enctype="multipart/form-data">
                                         <?php
                                         $Obj = new empresa();
                                         $aux = $Obj->ultimoCodigo();
                                         $fila = $aux->fetch_row();
                                         $siguiente = $fila[0] + 1;
                                         ?>
-                                        <div class="row">
+                                     
+                                       <div class="row">
                                             <div class="col-md-1 pr-1">
                                                 <div class="form-group">
                                                     <label>ID</label>
@@ -147,57 +158,206 @@ require_once __DIR__.'/../modelo/EmpresaModelo.php';
                                             </div>
                                             <div class="col-md-3 px-1">
                                                 <div class="form-group">
-                                                    <label>NOMBRE</label>
+                                                    <label>NOMBRE*</label>
                                                     <input type="text" name ="txtNombre"class="form-control" placeholder="NOMBRE" required>
-                                                </div>
-                                            </div>
-                                             <div class="col-md-4 pl-1">
-                                                <div class="form-group">
-                                                    <label for="exampleInputEmail1">CORREO</label>
-                                                    <input type="email" name ="txtCorreo" class="form-control" placeholder="CORREO" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-4 pl-1">
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">CONTRASENA</label>
+                                                    <label for="exampleInputEmail1">CONTRASENA*</label>
                                                     <input type="password" name="txtClave" class="form-control" placeholder="CONTRASENA" required>
                                                 </div>
                                             </div>
                                              <div class="col-md-4 pl-1">
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">CONFIRMAR CONTRASENA</label>
+                                                    <label for="exampleInputEmail1">CONFIRMAR CONTRASENA*</label>
                                                     <input type="password" name ="txtClave2" class="form-control" placeholder="CONFIRMAR CONTRASENA" required>
                                                 </div>
                                             </div>
-                                             <div class="col-md-4 pl-1">
+                                        </div>
+
+                                        <!-- Segunda Fila -->
+
+                                      
+                                            <div class="col-md-3 px-1">
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">CONFIRMAR CONTRASENA</label>
-                                                    <input type="password" name ="txtClave2" class="form-control" placeholder="CONFIRMAR CONTRASENA" required>
+                                                    <label>CORREO*</label>
+                                                    <input type="email" name="txtCorreo" class="form-control" placeholder="CORREO" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 px-1">
+                                                <div class="form-group">
+                                                    <label>TELEFONO*</label>
+                                                    <input type="text" name ="txtTelefono"class="form-control" placeholder="TELEFONO" required>
+                                                </div>
+                                            </div>   
+                                         
+                                        
+
+                                        <!-- Tercera Fila -->
+
+                                        
+                                            <div class="col-md-3 px-1">
+                                                <div class="form-group">
+                                                    <label>DIRECCION GPS*</label><br>
+                                                     <input type="text" id="MapLat" name="latitud" class="MapLat" placeholder="Latitud" readonly required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 px-1">
+                                                <div class="form-group">
+                                                    <input type="text" id="MapLon" name="longitud" class="MapLon" placeholder="Longitud" readonly required>                                            
+                                                </div>
+                                            </div>   
+                                       
+
+                                        <input type="submit" name ="btnAdicionar" id="btnAdicionar" class="btn btn-info btn-fill pull-right" value="Registrar Nueva Empresa" onclick="return verificar();">
+                                         <div id="map_canvas" style="height: 350px;width: 500px;margin: 0.6em;"></div>
+
+
+                                          <div class="col-md-3 px-1">
+                                                <div class="form-group">
+                                                    <label>LOGO*</label><br>
+                                                     <input type="file" id="image" name="image">
+                                       <!--NO USAR<input type="submit" name="insert" id="insert" value="Insert" /> -->
                                                 </div>
                                             </div>
 
-                                        </div>
-                                        <input type="submit" name ="btnAdicionar" class="btn btn-info btn-fill pull-right" value="Registrar Nueva Empresa" onclick="return verificar();">
-                                        <div class="clearfix"></div>
                                     </form>
+
                                     <?php
                                     if(isset($_POST['btnAdicionar']))
                                         {
-                                            require_once __DIR__.'/../modelo/AdminModelo.php';
-                                            $Obj = new admin();
-                                            echo "<script>alert('SE ADICIONO EXITOSAMENTE');</script>";
-                                            $Obj->setUsuario($_POST['txtUsuario']);
+                                            require_once __DIR__.'/../modelo/EmpresaModelo.php';
+                                            $Obj = new empresa();
+                                      $connect = mysqli_connect("localhost", "root", "", "bd_proyectofinal"); 
+                                      $file = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
+                                            $Obj->setNombre($_POST['txtNombre']);
+                                            $Obj->setCorreo($_POST['txtCorreo']);
+                                            $Obj->setTelefono($_POST['txtTelefono']);
+                                            $Obj->setLongitud($_POST['latitud']);
+                                            $Obj->setLatitud($_POST['longitud']);
                                             $Obj->setContrasena($_POST['txtClave']);
-                                            $Obj->adicionarUsuario();
-                                            echo " <script>window.location = '/proyectofinal/vista/useradmin.php';</script>";
+                                    
+                                    $a = $Obj->getNombre();
+                                    $b = $Obj->getCorreo();
+                                    $c = $Obj->getTelefono();
+                                    $d = $Obj->getLongitud();
+                                    $e = $Obj->getLatitud();
+                                    $f = $Obj->getContrasena();
+
+                                    $query = "INSERT INTO empresa(nombre, correo, contrasena, latitud, longitud, telefono, imagen) VALUES('$a','$b','$c','$d','$e','$f','$file');";  
+         if(mysqli_query($connect, $query))  
+      {  
+           echo '<script>alert("SE ADICIONO EXITOSAMENTE")</script>';  
+      }     
+                                   /* echo "<script>alert('SE ADICIONO EXITOSAMENTE');</script>";
+                                            $file = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
+                                            $Obj->setImagen($file);
+                                            $Obj->setNombre($_POST['txtNombre']);
+                                            $Obj->setCorreo($_POST['txtCorreo']);
+                                            $Obj->setTelefono($_POST['txtTelefono']);
+                                            $Obj->setLongitud($_POST['latitud']);
+                                            $Obj->setLatitud($_POST['longitud']);
+                                            $Obj->setContrasena($_POST['txtClave']);
+                                            $Obj->adicionarEmpresa();
+                                            */
+                                            echo " <script>window.location = '/proyectoFinal/vista/empresagestion.php';</script>";
                                     }
                                     ?>
+                                    <script>
+
+                                        $(document).ready(function () {
+                                            $('#btnAdicionar').click(function () {
+                                                var image_name = $('#image').val();
+                                                if (image_name == '') {
+                                                    alert("Selecciona Imagen Porfavor");
+                                                    return false;
+                                                } else {
+                                                    var extension = $('#image').val().split('.').pop().toLowerCase();
+                                                    if (jQuery.inArray(extension, ['gif', 'png', 'jpg', 'jpeg']) == -1)
+                                                    {
+                                                        alert('Imagen Invalida');
+                                                        $('#image').val('');
+                                                        return false;
+                                                    }
+                                                }
+                                            });
+                                        });
+
+                                    </script>
+                              
+                                
                                 </div>
                             </div>
                         </div>
                      </div>
                  </div>
              </div>
+            <!--GOOGLE MAPS-->
+
+
+
+               <script>
+function initMap() {
+      var geocoder = new google.maps.Geocoder();
+  var lat = -17.749,
+      lng = -63.176,
+      latlng = new google.maps.LatLng(lat, lng),
+      image = 'http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png';
+  var mapOptions = {
+      center: new google.maps.LatLng(lat, lng),
+      zoom: 13,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      panControl: true,
+      panControlOptions: {
+          position: google.maps.ControlPosition.TOP_RIGHT
+      },
+      zoomControl: true,
+      zoomControlOptions: {
+          style: google.maps.ZoomControlStyle.LARGE,
+          position: google.maps.ControlPosition.TOP_left
+      }
+  },
+      map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions),
+
+      marker = new google.maps.Marker({
+          position: latlng,
+          map: map,
+          icon: image,
+          draggable: true,
+      });
+
+   var input = document.getElementById('searchTextField');
+    var infowindow = new google.maps.InfoWindow();
+
+        google.maps.event.addListener(marker, 'dragend', function () {
+            var lat = marker.getPosition().lat();
+            var lng = marker.getPosition().lng();
+
+document.getElementById('MapLat').value = lat;
+document.getElementById('MapLon').value = lng;
+
+   });
+        }
+
+    </script>
+
+               <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCirmC7s8JbiGHJCCC_nYFp30xg2Ozzy1I&callback=initMap">
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
              <footer class="footer">
                  <div class="container-fluid">
                      <nav>
@@ -213,6 +373,8 @@ require_once __DIR__.'/../modelo/EmpresaModelo.php';
              </footer>
          </div>
      </div>
+    
+
   <!--   -->
      <!-- <div class="fixed-plugin">
      <div class="dropdown show-dropdown">
@@ -292,6 +454,7 @@ require_once __DIR__.'/../modelo/EmpresaModelo.php';
      </div>
  </div>
   -->
+
  </body>
  <!--   Core JS Files   -->
  <script src="../assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>

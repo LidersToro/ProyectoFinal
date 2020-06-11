@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zxx">
 
 <head>
@@ -121,7 +121,7 @@
                 $Obj->setlatitud($_POST['longitud']);
                 $Obj->setcontrasena($_POST['contra']);
                 $Obj->adicionarCliente();
-                echo "<script>window.location = '/proyectofinal/vista/login.html';</script>";
+                echo "<script>window.location = '/proyectoFinal/vista/login.html';</script>";
                 }
                 ?>
             </div>

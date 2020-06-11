@@ -1,4 +1,4 @@
-<!doctyp html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
@@ -49,7 +49,7 @@
                 icon: image,
                 draggable: true,
             });
-        
+
          var input = document.getElementById('searchTextField');
          var autocomplete = new google.maps.places.Autocomplete(input, {
              types: ["geocode"]
@@ -65,16 +65,16 @@
                   $('.MapLon').val(lng);
          });
 
-          
-        
+
+
          function moveMarker(placeName, latlng) {
              marker.setIcon(image);
              marker.setPosition(latlng);
              infowindow.setContent(placeName);
           }
-     }); 
+     });
 
-    
+
 </script>
 </body>
 </html>
