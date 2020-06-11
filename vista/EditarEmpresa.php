@@ -1,7 +1,22 @@
-<?php
+﻿<?php
 session_start();
 require_once __DIR__.'/../modelo/EmpresaModelo.php';
+$id = $_GET['pid'];
+$_SESSION['id']=$id;
+$nombre = $_GET['pnombre'];
+$correo = $_GET['pcorreo'];
+$contrasena = $_GET['pcontrasena'];
+$latitud = $_GET['platitud'];
+$longitud = $_GET['plongitud'];
+$telefono = $_GET['ptelefono'];
+//$imagen = $_GET['pimagen'];
 //require_once("ConectarDB.php");
+
+$Obj = new empresa();
+$aux = $Obj->obtenerDireccion($_SESSION['id']);
+$valor=$aux->fetch_row();
+$lat = floatval($valor[0]);
+$lon = floatval($valor[1]);
 ?>
  <!DOCTYPE html>
 
@@ -141,7 +156,7 @@ require_once __DIR__.'/../modelo/EmpresaModelo.php';
     }
 </script>
 
-                                    <form name="myForm" action="RegistrarEmpresa.php" method="POST" enctype="multipart/form-data">
+                                    <form name="myForm" action="EditarEmpresa.php" method="POST" enctype="multipart/form-data">
                                         <?php
                                         $Obj = new empresa();
                                         $aux = $Obj->ultimoCodigo();
@@ -153,25 +168,25 @@ require_once __DIR__.'/../modelo/EmpresaModelo.php';
                                             <div class="col-md-1 pr-1">
                                                 <div class="form-group">
                                                     <label>ID</label>
-                                                    <input type="text" class="form-control" readonly="readonly" placeholder="#" value="<?php echo $siguiente; ?>">
+                                                    <input type="text" name="txtId" class="form-control" readonly="readonly" placeholder="#" value="<?php echo $id; ?>">
                                                 </div>
                                             </div>
                                             <div class="col-md-3 px-1">
                                                 <div class="form-group">
                                                     <label>NOMBRE*</label>
-                                                    <input type="text" name ="txtNombre"class="form-control" placeholder="NOMBRE" required>
+                                                    <input type="text" name ="txtNombre"class="form-control" placeholder="NOMBRE" value="<?php echo $nombre; ?>" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-4 pl-1">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">CONTRASENA*</label>
-                                                    <input type="password" name="txtClave" class="form-control" placeholder="CONTRASENA" required>
+                                                    <input type="password" name="txtClave" class="form-control" placeholder="CONTRASENA" value="<?php echo $contrasena; ?>" required>
                                                 </div>
                                             </div>
                                              <div class="col-md-4 pl-1">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">CONFIRMAR CONTRASENA*</label>
-                                                    <input type="password" name ="txtClave2" class="form-control" placeholder="CONFIRMAR CONTRASENA" required>
+                                                    <input type="password" name ="txtClave2" class="form-control" placeholder="CONFIRMAR CONTRASENA" value="<?php echo $contrasena; ?>" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -182,13 +197,13 @@ require_once __DIR__.'/../modelo/EmpresaModelo.php';
                                             <div class="col-md-3 px-1">
                                                 <div class="form-group">
                                                     <label>CORREO*</label>
-                                                    <input type="email" name="txtCorreo" class="form-control" placeholder="CORREO" required>
+                                                    <input type="email" name="txtCorreo" class="form-control" placeholder="CORREO" value="<?php echo $correo; ?>" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-3 px-1">
                                                 <div class="form-group">
                                                     <label>TELEFONO*</label>
-                                                    <input type="text" name ="txtTelefono"class="form-control" placeholder="TELEFONO" required>
+                                                    <input type="text" name ="txtTelefono"class="form-control" placeholder="TELEFONO" value="<?php echo $telefono; ?>" required>
                                                 </div>
                                             </div>   
                                          
@@ -200,17 +215,17 @@ require_once __DIR__.'/../modelo/EmpresaModelo.php';
                                             <div class="col-md-3 px-1">
                                                 <div class="form-group">
                                                     <label>DIRECCION GPS*</label><br>
-                                                     <input type="text" id="MapLat" name="latitud" class="MapLat" placeholder="Latitud" readonly required>
+                                                     <input type="text" id="MapLat" name="latitud" class="MapLat" placeholder="Latitud" value="<?php echo $latitud; ?>" readonly required>
                                                 </div>
                                             </div>
                                             <div class="col-md-3 px-1">
                                                 <div class="form-group">
-                                                    <input type="text" id="MapLon" name="longitud" class="MapLon" placeholder="Longitud" readonly required>                                            
+                                                    <input type="text" id="MapLon" name="longitud" class="MapLon" placeholder="Longitud" value="<?php echo $longitud; ?>" readonly required>                                            
                                                 </div>
                                             </div>   
                                        
 
-                                        <input type="submit" name ="btnAdicionar" id="btnAdicionar" class="btn btn-info btn-fill pull-right" value="Registrar Nueva Empresa" onclick="return verificar();">
+                                        <input type="submit" name ="btnModificar" id="btnModificar" class="btn btn-info btn-fill pull-right" value="Modificar Empresa" onclick="return verificar();">
                                          <div id="map_canvas" style="height: 350px;width: 500px;margin: 0.6em;"></div>
 
 
@@ -225,12 +240,33 @@ require_once __DIR__.'/../modelo/EmpresaModelo.php';
                                     </form>
 
                                     <?php
-                                    if(isset($_POST['btnAdicionar']))
+                                    if(isset($_POST['btnModificar']))
                                         {
-                                            require_once __DIR__.'/../modelo/EmpresaModelo.php';
+                                        if ($_FILES['image']['error'] == UPLOAD_ERR_OK) 
+                                            {
+
+echo "                                    <script>\n";
+echo "\n";
+echo "                                        $(document).ready(function () {\n";
+echo "                                            $('#btnModificar').click(function () {                                             \n";
+echo "                                                    var extension = $('#image').val().split('.').pop().toLowerCase();\n";
+echo "                                                    if (jQuery.inArray(extension, ['gif', 'png', 'jpg', 'jpeg']) == -1)\n";
+echo "                                                    {\n";
+echo "                                                        alert('Imagen Invalida');\n";
+echo "                                                        $('#image').val('');\n";
+echo "                                                        return false;\n";
+echo "                                                    }\n";
+echo "                                                \n";
+echo "                                            });\n";
+echo "                                        });\n";
+echo "\n";
+echo "                                    </script>";
+
+
+                                             require_once __DIR__.'/../modelo/EmpresaModelo.php';
                                             $Obj = new empresa();
-                                      $connect = mysqli_connect("localhost", "root", "", "bd_proyectofinal"); 
-                                      $file = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
+                                            $connect = mysqli_connect("localhost", "root", "", "bd_proyectofinal"); 
+                                            $file = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
                                             $Obj->setNombre($_POST['txtNombre']);
                                             $Obj->setCorreo($_POST['txtCorreo']);
                                             $Obj->setTelefono($_POST['txtTelefono']);
@@ -244,37 +280,50 @@ require_once __DIR__.'/../modelo/EmpresaModelo.php';
                                     $d = $Obj->getLatitud();
                                     $e = $Obj->getLongitud();
                                     $f = $Obj->getContrasena();
-
-                                    $query = "INSERT INTO empresa(nombre, correo, contrasena, latitud, longitud, telefono, imagen) VALUES('$a','$b','$f','$d','$e','$c','$file');";  
-         if(mysqli_query($connect, $query))  
-      {  
-           echo '<script>alert("SE ADICIONO EXITOSAMENTE")</script>'; 
-                                    mysqli_close($connect);
-      }     
-                                   /* echo "<script>alert('SE ADICIONO EXITOSAMENTE');</script>";
-                                            $file = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
-                                            $Obj->setImagen($file);
+                                    $idEmp = $_POST['txtId'];
+                                    $query = "UPDATE empresa set nombre='$a', correo='$b', contrasena='$f', latitud='$d', longitud='$e', telefono='$c', imagen='$file' where idEmpresa='$idEmp';";  
+                                            if(mysqli_query($connect, $query))  
+                                               {  
+                                                     echo '<script>alert("SE MODIFICO EXITOSAMENTE")</script>';  
+                                                     
+                                                }     
+                                             }
+                                        else
+                                             {
+                                             require_once __DIR__.'/../modelo/EmpresaModelo.php';
+                                            $Obj = new empresa();
+                                            $connect = mysqli_connect("localhost", "root", "", "bd_proyectofinal"); 
+                                           // $file = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
                                             $Obj->setNombre($_POST['txtNombre']);
                                             $Obj->setCorreo($_POST['txtCorreo']);
                                             $Obj->setTelefono($_POST['txtTelefono']);
-                                            $Obj->setLongitud($_POST['latitud']);
-                                            $Obj->setLatitud($_POST['longitud']);
+                                            $Obj->setLatitud($_POST['latitud']);
+                                            $Obj->setLongitud($_POST['longitud']);
                                             $Obj->setContrasena($_POST['txtClave']);
-                                            $Obj->adicionarEmpresa();
-                                            */
-
+                                    
+                                    $a = $Obj->getNombre();
+                                    $b = $Obj->getCorreo();
+                                    $c = $Obj->getTelefono();
+                                    $d = $Obj->getLatitud();
+                                    $e = $Obj->getLongitud();
+                                    $f = $Obj->getContrasena();
+                                    $idEmp = $_POST['txtId'];
+                                    $query = "UPDATE empresa set nombre='$a', correo='$b', contrasena='$f', latitud='$d', longitud='$e', telefono='$c' where idEmpresa='$idEmp';";  
+                                        if(mysqli_query($connect, $query))  
+                                         {  
+                                             echo '<script>alert("SE MODIFICO EXITOSAMENTE")</script>';  
+                                           
+                                         }     
+                                    }
+                                    //echo $query;
+                                    //echo $idEmp;
                                             echo " <script>window.location = '/proyectoFinal/vista/empresagestion.php';</script>";
                                     }
                                     ?>
-                                    <script>
+                                    <!--<script>
 
                                         $(document).ready(function () {
-                                            $('#btnAdicionar').click(function () {
-                                                var image_name = $('#image').val();
-                                                if (image_name == '') {
-                                                    alert("Selecciona Imagen Porfavor");
-                                                    return false;
-                                                } else {
+                                            $('#btnModificar').click(function () {                                             
                                                     var extension = $('#image').val().split('.').pop().toLowerCase();
                                                     if (jQuery.inArray(extension, ['gif', 'png', 'jpg', 'jpeg']) == -1)
                                                     {
@@ -282,11 +331,11 @@ require_once __DIR__.'/../modelo/EmpresaModelo.php';
                                                         $('#image').val('');
                                                         return false;
                                                     }
-                                                }
+                                                
                                             });
                                         });
 
-                                    </script>
+                                    </script>-->
                               
                                 
                                 </div>
@@ -304,10 +353,10 @@ function initMap() {
       var geocoder = new google.maps.Geocoder();
   var lat = -17.749,
       lng = -63.176,
-      latlng = new google.maps.LatLng(lat, lng),
+      latlng = new google.maps.LatLng(<?php echo $lat;?>,<?php echo $lon;?>),
       image = 'http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png';
   var mapOptions = {
-      center: new google.maps.LatLng(lat, lng),
+      center: new google.maps.LatLng(<?php echo $lat;?>,<?php echo $lon;?>),
       zoom: 13,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       panControl: true,

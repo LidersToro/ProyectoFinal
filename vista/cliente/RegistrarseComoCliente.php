@@ -117,8 +117,8 @@
                 $Obj->setcorreo($_POST['correo']);
                 $Obj->setdireccion($_POST['direccion']);
                 $Obj->settelefono($_POST['telefono']);
-                $Obj->setlongitud($_POST['latitud']);
-                $Obj->setlatitud($_POST['longitud']);
+                $Obj->setlatitud($_POST['latitud']);
+                $Obj->setlongitud($_POST['longitud']);
                 $Obj->setcontrasena($_POST['contra']);
                 $Obj->adicionarCliente();
                 echo "<script>window.location = '/proyectoFinal/vista/login.html';</script>";
