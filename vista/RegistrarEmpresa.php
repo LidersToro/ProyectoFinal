@@ -261,6 +261,7 @@ require_once __DIR__.'/../modelo/EmpresaModelo.php';
                                             $Obj->setContrasena($_POST['txtClave']);
                                             $Obj->adicionarEmpresa();
                                             */
+
                                             echo " <script>window.location = '/proyectoFinal/vista/empresagestion.php';</script>";
                                     }
                                     ?>
