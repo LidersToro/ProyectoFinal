@@ -285,6 +285,7 @@ echo "                                    </script>";
                                             if(mysqli_query($connect, $query))  
                                                {  
                                                      echo '<script>alert("SE MODIFICO EXITOSAMENTE")</script>';  
+                                                     mysqli_close($connect);
                                                      
                                                 }     
                                              }
@@ -312,6 +313,7 @@ echo "                                    </script>";
                                         if(mysqli_query($connect, $query))  
                                          {  
                                              echo '<script>alert("SE MODIFICO EXITOSAMENTE")</script>';  
+                                             mysqli_close($connect);
                                            
                                          }     
                                     }
