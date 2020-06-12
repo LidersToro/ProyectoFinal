@@ -191,13 +191,23 @@ class empresa{
         }
         
     }
-    public function obtenerCuenta($usuario="",$contrasena="") {
-        $sql = "SELECT * FROM admin WHERE usuario= '$usuario' AND contrasena= '$contrasena';";
-         $conexion = Conectar::conectarBD();
-        $rows = $conexion->query($sql);
-        $conexion->close();
-        return ($rows);
-     }
+        public function borrarEmpresa($id)
+    {
+        $sql = "DELETE FROM empresa WHERE idEmpresa='$id';";
+        $conexion = Conectar::conectarBD();
+        $stmt = $conexion->prepare($sql);
+        $stmt->bind_param('s',$id);
+        if($stmt->execute())
+        {
+            $conexion->close();
+            return 1;
+        }
+        else
+        {
+            $conexion->close();
+            return -1;
+        }
+    }
     public function obtenerDireccion($id) {
         $sql = "SELECT latitud,longitud FROM empresa WHERE idEmpresa= '$id';";
          $conexion = Conectar::conectarBD();

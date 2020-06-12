@@ -152,7 +152,7 @@ print "                                        <td class=\"td-actions text-right
 print "                                            <button type=\"submit\" onclick=\"location.href='EditarEmpresa.php ? pid=$fila[0]&pnombre=$fila[1]&pcorreo=$fila[2]&pcontrasena=$fila[3]&platitud=$fila[4]&plongitud=$fila[5]&ptelefono=$fila[6]'\" rel=\"tooltip\" title=\"Editar\" name = \"editar$fila[0]\" value = \"$fila[0]\" class=\"btn btn-info btn-simple btn-link\">\n";
 print "                                                <i class=\"fa fa-edit\"></i>\n";
 print "                                            </button>\n";
-print "                                            <button type=\"button\" onclick=\"location.href='../controlador/controladorBorrarAdmin.php ? pid=$fila[0]'\" rel=\"tooltip\" title=\"Eliminar\" name = \"eliminar$fila[0]\" class=\"btn btn-danger btn-simple btn-link\">\n";
+print "                                            <button type=\"button\" onclick=\"location.href='../controlador/controladorBorrarEmpresa.php ? pid=$fila[0]'\" rel=\"tooltip\" title=\"Eliminar\" name = \"eliminar$fila[0]\" class=\"btn btn-danger btn-simple btn-link\">\n";
 print "                                                <i class=\"fa fa-times\"></i>\n";
 print "                                            </button>\n";
 print "                                        </td>\n";
