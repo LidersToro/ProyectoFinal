@@ -51,9 +51,9 @@ require_once __DIR__.'/../modelo/EmpresaModelo.php';
                          </a>
                      </li>
                      <li>
-                         <a class="nav-link" href="./user.html">
+                         <a class="nav-link" href="./motoquerogestion.php">
                              <i class="nc-icon nc-circle-09"></i>
-                             <p>Gestion Usuarios</p>
+                             <p>Gestion Motoqueros</p>
                          </a>
                      </li>
                      <li>

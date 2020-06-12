@@ -32,26 +32,30 @@ $usu = $_GET['pusuario'];
              <div class="sidebar-wrapper">
                  <div class="logo">
                      <a href="#pablo" class="simple-text">
-                         Delivery SLC
+                         Delivery SLC (ADMIN)
+                         <?php
+
+                         echo $_SESSION['user'];
+                         ?>
                      </a>
                  </div>
                  <ul class="nav">
                      <li>
-                         <a class="nav-link" href="dashboard.html">
+                         <a class="nav-link" href="empresagestion.php">
                              <i class="nc-icon nc-chart-pie-35"></i>
                              <p>Gestion de Empresas</p>
                          </a>
                      </li>
-                     <li class="nav-item active">
-                         <a class="nav-link" href="./user.html">
+                     <li>
+                         <a class="nav-link" href="./motoquerogestion.php">
                              <i class="nc-icon nc-circle-09"></i>
-                             <p>Gestion de Usuarios</p>
+                             <p>Gestion Motoqueros</p>
                          </a>
                      </li>
-                     <li>
-                         <a class="nav-link" href="./maps.html">
-                             <i class="nc-icon nc-pin-3"></i>
-                             <p>Delivery</p>
+                    <li class="nav-item active">
+                         <a class="nav-link" href="./useradmin.php">
+                             <i class="nc-icon nc-circle-09"></i>
+                             <p>Gestion de Admin</p>
                          </a>
                      </li>
                      <li class="nav-item active active-pro">

@@ -42,15 +42,15 @@ require_once __DIR__.'/../modelo/AdminModelo.php';
                  </div>
                  <ul class="nav">
                      <li>
-                         <a class="nav-link" href="dashboard.html">
+                         <a class="nav-link" href="empresagestion.php">
                              <i class="nc-icon nc-chart-pie-35"></i>
                              <p>Gestion de Empresas</p>
                          </a>
                      </li>
                      <li>
-                         <a class="nav-link" href="./user.html">
+                         <a class="nav-link" href="./motoquerogestion.php">
                              <i class="nc-icon nc-circle-09"></i>
-                             <p>Gestion Usuarios</p>
+                             <p>Gestion Motoqueros</p>
                          </a>
                      </li>
                      <li>

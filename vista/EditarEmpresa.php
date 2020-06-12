@@ -66,9 +66,9 @@ $lon = floatval($valor[1]);
                          </a>
                      </li>
                      <li>
-                         <a class="nav-link" href="./user.html">
+                         <a class="nav-link" href="./motoquerogestion.php">
                              <i class="nc-icon nc-circle-09"></i>
-                             <p>Gestion Usuarios</p>
+                             <p>Gestion Motoqueros</p>
                          </a>
                      </li>
                      <li>
@@ -96,7 +96,7 @@ $lon = floatval($valor[1]);
              <!-- Navbar -->
              <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                  <div class="container-fluid">
-                     <a class="navbar-brand" href="#pablo"> Gestion de Empresa </a>
+                     <a class="navbar-brand" href="empresagestion.php"> Gestion de Empresa </a>
                      <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                          <span class="navbar-toggler-bar burger-lines"></span>
                          <span class="navbar-toggler-bar burger-lines"></span>
@@ -134,7 +134,7 @@ $lon = floatval($valor[1]);
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Registrar Nueva Empresa</h4>
+                                    <h4 class="card-title">Modificar Empresa</h4>
                                 </div>
                                 <div class="card-body">
 
