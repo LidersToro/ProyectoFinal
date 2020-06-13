@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 session_start();
 require_once __DIR__.'/../modelo/EmpresaModelo.php';
 $id = $_GET['pid'];
@@ -155,6 +155,24 @@ $lon = floatval($valor[1]);
         return true;
     }
 </script>
+ <script>
+
+                                        $(document).ready(function () {
+                                            $('#btnModificar').click(function () {
+                                              //  var image_name = $('#image').val();
+                                                 
+                                                    var extension = $('#image').val().split('.').pop().toLowerCase();
+                                                    if (jQuery.inArray(extension, ['gif', 'png', 'jpg', 'jpeg']) == -1)
+                                                    {
+                                                        alert('Imagen Invalida');
+                                                        $('#image').val('');
+                                                        return false;
+                                                    }
+                                                
+                                            });
+                                        });
+
+</script>
 
                                     <form name="myForm" action="EditarEmpresa.php" method="POST" enctype="multipart/form-data">
                                         <?php
@@ -244,24 +262,6 @@ $lon = floatval($valor[1]);
                                         {
                                         if ($_FILES['image']['error'] == UPLOAD_ERR_OK) 
                                             {
-
-echo "                                    <script>\n";
-echo "\n";
-echo "                                        $(document).ready(function () {\n";
-echo "                                            $('#btnModificar').click(function () {                                             \n";
-echo "                                                    var extension = $('#image').val().split('.').pop().toLowerCase();\n";
-echo "                                                    if (jQuery.inArray(extension, ['gif', 'png', 'jpg', 'jpeg']) == -1)\n";
-echo "                                                    {\n";
-echo "                                                        alert('Imagen Invalida');\n";
-echo "                                                        $('#image').val('');\n";
-echo "                                                        return false;\n";
-echo "                                                    }\n";
-echo "                                                \n";
-echo "                                            });\n";
-echo "                                        });\n";
-echo "\n";
-echo "                                    </script>";
-
 
                                              require_once __DIR__.'/../modelo/EmpresaModelo.php';
                                             $Obj = new empresa();
