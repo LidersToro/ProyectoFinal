@@ -155,7 +155,7 @@ $lon = floatval($valor[1]);
         return true;
     }
 </script>
- <script>
+ <!--<script>
 
                                         $(document).ready(function () {
                                             $('#btnModificar').click(function () {
@@ -172,7 +172,7 @@ $lon = floatval($valor[1]);
                                             });
                                         });
 
-</script>
+</script>-->
 
                                     <form name="myForm" action="EditarEmpresa.php" method="POST" enctype="multipart/form-data">
                                         <?php
@@ -262,8 +262,18 @@ $lon = floatval($valor[1]);
                                         {
                                         if ($_FILES['image']['error'] == UPLOAD_ERR_OK) 
                                             {
+                                            $file = $_FILES['image'];
+                                            $filename = $file['name'];
+                                            $filepath = $file['tmp_name'];
+                                            $fileerror = $file['error'];
+                                            
+                                            $file_ext = explode('.',$filename);
+                                            $file_ext_check = strtolower(end($file_ext));
+                                            $valid_file_ext = array('png','jpg','jpeg');
 
-                                             require_once __DIR__.'/../modelo/EmpresaModelo.php';
+                                            if(in_array($file_ext_check,$valid_file_ext))
+                                            {
+                                            require_once __DIR__.'/../modelo/EmpresaModelo.php';
                                             $Obj = new empresa();
                                             $connect = mysqli_connect("localhost", "root", "", "bd_proyectofinal"); 
                                             $file = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
@@ -288,8 +298,21 @@ $lon = floatval($valor[1]);
                                                      mysqli_close($connect);
                                                      
                                                 }     
-                                             }
+                                             }else
+                                             {
+                                             echo '<script>alert("IMAGEN INVALIDA!")</script>';  
+
+                                             ?>
+                                    <script>
+                                        $('#image').val('');
+                                    </script>
+                                    <?php
+
+                                                }
+                                                }
                                         else
+                                            
+
                                              {
                                              require_once __DIR__.'/../modelo/EmpresaModelo.php';
                                             $Obj = new empresa();
@@ -320,6 +343,7 @@ $lon = floatval($valor[1]);
                                     //echo $query;
                                     //echo $idEmp;
                                             echo " <script>window.location = '/proyectoFinal/vista/empresagestion.php';</script>";
+                                    
                                     }
                                     ?>
                                     <!--<script>
