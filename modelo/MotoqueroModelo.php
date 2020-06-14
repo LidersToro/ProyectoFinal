@@ -158,7 +158,7 @@ class motoquero{
 	}
 
       public function ultimoCodigo()	{
-	  $sql="select max(idEmpresa) as maximo from empresa;";	  
+	  $sql="select max(idMotoquero) as maximo from motoquero;";	  
       $conexion = Conectar::conectarBD();
       $rows = $conexion->query($sql);
       $conexion->close();
@@ -167,7 +167,7 @@ class motoquero{
 
     public function obtenerTodos()
     {
-        $sql="SELECT * FROM empresa;";
+        $sql="SELECT * FROM motoquero;";
         $conexion = Conectar::conectarBD();
         $rows = $conexion->query($sql);
         $conexion->close();
@@ -200,9 +200,9 @@ class motoquero{
         }
         
     }
-        public function borrarEmpresa($id)
+        public function borrarMotoquero($id)
     {
-        $sql = "DELETE FROM empresa WHERE idEmpresa='$id';";
+        $sql = "DELETE FROM motoquero WHERE idMotoquero='$id';";
         $conexion = Conectar::conectarBD();
         $stmt = $conexion->prepare($sql);
         $stmt->bind_param('s',$id);

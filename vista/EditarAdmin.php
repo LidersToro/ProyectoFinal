@@ -58,12 +58,12 @@ $usu = $_GET['pusuario'];
                              <p>Gestion de Admin</p>
                          </a>
                      </li>
-                     <li class="nav-item active active-pro">
+                     <!--<li class="nav-item active active-pro">
                          <a class="nav-link active" href="upgrade.html">
                              <i class="nc-icon nc-alien-33"></i>
                              <p>Upgrade to PRO</p>
                          </a>
-                     </li>
+                     </li>-->
                  </ul>
              </div>
          </div>

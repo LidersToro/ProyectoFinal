@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 session_start();
-require_once __DIR__.'/../modelo/EmpresaModelo.php';
+require_once __DIR__.'/../modelo/MotoqueroModelo.php';
 //require_once("ConectarDB.php");
 ?>
  <!DOCTYPE html>
@@ -44,13 +44,13 @@ require_once __DIR__.'/../modelo/EmpresaModelo.php';
                      </a>
                  </div>
                  <ul class="nav">
-                     <li class="nav-item active">
+                     <li>
                          <a class="nav-link" href="empresagestion.php">
                              <i class="nc-icon nc-chart-pie-35"></i>
                              <p>Gestion de Empresas</p>
                          </a>
                      </li>
-                     <li>
+                     <li class="nav-item active">
                          <a class="nav-link" href="./motoquerogestion.php">
                              <i class="nc-icon nc-circle-09"></i>
                              <p>Gestion Motoqueros</p>
@@ -75,7 +75,7 @@ require_once __DIR__.'/../modelo/EmpresaModelo.php';
              <!-- Navbar -->
              <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                  <div class="container-fluid">
-                     <a class="navbar-brand" href="#pablo"> Gestion de Empresa </a>
+                     <a class="navbar-brand" href="motoquerogestion.php"> Gestion de Motoquero </a>
                      <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                          <span class="navbar-toggler-bar burger-lines"></span>
                          <span class="navbar-toggler-bar burger-lines"></span>
@@ -113,7 +113,7 @@ require_once __DIR__.'/../modelo/EmpresaModelo.php';
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Registrar Nueva Empresa</h4>
+                                    <h4 class="card-title">Registrar Nuevo Motoquero</h4>
                                 </div>
                                 <div class="card-body">
 
@@ -126,18 +126,13 @@ require_once __DIR__.'/../modelo/EmpresaModelo.php';
             alert("No Coinciden las contrasenas!");
             return false;
         }
-        if (myForm.latitud.value == "" || myForm.longitud.value == "")
-        {
-            alert("Falta poner su Ubicacion en GOOGLE MAPS!");
-            return false;
-        }
         return true;
     }
 </script>
 
-                                    <form name="myForm" action="RegistrarEmpresa.php" method="POST" enctype="multipart/form-data">
+                                    <form name="myForm" action="RegistrarMotoquero.php" method="POST" enctype="multipart/form-data">
                                         <?php
-                                        $Obj = new empresa();
+                                        $Obj = new motoquero();
                                         $aux = $Obj->ultimoCodigo();
                                         $fila = $aux->fetch_row();
                                         $siguiente = $fila[0] + 1;
@@ -193,24 +188,34 @@ require_once __DIR__.'/../modelo/EmpresaModelo.php';
                                         
                                             <div class="col-md-3 px-1">
                                                 <div class="form-group">
-                                                    <label>DIRECCION GPS*</label><br>
-                                                     <input type="text" id="MapLat" name="latitud" class="MapLat" placeholder="Latitud" readonly required>
+                                                    <label>Carnet de Identidad*</label>
+                                                    <input type="text" name="txtCI" class="form-control" placeholder="CARNET DE IDENTIDAD" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-3 px-1">
                                                 <div class="form-group">
-                                                    <input type="text" id="MapLon" name="longitud" class="MapLon" placeholder="Longitud" readonly required>                                            
+                                                    <label>Placa*</label>
+                                                    <input type="text" name ="txtPlaca"class="form-control" placeholder="PLACA" required>
                                                 </div>
-                                            </div>   
+                                            </div> 
+                                            <div class="col-md-3 px-1">
+                                                <div class="form-group">
+                                                    <label>Estado*</label>
+                                                   <select id="estado" name="estado">
+                                                  <option value="ACTIVO"selected>ACTIVO</option>
+                                                  <option value="INACTIVO">INACTIVO</option>                                               
+                                                </select>
+                                                </div>
+                                            </div>                                          
                                        
 
-                                        <input type="submit" name ="btnAdicionar" id="btnAdicionar" class="btn btn-info btn-fill pull-right" value="Registrar Nueva Empresa" onclick="return verificar();">
-                                         <div id="map_canvas" style="height: 350px;width: 500px;margin: 0.6em;"></div>
+                                        <input type="submit" name ="btnAdicionar" id="btnAdicionar" class="btn btn-info btn-fill pull-right" value="Registrar Nuevo Motoquero" onclick="return verificar();">
+                                         <!--<div id="map_canvas" style="height: 350px;width: 500px;margin: 0.6em;"></div>-->
 
 
                                           <div class="col-md-3 px-1">
                                                 <div class="form-group">
-                                                    <label>LOGO*</label><br>
+                                                    <label>FOTO DE PERFIL*</label><br>
                                                      <input type="file" id="image" name="image">
                                        <!--NO USAR<input type="submit" name="insert" id="insert" value="Insert" /> -->
                                                 </div>
@@ -221,25 +226,27 @@ require_once __DIR__.'/../modelo/EmpresaModelo.php';
                                     <?php
                                     if(isset($_POST['btnAdicionar']))
                                         {
-                                            require_once __DIR__.'/../modelo/EmpresaModelo.php';
-                                            $Obj = new empresa();
+                                            require_once __DIR__.'/../modelo/MotoqueroModelo.php';
+                                            $Obj = new motoquero();
                                       $connect = mysqli_connect("localhost", "root", "", "bd_proyectofinal"); 
                                       $file = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
                                             $Obj->setNombre($_POST['txtNombre']);
                                             $Obj->setCorreo($_POST['txtCorreo']);
                                             $Obj->setTelefono($_POST['txtTelefono']);
-                                            $Obj->setLatitud($_POST['latitud']);
-                                            $Obj->setLongitud($_POST['longitud']);
+                                            $Obj->setCI($_POST['txtCI']);
+                                            $Obj->setPlaca($_POST['txtPlaca']);
+                                            $Obj->setEstado($_POST['estado']);
                                             $Obj->setContrasena($_POST['txtClave']);
                                     
                                     $a = $Obj->getNombre();
                                     $b = $Obj->getCorreo();
                                     $c = $Obj->getTelefono();
-                                    $d = $Obj->getLatitud();
-                                    $e = $Obj->getLongitud();
-                                    $f = $Obj->getContrasena();
+                                    $d = $Obj->getCI();
+                                    $e = $Obj->getPlaca();
+                                    $f = $Obj->getEstado();
+                                    $g = $Obj->getContrasena();
 
-                                    $query = "INSERT INTO empresa(nombre, correo, contrasena, latitud, longitud, telefono, imagen) VALUES('$a','$b','$f','$d','$e','$c','$file');";  
+                                    $query = "INSERT INTO motoquero(nombre, correo, contrasena, CI, placa, estado, imagen, telefono) VALUES('$a','$b','$g','$d','$e','$f','$file','$c');";  
          if(mysqli_query($connect, $query))  
       {  
            echo '<script>alert("SE ADICIONO EXITOSAMENTE")</script>'; 
@@ -257,7 +264,7 @@ require_once __DIR__.'/../modelo/EmpresaModelo.php';
                                             $Obj->adicionarEmpresa();
                                             */
 
-                                            echo " <script>window.location = '/proyectoFinal/vista/empresagestion.php';</script>";
+                                            echo " <script>window.location = '/proyectoFinal/vista/motoquerogestion.php';</script>";
                                     }
                                     ?>
                                     <script>
