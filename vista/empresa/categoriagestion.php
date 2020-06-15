@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__.'/../modelo/EmpresaModelo.php';
+require_once __DIR__.'/../../modelo/CategoriaModelo.php';
 print "<!DOCTYPE html>\n";
 print "<html lang=\"en\">\n";
 print "\n";
@@ -132,7 +132,6 @@ print "                                    <th>Latitud</th>\n";
 print "                                    <th>Longitud</th>\n";
 print "                                    <th>Telefono</th>\n";
 print "                                    <th>Logo</th>\n";
-print "                                    <th>Usuario</th>\n";
 print "                                </thead>\n";
 print "                                <tbody>\n";
 while($fila = $aux->fetch_row()){
@@ -146,12 +145,11 @@ print "                                        <td>$fila[4]</td>\n";
 print "                                        <td>$fila[5]</td>\n";
 print "                                        <td>$fila[6]</td>\n";
 echo '                                        <td><img src="data:image/jpeg;base64,'.base64_encode( $fila[7] ).'"height="200" width="200" class="img-thumnail"/></td>';
-print "                                        <td><b>$fila[8]</b></td>\n";
 print "                                        <td class=\"td-actions text-right\">\n";
 //$_SESSION['id'] = $fila[0];
 //$_SESSION['nomb'] = $fila[1];
 //$_SESSION['pass'] = $fila[2];
-print "                                            <button type=\"submit\" onclick=\"location.href='EditarEmpresa.php ? pid=$fila[0]&pnombre=$fila[1]&pcorreo=$fila[2]&pcontrasena=$fila[3]&platitud=$fila[4]&plongitud=$fila[5]&ptelefono=$fila[6]&pusuario=$fila[8]'\" rel=\"tooltip\" title=\"Editar\" name = \"editar$fila[0]\" value = \"$fila[0]\" class=\"btn btn-info btn-simple btn-link\">\n";
+print "                                            <button type=\"submit\" onclick=\"location.href='EditarEmpresa.php ? pid=$fila[0]&pnombre=$fila[1]&pcorreo=$fila[2]&pcontrasena=$fila[3]&platitud=$fila[4]&plongitud=$fila[5]&ptelefono=$fila[6]'\" rel=\"tooltip\" title=\"Editar\" name = \"editar$fila[0]\" value = \"$fila[0]\" class=\"btn btn-info btn-simple btn-link\">\n";
 print "                                                <i class=\"fa fa-edit\"></i>\n";
 print "                                            </button>\n";
 print "                                            <button type=\"button\" onclick=\"location.href='../controlador/controladorBorrarEmpresa.php ? pid=$fila[0]'\" rel=\"tooltip\" title=\"Eliminar\" name = \"eliminar$fila[0]\" class=\"btn btn-danger btn-simple btn-link\">\n";
@@ -196,7 +194,7 @@ print "    <footer class=\"footer\">\n";
 print "        <div class=\"container-fluid\">\n";
 print "            <nav>\n";
 print "                <p class=\"copyright text-center\">\n";
-print "                    Â©\n";
+print "                    ©\n";
 print "                    <script>\n";
 print "                        document.write(new Date().getFullYear())\n";
 print "                    </script>\n";

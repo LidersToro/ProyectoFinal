@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 session_start();
 require_once __DIR__.'/../modelo/MotoqueroModelo.php';
 $id = $_GET['pid'];
@@ -10,6 +10,7 @@ $ci = $_GET['pci'];
 $placa = $_GET['pplaca'];
 $estado = $_GET['pestado'];
 $telefono = $_GET['ptelefono'];
+$usuario = $_GET['pusuario'];
 //$imagen = $_GET['pimagen'];
 //require_once("ConectarDB.php");
 
@@ -213,7 +214,13 @@ $telefono = $_GET['ptelefono'];
                                                     <label>TELEFONO*</label>
                                                     <input type="text" name ="txtTelefono"class="form-control" placeholder="TELEFONO" value="<?php echo $telefono; ?>" required>
                                                 </div>
-                                            </div>   
+                                            </div> 
+                                            <div class="col-md-3 px-1">
+                                                <div class="form-group">
+                                                    <label>USUARIO*</label>
+                                                    <input type="text" name ="txtUsuario"class="form-control" placeholder="USUARIO" value="<?php echo $usuario; ?>" required>
+                                                </div>
+                                            </div>                                          
                                          
                                         
 
@@ -284,6 +291,7 @@ $telefono = $_GET['ptelefono'];
                                             $Obj->setPlaca($_POST['txtPlaca']);
                                             $Obj->setContrasena($_POST['txtClave']);
                                             $Obj->setEstado($_POST['estado']);
+                                            $Obj->setUsuario($_POST['txtUsuario']);
                                     
                                     $a = $Obj->getNombre();
                                     $b = $Obj->getCorreo();
@@ -292,8 +300,9 @@ $telefono = $_GET['ptelefono'];
                                     $e = $Obj->getPlaca();
                                     $f = $Obj->getEstado();
                                     $g = $Obj->getContrasena();
+                                    $h = $Obj->getUsuario();
                                     $idMot = $_POST['txtId'];
-                                    $query = "UPDATE motoquero set nombre='$a', correo='$b', contrasena='$g', CI='$d', placa='$e', estado='$f', imagen='$file', telefono='$c' where idMotoquero='$idMot';";  
+                                    $query = "UPDATE motoquero set nombre='$a', correo='$b', contrasena='$g', CI='$d', placa='$e', estado='$f', imagen='$file', telefono='$c', usuario='$h' where idMotoquero='$idMot';";  
                                             if(mysqli_query($connect, $query))  
                                                {  
                                                      echo '<script>alert("SE MODIFICO EXITOSAMENTE")</script>';  
@@ -327,6 +336,7 @@ $telefono = $_GET['ptelefono'];
                                             $Obj->setPlaca($_POST['txtPlaca']);
                                             $Obj->setContrasena($_POST['txtClave']);
                                             $Obj->setEstado($_POST['estado']);
+                                            $Obj->setUsuario($_POST['txtUsuario']);
                                     
                                     $a = $Obj->getNombre();
                                     $b = $Obj->getCorreo();
@@ -335,8 +345,9 @@ $telefono = $_GET['ptelefono'];
                                     $e = $Obj->getPlaca();
                                     $f = $Obj->getEstado();
                                     $g = $Obj->getContrasena();
+                                    $h = $Obj->getUsuario();
                                     $idMot = $_POST['txtId'];
-                                    $query = "UPDATE motoquero set nombre='$a', correo='$b', contrasena='$g', CI='$d', placa='$e', estado='$f', telefono='$c' where idMotoquero='$idMot';"; 
+                                    $query = "UPDATE motoquero set nombre='$a', correo='$b', contrasena='$g', CI='$d', placa='$e', estado='$f', telefono='$c', usuario='$h' where idMotoquero='$idMot';"; 
                                         if(mysqli_query($connect, $query))  
                                          {  
                                              echo '<script>alert("SE MODIFICO EXITOSAMENTE")</script>';  

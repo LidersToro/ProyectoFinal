@@ -12,10 +12,11 @@ class motoquero{
     private $estado;
     private $imagen;
     private $telefono;
+    private $usuario;
 
 
 
-    public function __construct($nom="",$corr="",$contra="",$C="",$plac="",$est="",$imag="",$tel="")
+    public function __construct($nom="",$corr="",$contra="",$C="",$plac="",$est="",$imag="",$tel="",$usu="")
     {
         $this->idMotoquero = 0;
         $this->nombre    = $nom;
@@ -26,6 +27,7 @@ class motoquero{
         $this->estado = $est;
         $this->imagen = $imag;
         $this->telefono = $tel;
+        $this->usuario = $usu;
     }
     public function __destruct()
     {
@@ -67,6 +69,10 @@ class motoquero{
     {
         $this->telefono = $tel;
     }
+    public function setUsuario($usu)
+    {
+        $this->usuario = $usu;
+    }
 
 
 
@@ -102,10 +108,16 @@ class motoquero{
     {
       return $this->imagen;
     }
-   public function getTelefono()
+    public function getTelefono()
     {
       return $this->telefono;
     }
+    public function getUsuario()
+    {
+      return $this->usuario;
+    }
+    
+
     public function adicionarMotoquero()
     {
         $conexion = Conectar::conectarBD();

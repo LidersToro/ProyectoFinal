@@ -9,6 +9,7 @@ $contrasena = $_GET['pcontrasena'];
 $latitud = $_GET['platitud'];
 $longitud = $_GET['plongitud'];
 $telefono = $_GET['ptelefono'];
+$usuario = $_GET['pusuario'];
 //$imagen = $_GET['pimagen'];
 //require_once("ConectarDB.php");
 
@@ -218,7 +219,12 @@ $lon = floatval($valor[1]);
                                                     <input type="text" name ="txtTelefono"class="form-control" placeholder="TELEFONO" value="<?php echo $telefono; ?>" required>
                                                 </div>
                                             </div>   
-                                         
+                                            <div class="col-md-3 px-1">
+                                                <div class="form-group">
+                                                    <label>USUARIO*</label>
+                                                    <input type="text" name ="txtUsuario"class="form-control" placeholder="USUARIO" value="<?php echo $usuario; ?>" required>
+                                                </div>
+                                            </div>                                           
                                         
 
                                         <!-- Tercera Fila -->
@@ -277,6 +283,7 @@ $lon = floatval($valor[1]);
                                             $Obj->setLatitud($_POST['latitud']);
                                             $Obj->setLongitud($_POST['longitud']);
                                             $Obj->setContrasena($_POST['txtClave']);
+                                            $Obj->setUsuario($_POST['txtUsuario']);
                                     
                                     $a = $Obj->getNombre();
                                     $b = $Obj->getCorreo();
@@ -284,8 +291,9 @@ $lon = floatval($valor[1]);
                                     $d = $Obj->getLatitud();
                                     $e = $Obj->getLongitud();
                                     $f = $Obj->getContrasena();
+                                    $g = $Obj->getUsuario();
                                     $idEmp = $_POST['txtId'];
-                                    $query = "UPDATE empresa set nombre='$a', correo='$b', contrasena='$f', latitud='$d', longitud='$e', telefono='$c', imagen='$file' where idEmpresa='$idEmp';";  
+                                    $query = "UPDATE empresa set nombre='$a', correo='$b', contrasena='$f', latitud='$d', longitud='$e', telefono='$c', imagen='$file', usuario='$g' where idEmpresa='$idEmp';";  
                                             if(mysqli_query($connect, $query))  
                                                {  
                                                      echo '<script>alert("SE MODIFICO EXITOSAMENTE")</script>';  
@@ -318,6 +326,7 @@ $lon = floatval($valor[1]);
                                             $Obj->setLatitud($_POST['latitud']);
                                             $Obj->setLongitud($_POST['longitud']);
                                             $Obj->setContrasena($_POST['txtClave']);
+                                            $Obj->setUsuario($_POST['txtUsuario']);
                                     
                                     $a = $Obj->getNombre();
                                     $b = $Obj->getCorreo();
@@ -325,8 +334,9 @@ $lon = floatval($valor[1]);
                                     $d = $Obj->getLatitud();
                                     $e = $Obj->getLongitud();
                                     $f = $Obj->getContrasena();
+                                    $g = $Obj->getUsuario();
                                     $idEmp = $_POST['txtId'];
-                                    $query = "UPDATE empresa set nombre='$a', correo='$b', contrasena='$f', latitud='$d', longitud='$e', telefono='$c' where idEmpresa='$idEmp';";  
+                                    $query = "UPDATE empresa set nombre='$a', correo='$b', contrasena='$f', latitud='$d', longitud='$e', telefono='$c', usuario='$g' where idEmpresa='$idEmp';";  
                                         if(mysqli_query($connect, $query))  
                                          {  
                                              echo '<script>alert("SE MODIFICO EXITOSAMENTE")</script>';  

@@ -16,7 +16,9 @@ contrasena varchar(30),
 latitud varchar(30),
 longitud varchar(30),
 telefono varchar(10),
-imagen blob);
+imagen blob,
+usuario varchar(30)
+);
 
 create table motoquero(
 idMotoquero int AUTO_INCREMENT PRIMARY KEY,
@@ -27,7 +29,9 @@ CI varchar (20),
 placa varchar (30),
 estado varchar (20),
 imagen blob,
-telefono varchar(10));
+telefono varchar(10),
+usuario varchar(30)
+);
 
 create table categoria(
 idCategoria int AUTO_INCREMENT PRIMARY KEY,

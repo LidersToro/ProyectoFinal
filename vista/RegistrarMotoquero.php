@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 session_start();
 require_once __DIR__.'/../modelo/MotoqueroModelo.php';
 //require_once("ConectarDB.php");
@@ -180,7 +180,12 @@ require_once __DIR__.'/../modelo/MotoqueroModelo.php';
                                                     <input type="text" name ="txtTelefono"class="form-control" placeholder="TELEFONO" required>
                                                 </div>
                                             </div>   
-                                         
+                                            <div class="col-md-3 px-1">
+                                                <div class="form-group">
+                                                    <label>USUARIO*</label>
+                                                    <input type="text" name ="txtUsuario"class="form-control" placeholder="USUARIO" required>
+                                                </div>
+                                            </div>                                         
                                         
 
                                         <!-- Tercera Fila -->
@@ -237,6 +242,7 @@ require_once __DIR__.'/../modelo/MotoqueroModelo.php';
                                             $Obj->setPlaca($_POST['txtPlaca']);
                                             $Obj->setEstado($_POST['estado']);
                                             $Obj->setContrasena($_POST['txtClave']);
+                                            $Obj->setUsuario($_POST['txtUsuario']);
                                     
                                     $a = $Obj->getNombre();
                                     $b = $Obj->getCorreo();
@@ -245,8 +251,9 @@ require_once __DIR__.'/../modelo/MotoqueroModelo.php';
                                     $e = $Obj->getPlaca();
                                     $f = $Obj->getEstado();
                                     $g = $Obj->getContrasena();
+                                    $h = $Obj->getUsuario();
 
-                                    $query = "INSERT INTO motoquero(nombre, correo, contrasena, CI, placa, estado, imagen, telefono) VALUES('$a','$b','$g','$d','$e','$f','$file','$c');";  
+                                    $query = "INSERT INTO motoquero(nombre, correo, contrasena, CI, placa, estado, imagen, telefono, usuario) VALUES('$a','$b','$g','$d','$e','$f','$file','$c','$h');";  
          if(mysqli_query($connect, $query))  
       {  
            echo '<script>alert("SE ADICIONO EXITOSAMENTE")</script>'; 

@@ -2,117 +2,78 @@
 
 
 require_once("ConectarDB.php");//incluye una sola vez el contenido del archivo
-class empresa{
-    private $idEmpresa;
+class categoria{
+    private $idCategoria;
     private $nombre;
-    private $correo;
-    private $contrasena;
-    private $latitud;
-    private $longitud;
-    private $telefono;
+    private $descripcion;
     private $imagen;
-    private $usuario;
+    private $idEmpresa;
 
 
 
-    public function __construct($nom="",$corr="",$contra="",$lat="",$lon="",$tel="",$imag="",$usu="")
+    public function __construct($nom="",$desc="",$imag="",$idEmp="")
     {
-        $this->idEmpresa = 0;
+        $this->idCategoria = 0;
         $this->nombre    = $nom;
-        $this->correo    = $corr;
-        $this->contrasena = $contra;
-        $this->latitud = $lat;
-        $this->longitud = $lon;
-        $this->telefono = $tel;
+        $this->descripcion    = $desc;
         $this->imagen = $imag;
-        $this->usuario = $usu;
+        $this->idEmpresa    = $idEmp;
     }
     public function __destruct()
     {
 
     }
-    public function setIdEmpresa($idEmp)
+    public function setIdCategoria($idCat)
     {
-        $this->idEmpresa = $idEmp;
+        $this->idCategoria = $idCat;
     }
     public function setNombre($nom)
     {
         $this->nombre = $nom;
     }
-    public function setCorreo($con)
+    public function setDescripcion($desc)
     {
-        $this->correo = $con;
-    }
-    public function setContrasena($contra)
-    {
-        $this->contrasena = $contra;
-    }
-    public function setLatitud($lat)
-    {
-        $this->latitud = $lat;
-    }
-    public function setLongitud($lon)
-    {
-        $this->longitud = $lon;
-    }
-    public function setTelefono($tel)
-    {
-        $this->telefono = $tel;
+        $this->descripcion = $desc;
     }
     public function setImagen($imag)
     {
         $this->imagen = $imag;
     }
-    public function setUsuario($usu)
+    public function setIdEmpresa($idEmp)
     {
-        $this->usuario = $usu;
+        $this->idEmpresa = $idEmp;
     }
+    
 
 
-
-    public function getIdEmpresa()
+    public function getIdCategoria()
     {
-      return $this->idEmpresa;
+      return $this->idCategoria;
     }
     public function getNombre()
     {
       return $this->nombre;
     }
-    public function getCorreo()
+    public function getDescripcion()
     {
-      return $this->correo;
-    }
-    public function getContrasena()
-    {
-      return $this->contrasena;
-    }
-    public function getLatitud()
-    {
-      return $this->latitud;
-    }
-    public function getLongitud()
-    {
-      return $this->longitud;
-    }
-    public function getTelefono()
-    {
-      return $this->telefono;
+      return $this->descripcion;
     }
     public function getImagen()
     {
       return $this->imagen;
     }
-    public function getUsuario()
+    public function getIdEmpresa()
     {
-      return $this->usuario;
+      return $this->idEmpresa;
     }
+
    
-    public function adicionarEmpresa()
+    public function adicionarCategoria()
     {
         $conexion = Conectar::conectarBD();
         if($conexion !=false)
         {
-            $sql = "INSERT INTO empresa(nombre, correo, contrasena, latitud, longitud, telefono, imagen) VALUES(?,?,?,?,?,?,?);";
+            $sql = "INSERT INTO categoria(nombre, correo, contrasena, latitud, longitud, telefono, imagen) VALUES(?,?,?,?,?,?,?);";
             $stmt = $conexion->prepare($sql);
             $stmt->bind_param('sssssss', $this->nombre, $this->correo, $this->contrasena, $this->latitud, $this->longitud, $this->telefono, $this->imagen);
             if($stmt->execute())
@@ -127,13 +88,6 @@ class empresa{
             $conexion->close();
         }
     }
-        public function obtenerCuenta($usuario="",$contrasena="") {
-        $sql = "SELECT * FROM empresa WHERE usuario= '$usuario' AND contrasena= '$contrasena';";
-         $conexion = Conectar::conectarBD();
-        $rows = $conexion->query($sql);
-        $conexion->close();
-        return ($rows);
-     }
         public function insertarImagen($id,$img)
     {
         $conexion = Conectar::conectarBD();//nos conectamos a la base de datos

@@ -184,7 +184,13 @@ require_once __DIR__.'/../modelo/EmpresaModelo.php';
                                                     <label>TELEFONO*</label>
                                                     <input type="text" name ="txtTelefono"class="form-control" placeholder="TELEFONO" required>
                                                 </div>
-                                            </div>   
+                                            </div>
+                                            <div class="col-md-3 px-1">
+                                                <div class="form-group">
+                                                    <label>USUARIO*</label>
+                                                    <input type="text" name ="txtUsuario"class="form-control" placeholder="USUARIO" required>
+                                                </div>
+                                            </div>                                           
                                          
                                         
 
@@ -231,6 +237,7 @@ require_once __DIR__.'/../modelo/EmpresaModelo.php';
                                             $Obj->setLatitud($_POST['latitud']);
                                             $Obj->setLongitud($_POST['longitud']);
                                             $Obj->setContrasena($_POST['txtClave']);
+                                            $Obj->setUsuario($_POST['txtUsuario']);
                                     
                                     $a = $Obj->getNombre();
                                     $b = $Obj->getCorreo();
@@ -238,8 +245,10 @@ require_once __DIR__.'/../modelo/EmpresaModelo.php';
                                     $d = $Obj->getLatitud();
                                     $e = $Obj->getLongitud();
                                     $f = $Obj->getContrasena();
+                                    $g = $Obj->getUsuario();
 
-                                    $query = "INSERT INTO empresa(nombre, correo, contrasena, latitud, longitud, telefono, imagen) VALUES('$a','$b','$f','$d','$e','$c','$file');";  
+
+                                    $query = "INSERT INTO empresa(nombre, correo, contrasena, latitud, longitud, telefono, imagen, usuario) VALUES('$a','$b','$f','$d','$e','$c','$file','$g');";  
          if(mysqli_query($connect, $query))  
       {  
            echo '<script>alert("SE ADICIONO EXITOSAMENTE")</script>'; 
