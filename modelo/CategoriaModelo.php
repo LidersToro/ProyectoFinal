@@ -120,16 +120,16 @@ class categoria{
 	}
 
       public function ultimoCodigo()	{
-	  $sql="select max(idEmpresa) as maximo from empresa;";	  
+	  $sql="select max(idCategoria) as maximo from categoria;";	  
       $conexion = Conectar::conectarBD();
       $rows = $conexion->query($sql);
       $conexion->close();
       return ($rows);
 	}
 
-    public function obtenerTodos()
+    public function obtenerTodos($id)
     {
-        $sql="SELECT * FROM empresa;";
+        $sql="SELECT * FROM categoria where idEmpresa='$id';";
         $conexion = Conectar::conectarBD();
         $rows = $conexion->query($sql);
         $conexion->close();

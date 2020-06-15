@@ -36,7 +36,7 @@ usuario varchar(30)
 create table categoria(
 idCategoria int AUTO_INCREMENT PRIMARY KEY,
 nombre varchar(30),
-descripcion varchar(30),
+descripcion varchar(500),
 imagen blob,
 idEmpresa int,
 foreign key(idEmpresa) references empresa(idEmpresa)
@@ -45,7 +45,7 @@ foreign key(idEmpresa) references empresa(idEmpresa)
 create table producto(
 idProducto int AUTO_INCREMENT PRIMARY KEY,
 nombre varchar(30),
-descripcion varchar(30),
+descripcion varchar(500),
 precio float,
 imagen blob,
 idEmpresa int,

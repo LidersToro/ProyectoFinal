@@ -6,15 +6,12 @@ $_SESSION['user'] = $user;
 $_SESSION['clave'] = $clave;
 
 require_once __DIR__.'/../modelo/AdminModelo.php';
-require_once __DIR__.'/../modelo/EmpresaModelo.php';
 $Obj = new admin();
-$Obj1 = new empresa();
 if(isset($_POST['btn_login'])) 
 {
      if((isset($_POST['user'])) && (isset($_POST['clave'])))
      {                       
      $row = $Obj->obtenerCuenta($user,$clave);
-     $row1 = $Obj1->obtenerCuenta($user,$clave);
      $fila=$row->fetch_row();
             if($fila[1]==$_POST['user']&&$fila[2]==$_POST['clave'])
             {
