@@ -1,7 +1,11 @@
-<?php
+﻿<?php
 session_start();
 require_once __DIR__.'/../modelo/CategoriaModelo.php';
 $id = $_SESSION['id'];
+$idCat = $_GET['pid'];
+$_SESSION['id']=$id;
+$nombre = $_GET['pnombre'];
+$des = $_GET['pdescripcion'];
 //require_once("ConectarDB.php");
 ?>
  <!DOCTYPE html>
@@ -114,7 +118,7 @@ $id = $_SESSION['id'];
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Registrar Nueva Categoria</h4>
+                                    <h4 class="card-title">Modificar Categoria</h4>
                                 </div>
                                 <div class="card-body">
 
@@ -136,7 +140,7 @@ $id = $_SESSION['id'];
     }
 </script>-->
 
-                                    <form name="myForm" action="RegistrarCategoria.php" method="POST" enctype="multipart/form-data">
+                                    <form name="myForm" action="EditarCategoria.php" method="POST" enctype="multipart/form-data">
                                         <?php
                                         $Obj = new categoria();
                                         $aux = $Obj->ultimoCodigo();
@@ -148,13 +152,13 @@ $id = $_SESSION['id'];
                                             <div class="col-md-1 pr-1">
                                                 <div class="form-group">
                                                     <label>ID</label>
-                                                    <input type="text" class="form-control" readonly="readonly" placeholder="#" value="<?php echo $siguiente; ?>">
+                                                    <input type="text" name="txtCat" class="form-control" readonly="readonly" placeholder="#" value="<?php echo $idCat; ?>">
                                                 </div>
                                             </div>
                                             <div class="col-md-3 px-1">
                                                 <div class="form-group">
                                                     <label>NOMBRE*</label>
-                                                    <input type="text" name ="txtNombre"class="form-control" placeholder="NOMBRE" required>
+                                                    <input type="text" name ="txtNombre"class="form-control" placeholder="NOMBRE" value="<?php echo $nombre; ?>" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -165,7 +169,7 @@ $id = $_SESSION['id'];
                                             <div class="col-md-3 px-1">
                                                 <div class="form-group">
                                                     <label for="exampleFormControlTextarea1">DESCRIPCION*</label>
-                                                    <textarea class="form-control" id="txtArea" name="txtArea" style="margin-top: 0px; margin-bottom: 0px; height: 100px;" required></textarea>
+                                                    <textarea class="form-control" id="txtArea" name="txtArea" style="margin-top: 0px; margin-bottom: 0px; height: 100px;" required><?php echo $des; ?></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-md-3 px-1">
@@ -182,7 +186,7 @@ $id = $_SESSION['id'];
 
                                         
 
-                                        <input type="submit" name ="btnAdicionar" id="btnAdicionar" class="btn btn-info btn-fill pull-right" value="Registrar Nueva Categoria" onclick="return verificar();">
+                                        <input type="submit" name ="btnModificar" id="btnModificar" class="btn btn-info btn-fill pull-right" value="Modificar Categoria" onclick="return verificar();">
                                          <!--<div id="map_canvas" style="height: 350px;width: 500px;margin: 0.6em;"></div>-->
 
 
@@ -197,42 +201,82 @@ $id = $_SESSION['id'];
                                     </form>
 
                                     <?php
-                                    if(isset($_POST['btnAdicionar']))
+                                    if(isset($_POST['btnModificar']))
                                         {
+                                        if ($_FILES['image']['error'] == UPLOAD_ERR_OK) 
+                                            {
+                                            $file = $_FILES['image'];
+                                            $filename = $file['name'];
+                                            $filepath = $file['tmp_name'];
+                                            $fileerror = $file['error'];
+                                            
+                                            $file_ext = explode('.',$filename);
+                                            $file_ext_check = strtolower(end($file_ext));
+                                            $valid_file_ext = array('png','jpg','jpeg');
+
+                                            if(in_array($file_ext_check,$valid_file_ext))
+                                            {
                                             require_once __DIR__.'/../modelo/CategoriaModelo.php';
                                             $Obj = new categoria();
-                                      $connect = mysqli_connect("localhost", "root", "", "bd_proyectofinal"); 
-                                      $file = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
+                                            $connect = mysqli_connect("localhost", "root", "", "bd_proyectofinal"); 
+                                            $file = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
                                             $Obj->setNombre($_POST['txtNombre']);
                                             $Obj->setDescripcion($_POST['txtArea']);
                                             $Obj->setIdEmpresa($_POST['txtIdEmpresa']);
+
                                     
                                     $a = $Obj->getNombre();
                                     $b = $Obj->getDescripcion();
                                     $c = $Obj->getIdEmpresa();
-                                 
+                                    $idCat = $_POST['txtCat'];
+                                    $query = "UPDATE categoria set nombre='$a', descripcion='$b', imagen='$file' where idCategoria='$idCat';";  
+                                            if(mysqli_query($connect, $query))  
+                                               {  
+                                                     echo '<script>alert("SE MODIFICO EXITOSAMENTE")</script>';  
+                                                     mysqli_close($connect);
+                                                     
+                                                }     
+                                             }else
+                                             {
+                                             echo '<script>alert("IMAGEN INVALIDA!")</script>';  
 
+                                             ?>
+                                    <script>
+                                        $('#image').val('');
+                                    </script>
+                                    <?php
 
-                                    $query = "INSERT INTO categoria(nombre, descripcion, imagen, idEmpresa) VALUES('$a','$b','$file','$c');";  
-         if(mysqli_query($connect, $query))  
-      {  
-           echo '<script>alert("SE ADICIONO EXITOSAMENTE")</script>'; 
-                                    mysqli_close($connect);
-                                    
-      }     
-                                   /* echo "<script>alert('SE ADICIONO EXITOSAMENTE');</script>";
-                                            $file = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
-                                            $Obj->setImagen($file);
+                                                }
+                                                }
+                                        else
+                                            
+
+                                             {
+                                            require_once __DIR__.'/../modelo/CategoriaModelo.php';
+                                            $Obj = new categoria();
+                                            $connect = mysqli_connect("localhost", "root", "", "bd_proyectofinal"); 
+                                            //$file = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
                                             $Obj->setNombre($_POST['txtNombre']);
-                                            $Obj->setCorreo($_POST['txtCorreo']);
-                                            $Obj->setTelefono($_POST['txtTelefono']);
-                                            $Obj->setLongitud($_POST['latitud']);
-                                            $Obj->setLatitud($_POST['longitud']);
-                                            $Obj->setContrasena($_POST['txtClave']);
-                                            $Obj->adicionarEmpresa();
-                                            */
+                                            $Obj->setDescripcion($_POST['txtArea']);
+                                            $Obj->setIdEmpresa($_POST['txtIdEmpresa']);
 
+                                    
+                                    $a = $Obj->getNombre();
+                                    $b = $Obj->getDescripcion();
+                                    $c = $Obj->getIdEmpresa();
+                                    $idCat = $_POST['txtCat'];
+                                    $query = "UPDATE categoria set nombre='$a', descripcion='$b' where idCategoria='$idCat';";  
+                                        if(mysqli_query($connect, $query))  
+                                         {  
+                                             echo '<script>alert("SE MODIFICO EXITOSAMENTE")</script>';  
+                                             mysqli_close($connect);
+                                           
+                                         }     
+                                    }
+                                    //echo $query;
+                                    //echo $idEmp;
                                             echo " <script>window.location = '/proyectoFinal/vista/categoriagestion.php';</script>";
+                                   // echo $query;
                                     }
                                     ?>
                                     <script>

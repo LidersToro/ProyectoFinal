@@ -162,19 +162,21 @@ class categoria{
         }
         
     }
-        public function borrarEmpresa($id)
+        public function borrarCategoria($id)
     {
-        $sql = "DELETE FROM empresa WHERE idEmpresa='$id';";
+        $sql = "DELETE FROM categoria WHERE idCategoria='$id';";
         $conexion = Conectar::conectarBD();
         $stmt = $conexion->prepare($sql);
         $stmt->bind_param('s',$id);
         if($stmt->execute())
         {
+        echo '<script>alert("SE ELIMINO EXITOSAMENTE!")</script>'; 
             $conexion->close();
             return 1;
         }
         else
         {
+         echo '<script>alert("NO SE PUEDE ELIMINAR PORQUE EXISTE PRODUCTOS ASOCIADOS A ESTA CATEGORIA!")</script>'; 
             $conexion->close();
             return -1;
         }
