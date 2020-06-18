@@ -147,9 +147,17 @@ class producto{
       return ($rows);
 	}
 
-    public function obtenerTodos($id)
+    public function obtenerTodos($id,$ida)
     {
-        $sql="SELECT * FROM categoria where idEmpresa='$id';";
+        $sql="SELECT * FROM producto where idEmpresa='$id' and idCategoria='$ida';";
+        $conexion = Conectar::conectarBD();
+        $rows = $conexion->query($sql);
+        $conexion->close();
+        return($rows);
+    }
+    public function obtenerProductos($id)
+    {
+        $sql="SELECT * FROM producto where idEmpresa='$id';";
         $conexion = Conectar::conectarBD();
         $rows = $conexion->query($sql);
         $conexion->close();

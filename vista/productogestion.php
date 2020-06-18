@@ -1,11 +1,32 @@
 <?php
 session_start();
 require_once __DIR__.'/../modelo/ProductoModelo.php';
+require_once __DIR__.'/../modelo/CategoriaModelo.php';
+$abc = $_SESSION['id'];
+//echo $abc;
+$connect = mysqli_connect("localhost", "root", "", "bd_proyectofinal");
+function llenarCategoria($connect,$a)
+{
+    $output= '';
+    $sql = "SELECT * FROM categoria where idEmpresa = '$a';";
+    $resultado = mysqli_query($connect,$sql);
+    while($row = $resultado->fetch_row())
+    {
+        $output .= '<option value="'.$row[0].'">'.$row[1].'</option>';
+        
+    }
+    return $output;
+}
+function llenarProducto($connect)
+{
+
+}
 print "<!DOCTYPE html>\n";
 print "<html lang=\"en\">\n";
 print "\n";
 print "<head>\n";
 print "    <meta charset=\"utf-8\" />\n";
+print "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js\"></script>";
 print "    <link rel=\"apple-touch-icon\" sizes=\"76x76\" href=\"../assets/img/apple-icon.png\">\n";
 print "    <link rel=\"icon\" type=\"image/png\" href=\"../assets/img/favicon.ico\">\n";
 print "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\" />\n";
@@ -75,7 +96,7 @@ print "<div class=\"main-panel\">\n";
 print "    <!-- Navbar -->\n";
 print "    <nav class=\"navbar navbar-expand-lg \" color-on-scroll=\"500\">\n";
 print "        <div class=\"container-fluid\">\n";
-print "            <a class=\"navbar-brand\" href=\"categoriagestion.php\"> Gestion de Categorias </a>\n";
+print "            <a class=\"navbar-brand\" href=\"productogestion.php\"> Gestion de Productos </a>\n";
 print "            <button href=\"\" class=\"navbar-toggler navbar-toggler-right\" type=\"button\" data-toggle=\"collapse\" aria-controls=\"navigation-index\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n";
 print "                <span class=\"navbar-toggler-bar burger-lines\"></span>\n";
 print "                <span class=\"navbar-toggler-bar burger-lines\"></span>\n";
@@ -113,37 +134,48 @@ print "            <div class=\"row\">\n";
 print "                <div class=\"col-md-12\">\n";
 print "                    <div class=\"card strpied-tabled-with-hover\">\n";
 print "                        <div class=\"card-header \">\n";
-print "                            <h4 class=\"card-title\">Lista de Categorias</h4>\n";
+print "                            <h4 class=\"card-title\">Lista de Productos</h4>\n";
 print "                            <p class=\"card-category\">Delivery SLC</p>\n";
-print "                            <button type=\"submit\" onclick=\"location.href='RegistrarCategoria.php'\" class=\"btn btn-info btn-fill pull-left\">Registrar Nueva Categoria</button>\n";
-print "                        </div>\n";
-print "                        <div class=\"card-body table-full-width table-responsive\">\n";
+echo "<br><br>";
+print "                            <p class=\"card-category\"><b>Buscar Productos por Categoria</p>\n";
+?>
+<p>
+    <select name="categoria" id="categoria">
+        <option value="">MOSTRAR TODO</option>
+        <?php echo llenarCategoria($connect,$abc); ?>
+    </select>
+</p>
 
-$Obj = new categoria();
-$aux = $Obj->obtenerTodos($_SESSION['id']);
-//$aux1 = $Obj->ultimoCodigo();
+<?php
+print "                            <button type=\"submit\" onclick=\"location.href='RegistrarProducto.php'\" class=\"btn btn-info btn-fill pull-left\">Registrar Nuevo Producto</button>\n";
+print "                        </div>\n";
+print "                        <div id=\"show_product\" class=\"card-body table-full-width table-responsive\">\n";
+
+$Obj = new producto();
+$auxiliar = $Obj->obtenerProductos($_SESSION['id']);
+//$aux = $Obj->obtenerTodos($_SESSION['id']);
+
 print "                            <table class=\"table table-hover table-striped\">\n";
 print "                                <thead>\n";
 print "                                    <th>ID</th>\n";
 print "                                    <th>Logo</th>\n";
 print "                                    <th>Nombre</th>\n";
 print "                                    <th>Descripcion</th>\n";
-//print "                                    <th>IDEMPRESA</th>\n";
+print "                                    <th>Precio</th>\n";
 print "                                </thead>\n";
 print "                                <tbody>\n";
-while($fila = $aux->fetch_row()){
-
+while($fila = $auxiliar->fetch_row()){
 print "                                    <tr>\n";
 print "                                         <td> $fila[0] </td>\n";
-echo '                                        <td><img src="data:image/jpeg;base64,'.base64_encode( $fila[3] ).'"height="200" width="200" class="img-thumnail"/></td>';
+echo '                                        <td><img src="data:image/jpeg;base64,'.base64_encode( $fila[4] ).'"height="200" width="200" class="img-thumnail"/></td>';
 print "                                        <td>$fila[1]</td>\n";
 print "                                        <td>$fila[2]</td>\n";
-//print "                                        <td>$fila[4]</td>\n";
+print "                                        <td>$fila[3]</td>\n";
 print "                                        <td class=\"td-actions text-right\">\n";
 //$_SESSION['id'] = $fila[0];
 //$_SESSION['nomb'] = $fila[1];
 //$_SESSION['pass'] = $fila[2];
-print "                                            <button type=\"submit\" onclick=\"location.href='EditarCategoria.php ? pid=$fila[0]&pnombre=$fila[1]&pdescripcion=$fila[2]'\" rel=\"tooltip\" title=\"Editar\" name = \"editar$fila[0]\" value = \"$fila[0]\" class=\"btn btn-info btn-simple btn-link\">\n";
+print "                                            <button type=\"submit\" onclick=\"location.href='EditarProducto.php ? pid=$fila[0]&pnombre=$fila[1]&pdescripcion=$fila[2]'\" rel=\"tooltip\" title=\"Editar\" name = \"editar$fila[0]\" value = \"$fila[0]\" class=\"btn btn-info btn-simple btn-link\">\n";
 print "                                                <i class=\"fa fa-edit\"></i>\n";
 print "                                            </button>\n";
 print "                                            <button type=\"button\" onclick=\"location.href='../controlador/controladorBorrarCategoria.php ? pid=$fila[0]'\" rel=\"tooltip\" title=\"Eliminar\" name = \"eliminar$fila[0]\" class=\"btn btn-danger btn-simple btn-link\">\n";
