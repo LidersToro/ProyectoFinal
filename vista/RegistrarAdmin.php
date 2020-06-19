@@ -165,11 +165,11 @@ require_once __DIR__.'/../modelo/AdminModelo.php';
                                     <?php
                                     if(isset($_POST['btnAdicionar']))
                                         {
-                                            require_once __DIR__.'/../modelo/clienteModelp.php';
+                                            require_once __DIR__.'/../modelo/AdminModelo.php';
                                             $Obj = new admin();
                                             echo "<script>alert('SE ADICIONO EXITOSAMENTE');</script>";
-                                            $Obj->setUsuario($_POST['nombre']);
-                                            $Obj->setContrasena($_POST['correo']);
+                                            $Obj->setUsuario($_POST['txtUsuario']);
+                                            $Obj->setContrasena($_POST['txtClave']);
                                             $Obj->adicionarUsuario();
                                             echo " <script>window.location = '/proyectofinal/vista/useradmin.php';</script>";
                                     }

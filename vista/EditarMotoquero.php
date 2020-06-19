@@ -243,8 +243,8 @@ $usuario = $_GET['pusuario'];
                                                 <div class="form-group">
                                                     <label>Estado*</label>
                                                    <select id="estado" name="estado" value="<?php echo $estado;?>">
-                                                  <option <?php if ($estado == 'activo') {echo "selected='selected'";} ?> >ACTIVO</option>
-                                                  <option <?php if ($estado == 'inactivo') {echo "selected='selected'";} ?> >INACTIVO</option>                                               
+                                                  <option <?php if ($estado == 'ACTIVO') {echo "selected='selected'";} ?> >ACTIVO</option>
+                                                  <option <?php if ($estado == 'INACTIVO') {echo "selected='selected'";} ?> >INACTIVO</option>                                               
                                                 </select>
                                                 </div>
                                             </div>                                          
