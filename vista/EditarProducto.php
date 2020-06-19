@@ -3,9 +3,23 @@ session_start();
 require_once __DIR__.'/../modelo/ProductoModelo.php';
 require_once __DIR__.'/../modelo/CategoriaModelo.php';
 $id = $_SESSION['id'];
+$_SESSION['id']=$id;
+$idProd = $_GET['pid'];
+$nombre = $_GET['pnombre'];
+$des = $_GET['pdescripcion'];
+$precio = $_GET['pprecio'];
+$empresa = $_GET['pempresa'];
+$categoria = $_GET['pcategoria'];
+$abc = $categoria;
+
+
+$Obj8 = new categoria();
+$aux = $Obj8->obtenerNombre($abc);
+$valor=$aux->fetch_row();
+$catnom = $valor[0];
+//echo $catnom;
 
 //require_once("ConectarDB.php");
-
 $connect = mysqli_connect("localhost", "root", "", "bd_proyectofinal");
 function llenarCategoria($connect,$a)
 {
@@ -92,7 +106,7 @@ function llenarCategoria($connect,$a)
              <!-- Navbar -->
              <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                  <div class="container-fluid">
-                     <a class="navbar-brand" href="productogestion.php"> Gestion de Productos </a>
+                     <a class="navbar-brand" href="categoriagestion.php"> Gestion de Productos </a>
                      <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                          <span class="navbar-toggler-bar burger-lines"></span>
                          <span class="navbar-toggler-bar burger-lines"></span>
@@ -130,7 +144,7 @@ function llenarCategoria($connect,$a)
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Registrar Nuevo Producto</h4>
+                                    <h4 class="card-title">Modificar Producto</h4>
                                 </div>
                                 <div class="card-body">
 
@@ -152,30 +166,31 @@ function llenarCategoria($connect,$a)
     }
 </script>-->
 
-                                    <form name="myForm" action="RegistrarProducto.php" method="POST" enctype="multipart/form-data">
+                                    <form name="myForm" action="EditarProducto.php" method="POST" enctype="multipart/form-data">
                                         <?php
                                         $Obj = new producto();
                                         $aux = $Obj->ultimoCodigo();
                                         $fila = $aux->fetch_row();
                                         $siguiente = $fila[0] + 1;
                                         ?>
-  <p>
+<label>CATEGORIA*</label>
+<p>
     <select name="categoria" id="categoria">
-        
+        <option value="<?php echo $categoria;?>"><?php echo $catnom;?></option>
         <?php echo llenarCategoria($connect,$id); ?>
     </select>
-</p>
+</p>                                     
                                        <div class="row">
                                             <div class="col-md-1 pr-1">
                                                 <div class="form-group">
                                                     <label>ID</label>
-                                                    <input type="text" class="form-control" readonly="readonly" placeholder="#" value="<?php echo $siguiente; ?>">
+                                                    <input type="text" name="txtProd" class="form-control" readonly="readonly" placeholder="#" value="<?php echo $idProd; ?>">
                                                 </div>
                                             </div>
                                             <div class="col-md-3 px-1">
                                                 <div class="form-group">
                                                     <label>NOMBRE*</label>
-                                                    <input type="text" name ="txtNombre"class="form-control" placeholder="NOMBRE" required>
+                                                    <input type="text" name ="txtNombre"class="form-control" placeholder="NOMBRE" value="<?php echo $nombre; ?>" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -186,24 +201,27 @@ function llenarCategoria($connect,$a)
                                             <div class="col-md-3 px-1">
                                                 <div class="form-group">
                                                     <label for="exampleFormControlTextarea1">DESCRIPCION*</label>
-                                                    <textarea class="form-control" id="txtArea" name="txtArea" style="margin-top: 0px; margin-bottom: 0px; height: 100px;" required></textarea>
+                                                    <textarea class="form-control" id="txtArea" name="txtArea" style="margin-top: 0px; margin-bottom: 0px; height: 100px;" required><?php echo $des; ?></textarea>
                                                 </div>
                                             </div>
-
                                             <div class="col-md-3 px-1">
                                                 <div class="form-group">
                                                     <label>PRECIO*</label>
-                                                    <input type="text" name ="txtPrecio"class="form-control" placeholder="PRECIO" required>
+                                                    <input type="text" name ="txtPrecio"class="form-control" placeholder="PRECIO" value="<?php echo $precio; ?>" required>
                                                 </div>
                                             </div>
-
-
                                             <div class="col-md-3 px-1">
                                                 <div class="form-group">
                                                     <label>IDEMPRESA*</label>
-                                                    <input type="text" name ="txtIdEmpresa"class="form-control" placeholder="IDEMPRESA" value="<?php echo $id; ?>" readonly>
+                                                    <input type="text" name ="txtIdEmpresa"class="form-control" placeholder="IDEMPRESA" value="<?php echo $empresa; ?>" readonly>
                                                 </div>
                                             </div>
+                                            <!--<div class="col-md-3 px-1">
+                                                <div class="form-group">
+                                                    <label>IDCATEGORIA*</label>
+                                                    <input type="text" name ="txtIdCategoria"class="form-control" placeholder="IDCATEGORIA" value="<?php echo $categoria; ?>" readonly>
+                                                </div>
+                                            </div>-->
                                    
                                          
                                         
@@ -212,7 +230,7 @@ function llenarCategoria($connect,$a)
 
                                         
 
-                                        <input type="submit" name ="btnAdicionar" id="btnAdicionar" class="btn btn-info btn-fill pull-right" value="Registrar Nueva Categoria" onclick="return verificar();">
+                                        <input type="submit" name ="btnModificar" id="btnModificar" class="btn btn-info btn-fill pull-right" value="Modificar Producto" onclick="return verificar();">
                                          <!--<div id="map_canvas" style="height: 350px;width: 500px;margin: 0.6em;"></div>-->
 
 
@@ -227,46 +245,90 @@ function llenarCategoria($connect,$a)
                                     </form>
 
                                     <?php
-                                    if(isset($_POST['btnAdicionar']))
+                                    if(isset($_POST['btnModificar']))
                                         {
+                                        if ($_FILES['image']['error'] == UPLOAD_ERR_OK) 
+                                            {
+                                            $file = $_FILES['image'];
+                                            $filename = $file['name'];
+                                            $filepath = $file['tmp_name'];
+                                            $fileerror = $file['error'];
+                                            
+                                            $file_ext = explode('.',$filename);
+                                            $file_ext_check = strtolower(end($file_ext));
+                                            $valid_file_ext = array('png','jpg','jpeg');
+
+                                            if(in_array($file_ext_check,$valid_file_ext))
+                                            {
                                             require_once __DIR__.'/../modelo/ProductoModelo.php';
                                             $Obj = new producto();
-                                      $connect = mysqli_connect("localhost", "root", "", "bd_proyectofinal"); 
-                                      $file = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
+                                            $connect = mysqli_connect("localhost", "root", "", "bd_proyectofinal"); 
+                                            $file = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
                                             $Obj->setNombre($_POST['txtNombre']);
                                             $Obj->setDescripcion($_POST['txtArea']);
                                             $Obj->setPrecio($_POST['txtPrecio']);
                                             $Obj->setIdEmpresa($_POST['txtIdEmpresa']);
                                             $Obj->setIdCategoria($_POST['categoria']);
+
                                     
                                     $a = $Obj->getNombre();
                                     $b = $Obj->getDescripcion();
                                     $c = $Obj->getPrecio();
                                     $d = $Obj->getIdEmpresa();
                                     $e = $Obj->getIdCategoria();
-                                 
+                                    $idProd = $_POST['txtProd'];
+                                    $query = "UPDATE producto set nombre='$a', descripcion='$b', precio='$c', imagen='$file', idEmpresa='$d', idCategoria='$e' where idProducto='$idProd';";  
+                                            if(mysqli_query($connect, $query))  
+                                               {  
+                                                     echo '<script>alert("SE MODIFICO EXITOSAMENTE")</script>';  
+                                                     mysqli_close($connect);
+                                                     
+                                                }     
+                                             }else
+                                             {
+                                             echo '<script>alert("IMAGEN INVALIDA!")</script>';  
 
+                                             ?>
+                                    <script>
+                                        $('#image').val('');
+                                    </script>
+                                    <?php
 
-                                    $query = "INSERT INTO producto(nombre, descripcion, precio, imagen, idEmpresa, idCategoria) VALUES('$a','$b','$c','$file','$d','$e');";  
-         if(mysqli_query($connect, $query))  
-      {  
-           echo '<script>alert("SE ADICIONO EXITOSAMENTE")</script>'; 
-                                    mysqli_close($connect);
-                                    
-      }     
-                                   /* echo "<script>alert('SE ADICIONO EXITOSAMENTE');</script>";
-                                            $file = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
-                                            $Obj->setImagen($file);
+                                                }
+                                                }
+                                        else
+                                            
+
+                                             {
+                                            require_once __DIR__.'/../modelo/ProductoModelo.php';
+                                            $Obj = new producto();
+                                            $connect = mysqli_connect("localhost", "root", "", "bd_proyectofinal"); 
+                                            //$file = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
                                             $Obj->setNombre($_POST['txtNombre']);
-                                            $Obj->setCorreo($_POST['txtCorreo']);
-                                            $Obj->setTelefono($_POST['txtTelefono']);
-                                            $Obj->setLongitud($_POST['latitud']);
-                                            $Obj->setLatitud($_POST['longitud']);
-                                            $Obj->setContrasena($_POST['txtClave']);
-                                            $Obj->adicionarEmpresa();
-                                            */
+                                            $Obj->setDescripcion($_POST['txtArea']);
+                                            $Obj->setPrecio($_POST['txtPrecio']);
+                                            $Obj->setIdEmpresa($_POST['txtIdEmpresa']);
+                                            $Obj->setIdCategoria($_POST['categoria']);
 
+                                    
+                                    $a = $Obj->getNombre();
+                                    $b = $Obj->getDescripcion();
+                                    $c = $Obj->getPrecio();
+                                    $d = $Obj->getIdEmpresa();
+                                    $e = $Obj->getIdCategoria();
+                                    $idProd = $_POST['txtProd'];
+                                    $query = "UPDATE producto set nombre='$a', descripcion='$b', precio='$c', idEmpresa='$d', idCategoria='$e' where idProducto='$idProd';";  
+                                        if(mysqli_query($connect, $query))  
+                                         {  
+                                             echo '<script>alert("SE MODIFICO EXITOSAMENTE")</script>';  
+                                             mysqli_close($connect);
+                                           
+                                         }     
+                                    }
+                                    //echo $query;
+                                    //echo $idEmp;
                                             echo " <script>window.location = '/proyectoFinal/vista/productogestion.php';</script>";
+                                   // echo $query;
                                     }
                                     ?>
                                     <script>

@@ -17,9 +17,32 @@ function llenarCategoria($connect,$a)
     }
     return $output;
 }
-function llenarProducto($connect)
+function llenarProducto($connect,$a)
 {
-
+    $output = '';
+    $sql = "SELECT * from producto where idEmpresa ='$a'";
+    $resultado = mysqli_query($connect,$sql);
+    while($row = $resultado->fetch_row())
+    {
+        $output .= "<tr>\n";
+        $output .= "<td>$row[0]</td>\n";
+        $output .= ' <td><img src="data:image/jpeg;base64,'.base64_encode( $row[4] ).'"height="200" width="200" class="img-thumnail"/></td>';
+        $output .= "<td>$row[1]</td>\n";
+        $output .= "<td>$row[2]</td>\n";
+        $output .= "<td>$row[3]</td>\n";
+        $output .= "<td style='display:none;'>$row[5]</td>\n";
+        $output .= "<td style='display:none;'>$row[6]</td>\n";
+        $output .= "<td class=\"td-actions text-right\">\n";
+        $output .= " <button type=\"submit\" onclick=\"location.href='EditarProducto.php ? pid=$row[0]&pnombre=$row[1]&pdescripcion=$row[2]&pprecio=$row[3]&pempresa=$row[5]&pcategoria=$row[6]'\" rel=\"tooltip\" title=\"Editar\" name = \"editar$row[0]\" value = \"$row[0]\" class=\"btn btn-info btn-simple btn-link\">\n";
+        $output .= "<i class=\"fa fa-edit\"></i>\n";
+        $output .= "</button>\n";
+        $output .= "<button type=\"button\" onclick=\"location.href='../controlador/controladorBorrarProducto.php ? pid=$row[0]'\" rel=\"tooltip\" title=\"Eliminar\" name = \"eliminar$row[0]\" class=\"btn btn-danger btn-simple btn-link\">\n";
+        $output .= "<i class=\"fa fa-times\"></i>\n";
+        $output .= " </button>\n";
+        $output .= "</td>\n";
+        $output .= "</tr>\n";
+    }
+    return $output;
 }
 print "<!DOCTYPE html>\n";
 print "<html lang=\"en\">\n";
@@ -164,27 +187,33 @@ print "                                    <th>Descripcion</th>\n";
 print "                                    <th>Precio</th>\n";
 print "                                </thead>\n";
 print "                                <tbody>\n";
-while($fila = $auxiliar->fetch_row()){
-print "                                    <tr>\n";
-print "                                         <td> $fila[0] </td>\n";
-echo '                                        <td><img src="data:image/jpeg;base64,'.base64_encode( $fila[4] ).'"height="200" width="200" class="img-thumnail"/></td>';
-print "                                        <td>$fila[1]</td>\n";
-print "                                        <td>$fila[2]</td>\n";
-print "                                        <td>$fila[3]</td>\n";
-print "                                        <td class=\"td-actions text-right\">\n";
+//while($fila = $auxiliar->fetch_row()){
+//print "                                    <tr>\n";
+echo llenarProducto($connect,$abc);
+
+
+
+
+
+//print "                                         <td> $fila[0] </td>\n";
+//echo '                                        <td><img src="data:image/jpeg;base64,'.base64_encode( $fila[4] ).'"height="200" width="200" class="img-thumnail"/></td>';
+//print "                                        <td>$fila[1]</td>\n";
+//print "                                        <td>$fila[2]</td>\n";
+//print "                                        <td>$fila[3]</td>\n";
+//print "                                        <td class=\"td-actions text-right\">\n";
 //$_SESSION['id'] = $fila[0];
 //$_SESSION['nomb'] = $fila[1];
 //$_SESSION['pass'] = $fila[2];
-print "                                            <button type=\"submit\" onclick=\"location.href='EditarProducto.php ? pid=$fila[0]&pnombre=$fila[1]&pdescripcion=$fila[2]'\" rel=\"tooltip\" title=\"Editar\" name = \"editar$fila[0]\" value = \"$fila[0]\" class=\"btn btn-info btn-simple btn-link\">\n";
-print "                                                <i class=\"fa fa-edit\"></i>\n";
-print "                                            </button>\n";
-print "                                            <button type=\"button\" onclick=\"location.href='../controlador/controladorBorrarCategoria.php ? pid=$fila[0]'\" rel=\"tooltip\" title=\"Eliminar\" name = \"eliminar$fila[0]\" class=\"btn btn-danger btn-simple btn-link\">\n";
-print "                                                <i class=\"fa fa-times\"></i>\n";
-print "                                            </button>\n";
-print "                                        </td>\n";
-print "                                    </tr>\n";
-print "                                    <tr>\n";
-}
+//print "                                            <button type=\"submit\" onclick=\"location.href='EditarProducto.php ? pid=$fila[0]&pnombre=$fila[1]&pdescripcion=$fila[2]'\" rel=\"tooltip\" title=\"Editar\" name = \"editar$fila[0]\" value = \"$fila[0]\" class=\"btn btn-info btn-simple btn-link\">\n";
+//print "                                                <i class=\"fa fa-edit\"></i>\n";
+//print "                                            </button>\n";
+//print "                                            <button type=\"button\" onclick=\"location.href='../controlador/controladorBorrarProducto.php ? pid=$fila[0]'\" rel=\"tooltip\" title=\"Eliminar\" name = \"eliminar$fila[0]\" class=\"btn btn-danger btn-simple btn-link\">\n";
+//print "                                                <i class=\"fa fa-times\"></i>\n";
+//print "                                            </button>\n";
+//print "                                        </td>\n";
+//print "                                    </tr>\n";
+//print "                                    <tr>\n";
+//}
 /*for ($i = 0; $i <= $aux1; $i++)
 {
 if(isset($_POST['editar'.$i]))
@@ -233,3 +262,18 @@ print "        </div>\n";
 print "    </div>";
 print "    </html>";
 ?>
+<script>  
+ $(document).ready(function(){  
+      $('#categoria').change(function(){  
+           var idCategoria = $(this).val();  
+           $.ajax({  
+                url:"load_data.php",  
+                method:"POST",  
+                data:{idCategoria:idCategoria},  
+                success:function(data){  
+                     $('#show_product').html(data);  
+                }  
+           });  
+      });  
+ });  
+ </script>  

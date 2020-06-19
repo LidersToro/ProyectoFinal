@@ -135,6 +135,14 @@ class categoria{
         $conexion->close();
         return($rows);
     }
+    public function obtenerNombre($id)
+    {
+        $sql="SELECT nombre FROM categoria where idCategoria='$id';";
+        $conexion = Conectar::conectarBD();
+        $rows = $conexion->query($sql);
+        $conexion->close();
+        return($rows);
+    }
    
 
 

@@ -88,6 +88,7 @@ class producto{
     }
 
    
+
     public function adicionarProducto()
     {
         $conexion = Conectar::conectarBD();
@@ -190,9 +191,9 @@ class producto{
         }
         
     }
-        public function borrarCategoria($id)
+        public function borrarProducto($id)
     {
-        $sql = "DELETE FROM categoria WHERE idCategoria='$id';";
+        $sql = "DELETE FROM producto WHERE idProducto='$id';";
         $conexion = Conectar::conectarBD();
         $stmt = $conexion->prepare($sql);
         $stmt->bind_param('s',$id);
@@ -204,7 +205,7 @@ class producto{
         }
         else
         {
-         echo '<script>alert("NO SE PUEDE ELIMINAR PORQUE EXISTE PRODUCTOS ASOCIADOS A ESTA CATEGORIA!")</script>'; 
+         echo '<script>alert("NO SE PUEDE ELIMINAR! ERROR!")</script>'; 
             $conexion->close();
             return -1;
         }
