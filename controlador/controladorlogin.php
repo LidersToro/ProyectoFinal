@@ -18,6 +18,7 @@ if(isset($_POST['btn_login']))
      $rowAdm = $ObjAdm->obtenerCuenta($user,$clave);
      $fila=$row->fetch_row();
      $filaEmp=$rowEmp->fetch_row();
+
      $filaAdm=$rowAdm->fetch_row();
             if($fila[1]==$user && $fila[4]==$clave)
             {
