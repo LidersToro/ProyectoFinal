@@ -4,6 +4,7 @@
 require_once("ConectarDB.php");//incluye una sola vez el contenido del archivo
 class cliente{
     private $idCliente;
+    private $usuario;
     private $nombre;
     private $correo;
     private $direccion;
@@ -14,10 +15,11 @@ class cliente{
 
 
 
-    public function __construct($nom="",$core="",$dire="",$tele="",$lat="",$lon="",$contra="")
+    public function __construct($usu="",$nom="",$core="",$dire="",$tele="",$lat="",$lon="",$contra="")
     {
        
         $this->idCliente    = 0;
+        $this->usuario      = $usu;
         $this->nombre       = $nom;
         $this->correo       = $core;
         $this->direccion    = $dire;
@@ -30,6 +32,10 @@ class cliente{
     public function setIdCliente($valor)
     {
         $this->idCliente = $valor;
+    }
+     public function setusuario($valor)
+    {
+        $this->usuario = $valor;
     }
     public function setnombre($valor)
     {
@@ -67,10 +73,15 @@ class cliente{
     {
       return $this->idCliente;
     }
+     public function getusuario()
+    {
+      return $this->usuario;
+    }
     public function getnombre()
     {
       return $this->nombre;
     }
+    
     public function getcorreo()
     {
       return $this->correo;
@@ -101,9 +112,9 @@ class cliente{
         $conexion = Conectar::conectarBD();
         if($conexion !=false)
         {
-            $sql = "INSERT INTO cliente(nombre,correo,direccion,telefono,longitud,latitud,contrasena) VALUES(?,?,?,?,?,?,?);";
+            $sql = "INSERT INTO cliente(usuario,nombre,correo,direccion,telefono,longitud,latitud,contrasena) VALUES(?,?,?,?,?,?,?);";
             $stmt = $conexion->prepare($sql);
-            $stmt->bind_param('sssssss', $this->nombre, $this->correo, $this->direccion, $this->telefono, $this->longitud, $this->latitud, $this->contrasena);
+            $stmt->bind_param('ssssssss', $this->usuario,$this->nombre, $this->correo, $this->direccion, $this->telefono, $this->longitud, $this->latitud, $this->contrasena);
             if($stmt->execute())
             {
                 return(true);
@@ -127,13 +138,27 @@ class cliente{
         return($rows);
     }
      public function obtenerCuenta($usuario1,$contrasena1) {
-        $sql = "SELECT * FROM cliente WHERE nombre= '$usuario1' AND contrasena= '$contrasena1';";
+        $sql = "SELECT * FROM cliente WHERE usuario= '$usuario1' AND contrasena= '$contrasena1';";
          $conexion = Conectar::conectarBD();
         $rows = $conexion->query($sql);
         $conexion->close();
         return ($rows);
      }
-   
+      public function buscarRepetidos($usuario1) {
+        $sql = "SELECT * FROM cliente WHERE usuario = '$usuario1' ;";
+        $conexion = Conectar::conectarBD();
+        $rows = $conexion->query($sql);
+        $conexion->close();
+        return ($rows);
+     }
+       public function buscarRepetidos1($usuario1) {
+        $sql = " SELECT COUNT(usuario) FROM cliente where usuario ='$usuario1';";
+        $conexion = Conectar::conectarBD();
+        $rows = $conexion->query($sql);
+        $conexion->close();
+        return ($rows);
+     }
+  
    /*
 
     public function modificarUsuario($contra,$usu)

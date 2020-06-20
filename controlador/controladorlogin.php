@@ -7,15 +7,19 @@ $_SESSION['clave'] = $clave;
 
 require_once __DIR__.'/../modelo/clienteModelo.php';
 require_once __DIR__.'/../modelo/EmpresaModelo.php';
+require_once __DIR__.'/../modelo/AdminModelo.php';
 $Obj = new cliente();
 $ObjEmp = new empresa();
+$ObjAdm = new admin();
 if(isset($_POST['btn_login'])) 
 {                      
      $row = $Obj->obtenerCuenta($user,$clave);
      $rowEmp = $ObjEmp->obtenerCuenta($user,$clave);
+     $rowAdm = $ObjAdm->obtenerCuenta($user,$clave);
      $fila=$row->fetch_row();
      $filaEmp=$rowEmp->fetch_row();
-            if($fila[1]==$user && $fila[3]==$clave)
+     $filaAdm=$rowAdm->fetch_row();
+            if($fila[1]==$user && $fila[4]==$clave)
             {
             echo " <script>window.location = '/proyectoFinal/vista/cliente/index.php';</script>";
          
@@ -26,13 +30,22 @@ if(isset($_POST['btn_login']))
                 echo " <script>window.location = '/proyectoFinal/vista/categoriagestion.php';</script>";
                 $_SESSION['id'] = $filaEmp[0];
                 }else
-                 {
-                    echo "<script>alert('NOMBRE DE USUARIO O CONTRASENA INCORRECTO!');</script>";
-                    echo " <script>window.location = '/proyectoFinal/vista/login.html';</script>";         
+                {
+                         if($filaAdm[1]==$user && $filaAdm[2]==$clave)
+                        {
+                        echo " <script>window.location = '/proyectoFinal/vista/empresagestion.php';</script>";
+                        }
+                        else
+                        {
+                            echo "<script>alert('NOMBRE DE USUARIO O CONTRASENA INCORRECTO!');</script>";
+                            echo " <script>window.location = '/proyectoFinal/vista/login.html';</script>"; 
+                        }
                  }
             }
 
 
      
 }
+$_SESSION['user'] = $fila[2];
+
 

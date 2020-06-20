@@ -1,5 +1,6 @@
 create table cliente(
 idCliente int AUTO_INCREMENT PRIMARY KEY,
+usuario varchar(30),
 nombre varchar(30),
 correo varchar(30),
 contrasena varchar(30),

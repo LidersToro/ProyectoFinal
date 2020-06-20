@@ -61,13 +61,13 @@
 
             <div class="checkout__form">
                 <h4>DETALLES DE TU CUENTA</h4>
-                <form action="RegistrarseComoCliente.php" name="myForm"  method="POST">
+                <form action="/../proyectoFinal/controlador/controladorRegistrarCliente.php" name="myForm"  method="POST">
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
-                                        <p>Nombre de Usuario<span>*</span></p>
+                                        <p>Nombre Completo<span>*</span></p>
                                         <input type="text" name="nombre" required>
                                     </div>
                                 </div>
@@ -77,6 +77,10 @@
                                         <input type="email" name="correo" required>
                                     </div>
                                 </div>
+                            </div>
+                             <div class="checkout__input">
+                                <p>Usuario<span>*</span></p>
+                                <input type="text" name="usuario"required >
                             </div>
                             <div class="checkout__input">
                                 <p>Dirección<span>*</span></p>
@@ -105,25 +109,8 @@
                         </div>
                     </div>
                 </form>
-                <?php
+
                 
-                if(isset($_POST['btnAdicionar']))
-                {
-                
-                require_once __DIR__.'/../../modelo/clienteModelo.php';
-                $Obj = new cliente();
-                echo "<script>alert('SE ADICIONO EXITOSAMENTE');</script>";
-                $Obj->setnombre($_POST['nombre']);
-                $Obj->setcorreo($_POST['correo']);
-                $Obj->setdireccion($_POST['direccion']);
-                $Obj->settelefono($_POST['telefono']);
-                $Obj->setlatitud($_POST['latitud']);
-                $Obj->setlongitud($_POST['longitud']);
-                $Obj->setcontrasena($_POST['contra']);
-                $Obj->adicionarCliente();
-                echo "<script>window.location = '/proyectoFinal/vista/login.html';</script>";
-                }
-                ?>
             </div>
         </div>
     </section>
