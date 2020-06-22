@@ -141,12 +141,20 @@ class producto{
 	}
 
       public function ultimoCodigo()	{
-	  $sql="select max(idCategoria) as maximo from categoria;";	  
+	  $sql="select max(idProducto) as maximo from producto;";	  
       $conexion = Conectar::conectarBD();
       $rows = $conexion->query($sql);
       $conexion->close();
       return ($rows);
 	}
+     public function obtenerTodos1($id)
+    {
+        $sql="SELECT * FROM producto where idCategoria='$id';";
+        $conexion = Conectar::conectarBD();
+        $rows = $conexion->query($sql);
+        $conexion->close();
+        return($rows);
+    }
 
     public function obtenerTodos($id,$ida)
     {

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 require_once __DIR__.'/../../modelo/CategoriaModelo.php';
 $idEmpresa = $_GET['pid'];
@@ -192,13 +192,13 @@ $idEmpresa = $_GET['pid'];
                             require_once __DIR__.'/../../modelo/CategoriaModelo.php';
                             $Obj = new categoria();
                             $aux = $Obj->obtenerTodos($idEmpresa);
-                            $a=0;
+                            $a=1;
                             ?>
                             <ul>
                                 <?php 
                                 while($fila=$aux->fetch_row())
                                 {
-                                print "<li><a href=\"#combos\">$fila[1] </a></li>";
+                                print "<li><a href=\"#link".$a."\">$fila[1] </a></li>";
                                 $a++;
 
                                 }
@@ -212,218 +212,52 @@ $idEmpresa = $_GET['pid'];
                     </div>
                 </div>
                 <div class="col-lg-9 col-md-7">
-                    <div class="filter__item">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-5">
-                                
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="filter__found">
-                                    <a name="combos"><h6>Combos</h6></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/product/product-2.jpg">
-                                <ul class="product__item__pic__hover">
-                                       <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">1/4 de pollo a la Broaster - Pierna</a></h6>
-                                    <h5>Bs 25</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg">
-                                <ul class="product__item__pic__hover">
-                                       <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">1/4 de pollo a la Broaster - Pierna</a></h6>
-                                    <h5>Bs 25</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/product/product-2.jpg">
-                                <ul class="product__item__pic__hover">
-                                       <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">1/4 de pollo a la Broaster - Pierna</a></h6>
-                                    <h5>Bs 25</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="filter__item">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-5">
-                                
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="filter__found">
-                                    <a name="productos"><h6>Productos</h6></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/product/product-2.jpg">
-                                <ul class="product__item__pic__hover">
-                                       <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">1/4 de pollo a la Broaster - Pierna</a></h6>
-                                    <h5>Bs 25</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/product/product-2.jpg">
-                                <ul class="product__item__pic__hover">
-                                       <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">1/4 de pollo a la Broaster - Pierna</a></h6>
-                                    <h5>Bs 25</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/product/product-2.jpg">
-                                <ul class="product__item__pic__hover">
-                                       <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">1/4 de pollo a la Broaster - Pierna</a></h6>
-                                    <h5>Bs 25</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="filter__item">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-5">
-                                
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="filter__found">
-                                    <a name="bebidas"><h6>Bebidas</h6></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/product/product-2.jpg">
-                                <ul class="product__item__pic__hover">
-                                       <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">1/4 de pollo a la Broaster - Pierna</a></h6>
-                                    <h5>Bs 25</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/product/product-2.jpg">
-                                <ul class="product__item__pic__hover">
-                                       <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">1/4 de pollo a la Broaster - Pierna</a></h6>
-                                    <h5>Bs 25</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/product/product-2.jpg">
-                                <ul class="product__item__pic__hover">
-                                       <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">1/4 de pollo a la Broaster - Pierna</a></h6>
-                                    <h5>Bs 25</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="filter__item">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-5">
-                                
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="filter__found">
-                                    <a name="postres"><h6>Postres</h6></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/product/product-2.jpg">
-                                <ul class="product__item__pic__hover">
-                                       <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">1/4 de pollo a la Broaster - Pierna</a></h6>
-                                    <h5>Bs 25</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/product/product-2.jpg">
-                                <ul class="product__item__pic__hover">
-                                       <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">1/4 de pollo a la Broaster - Pierna</a></h6>
-                                    <h5>Bs 25</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/product/product-2.jpg">
-                                <ul class="product__item__pic__hover">
-                                       <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">1/4 de pollo a la Broaster - Pierna</a></h6>
-                                    <h5>Bs 25</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php
+                    require_once __DIR__.'/../../modelo/CategoriaModelo.php';
+                    $Obj2 = new categoria();
+                    $b=1;
+                    $aux2 = $Obj2->obtenerTodos($idEmpresa);
+                    while($fila2=$aux2->fetch_row())
+                        {
+    echo "                        <div class=\"filter__item\">\n";
+    echo "                            <div class=\"row\">\n";
+    echo "                                <div class=\"col-lg-4 col-md-5\">\n";
+    echo "                                </div>\n";
+    echo "                                <div class=\"col-lg-4 col-md-4\">\n";
+    echo "                                    <div class=\"filter__found\">\n";
+    echo "                                        <a name=\"link".$b."\"><h6>".$fila2[1]."</h6></a>\n";
+    echo "                                    </div>\n";
+    echo "                                </div>\n";
+    echo "                            </div>\n";
+    echo "                        </div>\n";
+    echo "                        <div class=\"row\">\n";
+                                    require_once __DIR__.'/../../modelo/ProductoModelo.php';
+                                    $Obj1 = new producto();
+                                    
+                                    $aux1 =$Obj1->obtenerTodos1($fila2[0]);
+                                    while($fila1=$aux1->fetch_row())
+                                    {
+
+            echo "                            <div class=\"col-lg-4 col-md-6 col-sm-6\">\n";
+            echo "                                <div class=\"product__item\">\n";
+            echo '                                <div class=\"product__item__pic set-bg\"><img src="data:image/jpeg;base64,'.base64_encode( $fila1[4] ).'"height="275" width="300" class="img-thumnail"/>';
+            echo "                                    </div>\n";
+            echo "                                    <div class=\"product__item__text\">\n";
+            echo "                                        <h6><a href=\"#\">".$fila1[1]."</a></h6>\n";
+            echo "                                        <h5>".$fila1[3]." Bs. </h5>\n";
+            echo "                                    </div>\n";
+            echo "                                </div>\n";
+            echo "                            </div>";
+                                    }
+    echo "                        </div>";
+                                  $b++;           
+                        
+
+
+                        
+
+                        }
+                        ?>
                 </div>
             </div>
         </div>
