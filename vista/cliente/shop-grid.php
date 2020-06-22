@@ -1,4 +1,5 @@
-﻿<?php
+<?php
+require_once __DIR__.'/../../modelo/EmpresaModelo.php';
 session_start();
 
 
@@ -213,6 +214,28 @@ session_start();
                         </div>
                     </div>
                     <div class="row">
+                        <?php
+                        require_once __DIR__.'/../../modelo/EmpresaModelo.php';
+                        $Obj = new empresa();
+                        $aux = $Obj->obtenerTodos();
+                       while( $fila= $aux->fetch_row())
+                       {
+print " <div class=\"col-lg-4 col-md-6 col-sm-6\">\n";
+print "                            <div class=\"product__item\">\n";
+print " <a href=\"./company-grid.php? pid=$fila[0]\">";
+echo '                                <div class=\"product__item__pic set-bg\"><img src="data:image/jpeg;base64,'.base64_encode( $fila[7] ).'"height="275" width="300" class="img-thumnail"/>';
+print "                                </div></a>\n";
+print "                                <div class=\"product__item__text\">\n";
+print "                                    <h6><a href=\"./company-grid.php? pid=$fila[0]\">$fila[1]</a></h6>\n";
+//print "                                    <h5>Abierto</h5>\n";
+print "                                </div>\n";
+print "                            </div>\n";
+print "                        </div>";
+
+                        
+                        }
+                        
+                        ?>
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
                                 <a href="./company-grid.php"><div class="product__item__pic set-bg" data-setbg="img/product/product-1.jpg">
@@ -223,17 +246,20 @@ session_start();
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <a href="./company-grid.php"><div class="product__item__pic set-bg" data-setbg="img/product/product-1.jpg">
-                                </div></a>
-                                <div class="product__item__text">
-                                    <h6><a href="./company-grid.php">Pollos Kiky - UPSA</a></h6>
-                                    <h5>Abierto</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
+                        
+
+
+
+
+
+
+
+
+
+
+
+
+                        <!--<div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
                                 <a href="./company-grid.html"><div class="product__item__pic set-bg" data-setbg="img/product/product-1.jpg">
                                 </div></a>
@@ -332,7 +358,7 @@ session_start();
                                     <h5>Abierto</h5>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </div>

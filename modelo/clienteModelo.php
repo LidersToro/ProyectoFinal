@@ -112,9 +112,9 @@ class cliente{
         $conexion = Conectar::conectarBD();
         if($conexion !=false)
         {
-            $sql = "INSERT INTO cliente(usuario,nombre,correo,direccion,telefono,longitud,latitud,contrasena) VALUES(?,?,?,?,?,?,?);";
+            $sql = "INSERT INTO cliente(usuario,nombre,correo,direccion,telefono,longitud,latitud,contrasena) VALUES(?,?,?,?,?,?,?,?);";
             $stmt = $conexion->prepare($sql);
-            $stmt->bind_param('ssssssss', $this->usuario,$this->nombre, $this->correo, $this->direccion, $this->telefono, $this->longitud, $this->latitud, $this->contrasena);
+            $stmt->bind_param('ssssssss', $this->usuario, $this->nombre, $this->correo, $this->direccion, $this->telefono, $this->longitud, $this->latitud, $this->contrasena);
             if($stmt->execute())
             {
                 return(true);

@@ -17,7 +17,7 @@
 				        }
                         else
                         {
-                             require_once __DIR__.'/../../modelo/clienteModelo.php';
+                             require_once __DIR__.'/../modelo/clienteModelo.php';
 				             $Obj = new cliente();
                              echo "<script>alert('SE ADICIONO EXITOSAMENTE');</script>";
                                     $Obj->setnombre($_POST['nombre']);

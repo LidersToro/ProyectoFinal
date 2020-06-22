@@ -1,8 +1,8 @@
-﻿<?php
+<?php
 session_start();
-
-
-
+require_once __DIR__.'/../../modelo/CategoriaModelo.php';
+$idEmpresa = $_GET['pid'];
+//echo $idEmpresa;
 ?>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -188,11 +188,25 @@ session_start();
                     <div class="sidebar">
                         <div class="sidebar__item">
                             <h4>Categorias de la empresa</h4>
+                            <?php
+                            require_once __DIR__.'/../../modelo/CategoriaModelo.php';
+                            $Obj = new categoria();
+                            $aux = $Obj->obtenerTodos($idEmpresa);
+                            $a=0;
+                            ?>
                             <ul>
-                            <li><a href="#combos">Combos </a></li>
+                                <?php 
+                                while($fila=$aux->fetch_row())
+                                {
+                                print "<li><a href=\"#combos\">$fila[1] </a></li>";
+                                $a++;
+
+                                }
+                                ?>
+                            <!--<li><a href="#combos">Combos </a></li>
                             <li><a href="#productos">Productos </a></li>
                             <li><a href="#bebidas">Bebidas </a></li>
-                            <li><a href="#postres">Postres</a></li>
+                            <li><a href="#postres">Postres</a></li>-->
                             </ul>
                         </div>
                     </div>

@@ -164,6 +164,14 @@ class empresa{
       $conexion->close();
       return ($rows);
 	}
+   
+ //  public function obtenerTopEmpresas($id)	{
+    //  $sql="select nombre from empresa where  limit 5;";	  
+    //  $conexion = Conectar::conectarBD();
+    //  $rows = $conexion->query($sql);
+    //  $conexion->close();
+    //  return ($rows);
+    //}
 
       public function ultimoCodigo()	{
 	  $sql="select max(idEmpresa) as maximo from empresa;";	  

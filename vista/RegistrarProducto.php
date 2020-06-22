@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 session_start();
 require_once __DIR__.'/../modelo/ProductoModelo.php';
 require_once __DIR__.'/../modelo/CategoriaModelo.php';
@@ -212,7 +212,7 @@ function llenarCategoria($connect,$a)
 
                                         
 
-                                        <input type="submit" name ="btnAdicionar" id="btnAdicionar" class="btn btn-info btn-fill pull-right" value="Registrar Nueva Categoria" onclick="return verificar();">
+                                        <input type="submit" name ="btnAdicionar" id="btnAdicionar" class="btn btn-info btn-fill pull-right" value="Registrar Nuevo Producto" onclick="return verificar();">
                                          <!--<div id="map_canvas" style="height: 350px;width: 500px;margin: 0.6em;"></div>-->
 
 
