@@ -6,6 +6,7 @@ $_SESSION['user'] = $user;
 $_SESSION['clave'] = $clave;
 $_SESSION['carrito'];
 
+
 require_once __DIR__.'/../modelo/clienteModelo.php';
 require_once __DIR__.'/../modelo/EmpresaModelo.php';
 require_once __DIR__.'/../modelo/AdminModelo.php';
