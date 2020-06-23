@@ -1,21 +1,8 @@
 <?php
 session_start();
-$idProducto = $_GET['pid'];
-if(!$_SESSION['carrito'])
-{
-  $producto = array(
-      'id'=>$idProducto,
-      'cantidad'=>1
-      );
-      $_SESSION['carrito'][0]= $producto;
-      }else {
-    $numerodeproducto = count($_SESSION['carrito']);
-    $producto = array(
-      'id'=>$idProducto,
-      'cantidad'=>1
-      );
-      $_SESSION['carrito'][$numerodeproducto]= $producto;
-}
+
+
+  
 
 /*print_r($_SESSION['carrito']);
 $dim = count($_SESSION['carrito']);
@@ -217,70 +204,68 @@ for($i=0;$i<$dim;$i++){
                             </thead>
                             <tbody>
                                 <tr>
-                                 <?php
-                                 $dim = count($_SESSION['carrito']);
-                                 if($dim>=0)
-	 	                        {
-                                for($k=0;$k<$dim;$k++)
-			                    {
-                                   require_once __DIR__.'/../../modelo/ProductoModelo.php';
-                                   $id = $_SESSION['carrito'][$k]['id'];
-                                   $cantidad = $_SESSION['carrito'][$k]['cantidad'];
-                                   $Obj = new producto();
-                                   $aux = $Obj->obtenerTodosidproduc($id);
-                                   $fila= $aux->fetch_row();
-                                   $nombre=$fila[1];
-                                   $precio=$fila[3];
-                                   $imagen=base64_encode( $fila[4] );
+                            <?php
+                           
+                            if(empty(!$_SESSION['carrito'] ))
+                            {
+                             $total = 0;
+                            $dim = count($_SESSION['carrito']);
+                                         if($dim>=0)
+	 	                                 {
+                                                       
+                                                        for($k=0;$k<$dim;$k++)
+			                                            {
+                                                           require_once __DIR__.'/../../modelo/ProductoModelo.php';
+                                                           $id = $_SESSION['carrito'][$k]['id'];
+                                                           $cantidad = $_SESSION['carrito'][$k]['cantidad'];
+                                                           $Obj = new producto();
+                                                           $aux = $Obj->obtenerTodosidproduc($id);
+                                                           $fila= $aux->fetch_row();
+                                                           $nombre=$fila[1];
+                                                           $precio=$fila[3];
+                                                           $imagen=base64_encode( $fila[4] );
+                                                           $subtotal=$precio*$cantidad;
 
 
-echo "                                    <td class=\"shoping__cart__item\">\n";
-echo '                                        <img src="data:image/jpeg;base64,'.$imagen.'"height="100" width="120" class="img-thumnail"/>';
-echo "                                        <h5>".$nombre."</h5>\n";
-echo "                                    </td>\n";
-echo "                                    <td class=\"shoping__cart__price\">\n";
-                                        echo $precio." Bs";
-echo "                                    </td>\n";
-echo "                                    <td class=\"shoping__cart__quantity\">\n";
-echo "                                        <div class=\"quantity\">\n";
-echo "                                            <div class=\"pro-qty\">\n";
-echo "                                                <input type=\"text\" value=\"$cantidad\">\n";
-echo "                                            </div>\n";
-echo "                                        </div>\n";
-echo "                                    </td>\n";
-echo "                                    <td class=\"shoping__cart__total\">\n";
-echo "                                        $110.00\n";
-echo "                                    </td>\n";
-echo "                                    <td class=\"shoping__cart__item__close\">\n";
-echo "                                        <span class=\"icon_close\"></span>\n";
-echo "                                    </td>\n";
-echo "                                </tr>";
-                                    }
-                                 }
+                        echo "                                    <td class=\"shoping__cart__item\">\n";
+                        echo '                                        <img src="data:image/jpeg;base64,'.$imagen.'"height="100" width="120" class="img-thumnail"/>';
+                        echo "                                        <h5>".$nombre."</h5>\n";
+                        echo "                                    </td>\n";
+                        echo "                                    <td class=\"shoping__cart__price\">\n";
+                                                                echo $precio." Bs";
+                        echo "                                    </td>\n";
+                        echo "                                    <td class=\"shoping__cart__quantity\">\n";
+                        echo "                                        <div class=\"quantity\">\n";
+                        echo "                                            <div class=\"pro-qty\">\n";
+                        echo "                                                <input type=\"text\" value=\"$cantidad\">\n";
+                        echo "                                            </div>\n";
+                        echo "                                        </div>\n";
+                        echo "                                    </td>\n";
+                        echo "                                    <td class=\"shoping__cart__total\">\n";
+                        echo "                                        $subtotal Bs\n";
+                        echo "                                    </td>\n";
+                        echo "                                    <td class=\"shoping__cart__item__close\">\n";
+                        echo "                                        <a href=\"./../../controlador/controladorcesta.php? pidelim=$id\"><span class=\"icon_close\"></span></a>\n";
+                        echo "                                    </td>\n";
+                        echo "                                </tr>";
+                                                              $total = $total + $subtotal;
+                                                            }
+                                                            
+                                                            
+                                          }
+                                 
+                             }else { 
+                             
+echo "                                 <td><h3>\n";
+echo "                                    No tiene nada en el carrito....\n";
+echo "                                 </td></h3>\n";
+echo "                                 </tr>";
+                             
+                                 
+                                
+                                 } ?>
+                                 
 
-                                 ?>
-                        
-                                    <!--<td class="shoping__cart__item">
-                                        <img src="img/cart/cart-1.jpg" alt="">
-                                        <h5>Vegetable’s Package</h5>
-                                    </td>
-                                    <td class="shoping__cart__price">
-                                        $55.00
-                                    </td>
-                                    <td class="shoping__cart__quantity">
-                                        <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input type="text" value="1">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="shoping__cart__total">
-                                        $110.00
-                                    </td>
-                                    <td class="shoping__cart__item__close">
-                                        <span class="icon_close"></span>
-                                    </td>
-                                </tr>-->
                                 
                             </tbody>
                         </table>
@@ -310,8 +295,8 @@ echo "                                </tr>";
                     <div class="shoping__checkout">
                         <h5>Cart Total</h5>
                         <ul>
-                            <li>Subtotal <span>$454.98</span></li>
-                            <li>Total <span>$454.98</span></li>
+                            <li>Subtotal <span><?php echo $total;?></span></li>
+                            <li>Total <span><?php echo $total+10; ?></span></li>
                         </ul>
                         <a href="./checkout.html" class="primary-btn">PROCEED TO CHECKOUT</a>
                     </div>

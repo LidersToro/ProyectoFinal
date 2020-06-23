@@ -240,11 +240,11 @@ $idEmpresa = $_GET['pid'];
 
             echo "                            <div class=\"col-lg-4 col-md-6 col-sm-6\">\n";
             echo "                                <div class=\"product__item\">\n";
-            echo "                                <a href=\"./shoping-cart.php? pid=$fila1[0]\">\n";
+            echo "                                <a href=\"./../../controlador/controladorcesta.php? pid=$fila1[0]\">\n";
             echo '                                <div class=\"product__item__pic set-bg\"><img src="data:image/jpeg;base64,'.base64_encode( $fila1[4] ).'"height="275" width="300" class="img-thumnail"/>';
             echo "                                    </div></a>\n";
             echo "                                    <div class=\"product__item__text\">\n";
-            echo "                                        <h6><a href=\"./shoping-cart.php? pid=$fila1[0]\">".$fila1[1]."</a></h6>\n";
+            echo "                                        <h6><a href=\"./../../controlador/controladorcesta.php? pid=$fila1[0]\">".$fila1[1]."</a></h6>\n";
             echo "                                        <h5>".$fila1[3]." Bs. </h5>\n";
             echo "                                    </div>\n";
             echo "                                </div>\n";
