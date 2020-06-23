@@ -38,7 +38,7 @@ $id = $_SESSION['id'];
                         
                          <?php
                          echo "\n";
-                         echo $_SESSION['user'];
+                         echo $_SESSION['userEmpr'];
                          ?>
 
 

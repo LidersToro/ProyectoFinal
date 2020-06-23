@@ -33,7 +33,7 @@ print "    <div class=\"sidebar-wrapper\">\n";
 print "        <div class=\"logo\">\n";
 print "            <a href=\"#pablo\" class=\"simple-text\">\n";
 print "                Delivery SLC (EMPRESA)\n";
-echo $_SESSION['user'];
+echo $_SESSION['userEmpr'];
 //echo $_SESSION['id'];
 print "            </a>\n";
 print "        </div>\n";

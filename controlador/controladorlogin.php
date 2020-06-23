@@ -4,7 +4,6 @@ $user = $_POST['nombre'];
 $clave = $_POST['contra'];
 $_SESSION['user'] = $user;
 $_SESSION['clave'] = $clave;
-
 require_once __DIR__.'/../modelo/clienteModelo.php';
 require_once __DIR__.'/../modelo/EmpresaModelo.php';
 require_once __DIR__.'/../modelo/AdminModelo.php';
@@ -40,6 +39,7 @@ if(isset($_POST['btn_login']))
                     if($filaMot[9]==$user && $filaMot[3]==$clave)
                         {
                          echo " <script>window.location = '/proyectoFinal/vista/pedidogestion.php';</script>";
+                         $_SESSION['idMot'] = $filaMot[0];
                         }
                         else
                         {
