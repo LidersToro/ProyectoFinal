@@ -233,6 +233,7 @@ for($i=0;$i<$dim;$i++){
                                    $precio=$fila[3];
                                    $imagen=base64_encode( $fila[4] );
 
+
 echo "                                    <td class=\"shoping__cart__item\">\n";
 echo '                                        <img src="data:image/jpeg;base64,'.$imagen.'"height="100" width="120" class="img-thumnail"/>';
 echo "                                        <h5>".$nombre."</h5>\n";
