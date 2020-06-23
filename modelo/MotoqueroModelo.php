@@ -138,6 +138,13 @@ class motoquero{
             $conexion->close();
         }
     }
+    public function obtenerCuenta($usuario="",$contrasena="") {
+        $sql = "SELECT * FROM motoquero WHERE usuario= '$usuario' AND contrasena= '$contrasena';";
+        $conexion = Conectar::conectarBD();
+        $rows = $conexion->query($sql);
+        $conexion->close();
+        return ($rows);
+     }
         public function insertarImagen($id,$img)
     {
         $conexion = Conectar::conectarBD();//nos conectamos a la base de datos
