@@ -63,8 +63,6 @@ class ordenproducto{
     }
    
 
-   
-
     public function adicionarOrdenProducto()
     {
         $conexion = Conectar::conectarBD();
