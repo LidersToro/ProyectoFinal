@@ -155,6 +155,14 @@ class producto{
         $conexion->close();
         return($rows);
     }
+     public function obtenerTodosidproduc($id)
+    {
+        $sql="SELECT * FROM producto where idProducto='$id';";
+        $conexion = Conectar::conectarBD();
+        $rows = $conexion->query($sql);
+        $conexion->close();
+        return($rows);
+    }
 
     public function obtenerTodos($id,$ida)
     {

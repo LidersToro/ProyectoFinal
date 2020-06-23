@@ -236,30 +236,7 @@ print "                        </div>";
                         }
                         
                         ?>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <a href="./company-grid.php"><div class="product__item__pic set-bg" data-setbg="img/product/product-1.jpg">
-                                </div></a>
-                                <div class="product__item__text">
-                                    <h6><a href="./company-grid.php">Pollos Kiky - UPSA</a></h6>
-                                    <h5>Abierto</h5>
-                                </div>
-                            </div>
-                        </div>
-                        
-
-
-
-
-
-
-
-
-
-
-
-
-                        <!--<div class="col-lg-4 col-md-6 col-sm-6">
+                              <!--<div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
                                 <a href="./company-grid.html"><div class="product__item__pic set-bg" data-setbg="img/product/product-1.jpg">
                                 </div></a>

@@ -22,6 +22,7 @@ if(isset($_POST['btn_login']))
      $filaAdm=$rowAdm->fetch_row();
             if($fila[1]==$user && $fila[4]==$clave)
             {
+            
             echo " <script>window.location = '/proyectoFinal/vista/cliente/index.php';</script>";
          
             }else
