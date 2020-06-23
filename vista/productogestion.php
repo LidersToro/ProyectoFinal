@@ -29,7 +29,7 @@ function llenarProducto($connect,$a)
         $output .= ' <td><img src="data:image/jpeg;base64,'.base64_encode( $row[4] ).'"height="200" width="200" class="img-thumnail"/></td>';
         $output .= "<td>$row[1]</td>\n";
         $output .= "<td>$row[2]</td>\n";
-        $output .= "<td>$row[3]</td>\n";
+        $output .= "<td>$row[3] bs</td>\n";
         $output .= "<td style='display:none;'>$row[5]</td>\n";
         $output .= "<td style='display:none;'>$row[6]</td>\n";
         $output .= "<td class=\"td-actions text-right\">\n";
@@ -77,7 +77,7 @@ print "    <div class=\"sidebar-wrapper\">\n";
 print "        <div class=\"logo\">\n";
 print "            <a href=\"#pablo\" class=\"simple-text\">\n";
 print "                Delivery SLC (EMPRESA)\n";
-echo $_SESSION['user'];
+echo $_SESSION['userEmpr'];
 //echo $_SESSION['id'];
 print "            </a>\n";
 print "        </div>\n";

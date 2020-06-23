@@ -165,9 +165,9 @@ class orden{
         return($rows);
     }
 
-    public function obtenerTodos($id,$ida)
+    public function obtenerTodos($estado,$estado1)
     {
-        $sql="SELECT * FROM producto where idEmpresa='$id' and idCategoria='$ida';";
+        $sql="select * from orden where estado <> '$estado' and estado <> '$estado1';";
         $conexion = Conectar::conectarBD();
         $rows = $conexion->query($sql);
         $conexion->close();

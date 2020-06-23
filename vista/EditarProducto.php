@@ -68,7 +68,7 @@ function llenarCategoria($connect,$a)
                         
                          <?php
                          echo "\n";
-                         echo $_SESSION['user'];
+                         echo $_SESSION['userEmpr'];
                          ?>
 
 

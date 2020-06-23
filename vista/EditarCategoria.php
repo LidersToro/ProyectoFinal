@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 session_start();
 require_once __DIR__.'/../modelo/CategoriaModelo.php';
 $id = $_SESSION['id'];
@@ -42,7 +42,7 @@ $des = $_GET['pdescripcion'];
                         
                          <?php
                          echo "\n";
-                         echo $_SESSION['user'];
+                         echo $_SESSION['userEmpr'];
                          ?>
 
 

@@ -240,7 +240,13 @@ class empresa{
         $conexion->close();
         return ($rows);
      }
-
+    public function obtenerNombre($id) {
+        $sql = "SELECT nombre FROM empresa WHERE idEmpresa= '$id';";
+         $conexion = Conectar::conectarBD();
+        $rows = $conexion->query($sql);
+        $conexion->close();
+        return ($rows);
+     }
 
     public function buscarCuenta($id) {
         $sql = "SELECT * FROM admin WHERE idAdmin='$id';";
