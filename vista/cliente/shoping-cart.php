@@ -1,6 +1,6 @@
 <?php
 session_start();
-$idProducto = $_GET['pid'];
+
 
   
 
@@ -205,33 +205,14 @@ for($i=0;$i<$dim;$i++){
                             <tbody>
                                 <tr>
                             <?php
-                            if(empty($_SESSION['carrito'] ))
+                           
+                            if(empty(!$_SESSION['carrito'] ))
                             {
-echo "                                 <td><h3>\n";
-echo "                                    No tiene nada en el carrito....\n";
-echo "                                 </td></h3>\n";
-echo "                                 </tr>";
-                                 
-                             }else { 
-                             if(!$_SESSION['carrito'])
-     {
-       $producto = array(
-         'id'=>$idProducto,
-         'cantidad'=>1
-          );
-       $_SESSION['carrito'][0]= $producto;
-       }else {
-         $numerodeproducto = count($_SESSION['carrito']);
-         $producto = array(
-            'id'=>$idProducto,
-            'cantidad'=>1
-             );
-         $_SESSION['carrito'][$numerodeproducto]= $producto;
-       }
-                                 
-                                 $dim = count($_SESSION['carrito']);
+                             $total = 0;
+                            $dim = count($_SESSION['carrito']);
                                          if($dim>=0)
 	 	                                 {
+                                                       
                                                         for($k=0;$k<$dim;$k++)
 			                                            {
                                                            require_once __DIR__.'/../../modelo/ProductoModelo.php';
@@ -243,6 +224,7 @@ echo "                                 </tr>";
                                                            $nombre=$fila[1];
                                                            $precio=$fila[3];
                                                            $imagen=base64_encode( $fila[4] );
+                                                           $subtotal=$precio*$cantidad;
 
 
                         echo "                                    <td class=\"shoping__cart__item\">\n";
@@ -260,14 +242,27 @@ echo "                                 </tr>";
                         echo "                                        </div>\n";
                         echo "                                    </td>\n";
                         echo "                                    <td class=\"shoping__cart__total\">\n";
-                        echo "                                        $110.00\n";
+                        echo "                                        $subtotal Bs\n";
                         echo "                                    </td>\n";
                         echo "                                    <td class=\"shoping__cart__item__close\">\n";
-                        echo "                                        <span class=\"icon_close\"></span>\n";
+                        echo "                                        <a href=\"./../../controlador/controladorcesta.php? pidelim=$id\"><span class=\"icon_close\"></span></a>\n";
                         echo "                                    </td>\n";
                         echo "                                </tr>";
+                                                              $total = $total + $subtotal;
                                                             }
+                                                            
+                                                            
                                           }
+                                 
+                             }else { 
+                             
+echo "                                 <td><h3>\n";
+echo "                                    No tiene nada en el carrito....\n";
+echo "                                 </td></h3>\n";
+echo "                                 </tr>";
+                             
+                                 
+                                
                                  } ?>
                                  
 
@@ -300,8 +295,8 @@ echo "                                 </tr>";
                     <div class="shoping__checkout">
                         <h5>Cart Total</h5>
                         <ul>
-                            <li>Subtotal <span>$454.98</span></li>
-                            <li>Total <span>$454.98</span></li>
+                            <li>Subtotal <span><?php echo $total;?></span></li>
+                            <li>Total <span><?php echo $total+10; ?></span></li>
                         </ul>
                         <a href="./checkout.html" class="primary-btn">PROCEED TO CHECKOUT</a>
                     </div>
