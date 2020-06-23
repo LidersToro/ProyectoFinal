@@ -93,80 +93,7 @@ for($i=0;$i<$dim;$i++){
                 </div>
             </div>
         </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="header__logo">
-                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <nav class="header__menu">
-                        <ul>
-                            <li><a href="./index.php">Inicio</a></li>
-                            <li class="active"><a href="./shop-grid.php">Empresas</a></li>
-                            <li><a href="./contact.php">Contáctanos</a></li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="col-lg-3">
-                    <div class="header__cart">
-                        <ul>
-                            <li><a href="./shoping-cart.php"><i class="fa fa-shopping-bag"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- Header Section End -->
-
-    <!-- Hero Section Begin -->
-    <section class="hero hero-normal">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="hero__categories">
-                        <div class="hero__categories__all">
-                            <i class="fa fa-bars"></i>
-                            <span>Empresas Top</span>
-                        </div>
-                        <ul>
-                            <li><a href="#">Casa de Camba - Makro</a></li>
-                            <li><a href="#">Pollos Kiky - UPSA</a></li>
-                            <li><a href="#">Tipical Chef - Makro</a></li>
-                            <li><a href="#">Cabernet - UPSA</a></li>
-                            <li><a href="#">Bitsacream - Makro</a></li>
-                            <li><a href="#">Burguer King - Makro</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-9">
-                    <div class="hero__search">
-                        <div class="hero__search__form">
-                            <form action="#">
-                                <div class="hero__search__categories">
-                                    Todas las empresas 
-                                </div>
-                                <input type="text" placeholder="¿Qué empresas busca?">
-                                <button type="submit" class="site-btn">Buscar</button>
-                            </form>
-                        </div>
-                        <div class="hero__search__phone">
-                            <div class="hero__search__phone__icon">
-                                <i class="fa fa-phone"></i>
-                            </div>
-                            <div class="hero__search__phone__text">
-                                <h5>+591 6922-1292</h5>
-                                <span>Soporte 24/7</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Hero Section End -->
+        
 
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
@@ -176,7 +103,7 @@ for($i=0;$i<$dim;$i++){
                     <div class="breadcrumb__text">
                         <h2>Carrito de compra</h2>
                         <div class="breadcrumb__option">
-                            <a href="./index.php">Inicio&nbsp;</a>
+                            
                             <span>Carrito de Compra</span>
                         </div>
                     </div>
@@ -204,11 +131,14 @@ for($i=0;$i<$dim;$i++){
                             </thead>
                             <tbody>
                                 <tr>
+                                <form action="./../../controlador/actualizarcarrito.php" method="post">
                             <?php
-                           
+                           $idfin=0;
+                           $m = 0;
                             if(empty(!$_SESSION['carrito'] ))
                             {
                              $total = 0;
+                             
                             $dim = count($_SESSION['carrito']);
                                          if($dim>=0)
 	 	                                 {
@@ -237,18 +167,17 @@ for($i=0;$i<$dim;$i++){
                         echo "                                    <td class=\"shoping__cart__quantity\">\n";
                         echo "                                        <div class=\"quantity\">\n";
                         echo "                                            <div class=\"pro-qty\">\n";
-                        echo "                                                <input type=\"text\" value=\"$cantidad\">\n";
+                        echo "                                                <input name=\"cantidad$m\"type=\"text\" value=\"$cantidad\">\n";
                         echo "                                            </div>\n";
                         echo "                                        </div>\n";
                         echo "                                    </td>\n";
                         echo "                                    <td class=\"shoping__cart__total\">\n";
                         echo "                                        $subtotal Bs\n";
                         echo "                                    </td>\n";
-                        echo "                                    <td class=\"shoping__cart__item__close\">\n";
-                        echo "                                        <a href=\"./../../controlador/controladorcesta.php? pidelim=$id\"><span class=\"icon_close\"></span></a>\n";
-                        echo "                                    </td>\n";
                         echo "                                </tr>";
                                                               $total = $total + $subtotal;
+                                                              $idfin=$id;
+                                                              $m++;
                                                             }
                                                             
                                                             
@@ -275,20 +204,16 @@ echo "                                 </tr>";
             <div class="row">
                 <div class="col-lg-12">
                     <div class="shoping__cart__btns">
-                        <a href="#" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
-                        <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
-                            Upadate Cart</a>
+                    <?php
+                        echo"<a href=\"./company-grid.php? pid=".$_SESSION['empresa']."\" class=\"primary-btn cart-btn\">Continuar Comprando</a>";
+                        echo"<a href=\"./../../controlador/controladoreliminarporducto.php? pidelim=".$idfin."\" class=\"primary-btn cart-btn cart-btn-center\">Eliminar Ultimo Producto</a>";
+                    ?>
+                        <a href="#" class="primary-btn cart-btn cart-btn-right"> <input name="btnactualizar"type="submit" value="Actualizar Carrito"></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="shoping__continue">
-                        <div class="shoping__discount">
-                            <h5>Discount Codes</h5>
-                            <form action="#">
-                                <input type="text" placeholder="Enter your coupon code">
-                                <button type="submit" class="site-btn">APPLY COUPON</button>
-                            </form>
-                        </div>
+                        
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -298,10 +223,12 @@ echo "                                 </tr>";
                             <li>Subtotal <span><?php echo $total;?></span></li>
                             <li>Total <span><?php echo $total+10; ?></span></li>
                         </ul>
-                        <a href="./checkout.html" class="primary-btn">PROCEED TO CHECKOUT</a>
+                        <a href="./checkout.html" class="primary-btn">Proceder a comprar</a>
                     </div>
                 </div>
             </div>
+            </form>
+
         </div>
     </section>
     <!-- Shoping Cart Section End -->
@@ -313,7 +240,7 @@ echo "                                 </tr>";
                 <div class="col-lg-12 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo text-center">
-                            <a href="./index.html"><img src="img/logo.png" style='width:300px;' alt=""></a>
+                            <a href="#"><img src="img/logo.png" style='width:300px;' alt=""></a>
                         </div>
                         <ul class="text-center">
                             <li>Dirección: Mall Brisas, Santa Cruz, Bolivia</li>
