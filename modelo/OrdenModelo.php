@@ -98,7 +98,6 @@ class orden{
             $sql = "INSERT INTO orden(precioTotal, estado, fecha, idEmpresa, idCliente, idMotoquero) VALUES(?,?,?,?,?,?);";
             $stmt = $conexion->prepare($sql);
             $stmt->bind_param('issiii', $this->precioTotal, $this->estado, $this->fecha, $this->idEmpresa, $this->idCliente, $this->idMotoquero);
-
             if($stmt->execute())
             {
                 return(true);
