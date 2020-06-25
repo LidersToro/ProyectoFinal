@@ -98,7 +98,7 @@ print "                    </li>\n";
 print "                   \n";
 print "                    </li>\n";
 print "                    <li class=\"nav-item\">\n";
-print "                        <a class=\"nav-link\" href=\"adminlogin.php\">\n";
+print "                        <a class=\"nav-link\" href=\"login.html\">\n";
 print "                            <span class=\"no-icon\">Cerrar Sesion</span>\n";
 print "                        </a>\n";
 print "                    </li>\n";

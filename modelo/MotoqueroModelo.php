@@ -176,6 +176,14 @@ class motoquero{
       return ($rows);
 	}
 
+      public function obtenerMotoquero($nombre)	{
+	  $sql="select idMotoquero from motoquero where nombre='$nombre';";	  
+      $conexion = Conectar::conectarBD();
+      $rows = $conexion->query($sql);
+      $conexion->close();
+      return ($rows);
+	}
+
       public function ultimoCodigo()	{
 	  $sql="select max(idMotoquero) as maximo from motoquero;";	  
       $conexion = Conectar::conectarBD();

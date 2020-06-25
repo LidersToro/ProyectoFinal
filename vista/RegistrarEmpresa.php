@@ -98,7 +98,7 @@ require_once __DIR__.'/../modelo/EmpresaModelo.php';
 
                              
                              <li class="nav-item">
-                                 <a class="nav-link" href="adminlogin.php">
+                                 <a class="nav-link" href="login.html">
                                      <span class="no-icon">Cerrar Sesi&oacute;n</span>
                                  </a>
                              </li>

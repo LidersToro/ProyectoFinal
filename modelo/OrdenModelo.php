@@ -208,6 +208,31 @@ class orden{
         }
         
     }
+
+    public function modificarEstado($criterio,$id,$idOrd)
+    {
+        $conexion = Conectar::conectarBD();//nos conectamos a la base de datos
+        if($conexion != false)
+        {
+            $sql = "UPDATE orden SET estado = '$criterio', idMotoquero = '$id' WHERE idOrden = '$idOrd';";
+            echo $sql;
+            $stmt=$conexion->prepare($sql);
+            $stmt->bind_param('si',$criterio, $id);
+            if($stmt->execute())
+            {
+                $conexion->close();
+                return (true);
+                
+            }
+            else
+            {
+                $conexion->close();
+                return (false);
+            }
+          
+        }
+        
+    }
         public function borrarProducto($id)
     {
         $sql = "DELETE FROM producto WHERE idProducto='$id';";

@@ -1,7 +1,21 @@
 <?php
 session_start();
+require_once __DIR__.'/../modelo/OrdenProductoModelo.php';
 require_once __DIR__.'/../modelo/OrdenModelo.php';
 require_once __DIR__.'/../modelo/EmpresaModelo.php';
+$id = $_GET['pid'];
+$_SESSION['id']=$id;
+$ObjDetalle = new ordenproducto();
+$a = $ObjDetalle->obtenerDetalle($id);
+$detalle = $a->fetch_row();
+
+
+$Obj = new empresa();
+$aux = $Obj->obtenerDireccion($_SESSION['id']);
+$valor=$aux->fetch_row();
+$lat = floatval($valor[0]);
+$lon = floatval($valor[1]);
+
 //echo $_SESSION['idMot'];
 print "<!DOCTYPE html>\n";
 print "<html lang=\"en\">\n";
@@ -117,48 +131,48 @@ print "                    <div class=\"card strpied-tabled-with-hover\">\n";
 print "                        <div class=\"card-header \">\n";
 print "                            <h4 class=\"card-title\">Lista de Pedidos</h4>\n";
 print "                            <p class=\"card-category\">Delivery SLC</p>\n";
-//print "                            <button type=\"submit\" onclick=\"location.href='RegistrarCategoria.php'\" class=\"btn btn-info btn-fill pull-left\">Registrar Nueva Categoria</button>\n";
+print "                            <button type=\"submit\" onclick=\"location.href='/../proyectoFinal/controlador/detallepedidocontrolador.php'\" class=\"btn btn-info btn-fill pull-left\">Aceptar Pedido</button>\n";
 print "                        </div>\n";
 print "                        <div class=\"card-body table-full-width table-responsive\">\n";
 
-$Obj = new orden();
-$ObjEmp = new Empresa();
-$estado = 'recibido';
-$estado1 = 'finalizado';
-$aux = $Obj->obtenerTodos($estado,$estado1);
+//$Obj = new orden();
+//$ObjEmp = new Empresa();
+//$estado = 'recibido';
+//$estado1 = 'finalizado';
+//$aux = $Obj->obtenerTodos($estado,$estado1);
 //$aux1 = $Obj->ultimoCodigo();
 print "                            <table class=\"table table-hover table-striped\">\n";
 print "                                <thead>\n";
-print "                                    <th>ID</th>\n";
-print "                                    <th>Monto Total</th>\n";
-print "                                    <th>Estado</th>\n";
-print "                                    <th>Empresa</th>\n";
+print "                                    <th>Nombre</th>\n";
+print "                                    <th>Precio</th>\n";
+print "                                    <th>Cantidad</th>\n";
+//print "                                    <th>Empresa</th>\n";
 //print "                                    <th>IDEMPRESA</th>\n";
 print "                                </thead>\n";
 print "                                <tbody>\n";
-while($fila = $aux->fetch_row()){
+while($detalle = $a->fetch_row()){
 
 print "                                    <tr>\n";
-print "                                         <td> $fila[0] </td>\n";
-print "                                         <td> $fila[1] bs </td>\n";
-print "                                        <td><b>$fila[2]</b></td>\n";
-print "                                        <td style='display:none;'>$fila[3]</td>\n";
-$auxEmp = $ObjEmp->obtenerNombre($fila[4]);
-$filaEmp = $auxEmp->fetch_row();
-print "                                         <td> $filaEmp[0] </td>\n";
-print "                                        <td style='display:none;'>$fila[5]</td>\n";
+print "                                         <td> $detalle[0] </td>\n";
+print "                                         <td> $detalle[1] bs </td>\n";
+print "                                        <td><b>$detalle[2]</b></td>\n";
+//print "                                        <td style='display:none;'>$fila[3]</td>\n";
+//$auxEmp = $ObjEmp->obtenerNombre($fila[4]);
+//$filaEmp = $auxEmp->fetch_row();
+//print "                                         <td> $id </td>\n";
+//print "                                        <td style='display:none;'>$fila[5]</td>\n";
 //echo $fila[4];
 //print "                                        <td>$fila[4]</td>\n";
 print "                                        <td class=\"td-actions text-right\">\n";
 //$_SESSION['id'] = $fila[0];
 //$_SESSION['nomb'] = $fila[1];
 //$_SESSION['pass'] = $fila[2];
-print "                                            <button type=\"submit\" onclick=\"location.href='detallepedidos.php ? pid=$fila[0]&pnombre=$fila[1]&pdescripcion=$fila[2]'\" rel=\"tooltip\" title=\"Editar\" name = \"editar$fila[0]\" value = \"$fila[0]\" class=\"btn btn-info btn-simple btn-link\">\n";
-print "                                                <i class=\"fa fa-edit\">Ver Detalles</i>\n";
-print "                                            </button>\n";
+//print "                                            <button type=\"submit\" onclick=\"location.href='detallepedidos.php ? pid=$fila[0]&pnombre=$fila[1]&pdescripcion=$fila[2]'\" rel=\"tooltip\" title=\"Editar\" name = \"editar$fila[0]\" value = \"$fila[0]\" class=\"btn btn-info btn-simple btn-link\">\n";
+//print "                                                <i class=\"fa fa-edit\">Ver Detalles</i>\n";
+//print "                                            </button>\n";
 //print "                                            <button type=\"button\" onclick=\"location.href='../controlador/controladorBorrarCategoria.php ? pid=$fila[0]'\" rel=\"tooltip\" title=\"Eliminar\" name = \"eliminar$fila[0]\" class=\"btn btn-danger btn-simple btn-link\">\n";
 //print "                                                <i class=\"fa fa-times\"></i>\n";
-print "                                            </button>\n";
+//print "                                            </button>\n";
 print "                                        </td>\n";
 print "                                    </tr>\n";
 print "                                    <tr>\n";

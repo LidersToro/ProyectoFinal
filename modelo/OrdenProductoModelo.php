@@ -108,8 +108,8 @@ class ordenproducto{
         }
         
     }
-      public function obtenerEmpleado($id)	{
-	  $sql="select * from empresa where idEmpresa='$id';";	  
+      public function obtenerDetalle($id)	{
+	  $sql="select producto.nombre, producto.precio, ordenproducto.cantidad from producto,ordenproducto where producto.idProducto = ordenproducto.idProducto and ordenproducto.idOrden = '$id';";	  
       $conexion = Conectar::conectarBD();
       $rows = $conexion->query($sql);
       $conexion->close();
