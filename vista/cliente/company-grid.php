@@ -2,6 +2,7 @@
 session_start();
 require_once __DIR__.'/../../modelo/CategoriaModelo.php';
 $idEmpresa = $_GET['pid'];
+$_SESSION['empresa'] = $idEmpresa
 //echo $idEmpresa;
 ?>
 <!DOCTYPE html>
