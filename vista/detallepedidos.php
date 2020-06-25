@@ -7,7 +7,7 @@ $id = $_GET['pid'];
 $_SESSION['id']=$id;
 $ObjDetalle = new ordenproducto();
 $a = $ObjDetalle->obtenerDetalle($id);
-$detalle = $a->fetch_row();
+//$detalle = $a->fetch_row();
 
 
 $Obj = new empresa();
@@ -144,8 +144,8 @@ print "                        <div class=\"card-body table-full-width table-res
 print "                            <table class=\"table table-hover table-striped\">\n";
 print "                                <thead>\n";
 print "                                    <th>Nombre</th>\n";
-print "                                    <th>Precio</th>\n";
 print "                                    <th>Cantidad</th>\n";
+print "                                    <th>Precio</th>\n";
 //print "                                    <th>Empresa</th>\n";
 //print "                                    <th>IDEMPRESA</th>\n";
 print "                                </thead>\n";
@@ -154,8 +154,8 @@ while($detalle = $a->fetch_row()){
 
 print "                                    <tr>\n";
 print "                                         <td> $detalle[0] </td>\n";
-print "                                         <td> $detalle[1] bs </td>\n";
-print "                                        <td><b>$detalle[2]</b></td>\n";
+print "                                         <td> $detalle[2]  </td>\n";
+print "                                        <td><b>$detalle[1] bs</b></td>\n";
 //print "                                        <td style='display:none;'>$fila[3]</td>\n";
 //$auxEmp = $ObjEmp->obtenerNombre($fila[4]);
 //$filaEmp = $auxEmp->fetch_row();
@@ -163,7 +163,7 @@ print "                                        <td><b>$detalle[2]</b></td>\n";
 //print "                                        <td style='display:none;'>$fila[5]</td>\n";
 //echo $fila[4];
 //print "                                        <td>$fila[4]</td>\n";
-print "                                        <td class=\"td-actions text-right\">\n";
+//print "                                        <td class=\"td-actions text-right\">\n";
 //$_SESSION['id'] = $fila[0];
 //$_SESSION['nomb'] = $fila[1];
 //$_SESSION['pass'] = $fila[2];
