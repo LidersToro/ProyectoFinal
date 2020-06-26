@@ -6,12 +6,13 @@ require_once __DIR__.'/../modelo/MotoqueroModelo.php';
 $Obj = new orden();
 $ObjMot = new motoquero();
 $estado = 'finalizado';
+$fecha = date("Y-m-d");
 
 echo $_SESSION['userMot'];
 echo $_SESSION['id'];
 $aux = $ObjMot->obtenerMotoquero($_SESSION['userMot']);
 $fila = $aux->fetch_row();
-$Obj->modificarEstado($estado,$fila[0],$_SESSION['id']);
+$Obj->modificarEstadoFecha($estado,$fecha,$fila[0],$_SESSION['id']);
 echo " <script>window.location = '/proyectoFinal/vista/motoqueropedidos.php';</script>";
 
 
