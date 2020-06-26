@@ -121,34 +121,8 @@ session_start();
     <section class="hero hero-normal">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3">
-                    <div class="hero__categories">
-                        <div class="hero__categories__all">
-                            <i class="fa fa-bars"></i>
-                            <span>Empresas Top</span>
-                        </div>
-                        <ul>
-                            <li><a href="#">Casa de Camba - Makro</a></li>
-                            <li><a href="#">Pollos Kiky - UPSA</a></li>
-                            <li><a href="#">Tipical Chef - Makro</a></li>
-                            <li><a href="#">Cabernet - UPSA</a></li>
-                            <li><a href="#">Bitsacream - Makro</a></li>
-                            <li><a href="#">Burguer King - Makro</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-9">
+                <div class="col-lg-12">
                     <div class="hero__search">
-                        <div class="hero__search__form">
-                            <form action="#">
-                                <div class="hero__search__categories">
-                                    Todas Las empresas
-                                    
-                                </div>
-                                <input type="text" placeholder="¿Qué Empresa busca?">
-                                <button type="submit" class="site-btn">Buscar</button>
-                            </form>
-                        </div>
                         <div class="hero__search__phone">
                             <div class="hero__search__phone__icon">
                                 <i class="fa fa-phone"></i>
@@ -227,32 +201,7 @@ session_start();
     </div>
     <!-- Map End -->
 
-    <!-- Contact Form Begin -->
-    <div class="contact-form spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="contact__form__title">
-                        <h2>Envíanos un mensaje</h2>
-                    </div>
-                </div>
-            </div>
-            <form action="#">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6">
-                        <input type="text" placeholder="Tu Nombre">
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <input type="text" placeholder="Tu Correo">
-                    </div>
-                    <div class="col-lg-12 text-center">
-                        <textarea placeholder="Tu mensaje"></textarea>
-                        <button type="submit" class="site-btn">Enviar mensaje</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
+    
     <!-- Contact Form End -->
 
     <!-- Footer Section Begin -->

@@ -151,6 +151,13 @@ class cliente{
         $conexion->close();
         return ($rows);
      }
+      public function obtenerid($nom) {
+        $sql = "SELECT * FROM cliente WHERE usuario = '$nom' ;";
+        $conexion = Conectar::conectarBD();
+        $rows = $conexion->query($sql);
+        $conexion->close();
+        return ($rows);
+     }
        public function buscarRepetidos1($usuario1) {
         $sql = " SELECT COUNT(usuario) FROM cliente where usuario ='$usuario1';";
         $conexion = Conectar::conectarBD();

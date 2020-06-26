@@ -3,6 +3,7 @@ session_start();
 $user = $_POST['nombre'];
 $clave = $_POST['contra'];
 $_SESSION['user'] = $user;
+$_SESSION['usuario'] = $user;
 $_SESSION['clave'] = $clave;
 $_SESSION['carrito'];
 

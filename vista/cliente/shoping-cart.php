@@ -39,6 +39,23 @@ for($i=0;$i<$dim;$i++){
 </head>
 
 <body>
+    <script>
+        function verificar() {
+               <?php   
+
+                 if(!$_SESSION['user'])
+                    {
+                    echo"alert(\"Inicie Sesión como cliente primero!\");";
+                    echo "return false;";
+                    }else{  
+                    echo"alert(\"Alerta Usted procedio a una compra!\");";
+                    echo "return true;";
+                    }
+                    
+                  ?>
+        }
+    </script>
+
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -221,9 +238,12 @@ echo "                                 </tr>";
                         <h5>Cart Total</h5>
                         <ul>
                             <li>Subtotal <span><?php echo $total;?></span></li>
+                            *Más el precio del delivey 10 bs
                             <li>Total <span><?php echo $total+10; ?></span></li>
                         </ul>
-                        <a href="./checkout.html" class="primary-btn">Proceder a comprar</a>
+                        <?php
+                       echo" <a href=\"./../../controlador/controladorpagar.php? pidempre=".$_SESSION['empresa']."&pidcliente=".$_SESSION['usuario']."&ptotalapagar=".$total."\" class=\"primary-btn\" onclick=\"return verificar();\">Proceder a comprar</a>";
+                        ?>
                     </div>
                 </div>
             </div>

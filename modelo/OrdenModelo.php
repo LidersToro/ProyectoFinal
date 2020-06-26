@@ -16,7 +16,7 @@ class orden{
 
     public function __construct($precTot="",$est="",$fec="",$idEmp="",$idCli="",$idMot="")
     {
-        $this->idProducto = 0;
+        $this->idOrden = 0;
         $this->precioTotal    = $precTot;
         $this->estado    = $est;
         $this->fecha = $fec;
@@ -95,16 +95,18 @@ class orden{
         $conexion = Conectar::conectarBD();
         if($conexion !=false)
         {
-            $sql = "INSERT INTO orden(precioTotal, estado, fecha, idEmpresa, idCliente, idMotoquero) VALUES(?,?,?,?,?,?);";
+            $sql = "INSERT INTO orden(precioTotal, estado, fecha, idEmpresa, idCliente) VALUES(?,?,?,?,?);";
             $stmt = $conexion->prepare($sql);
-            $stmt->bind_param('issiii', $this->precioTotal, $this->estado, $this->fecha, $this->idEmpresa, $this->idCliente, $this->idMotoquero);
+            $stmt->bind_param('issii', $this->precioTotal, $this->estado, $this->fecha, $this->idEmpresa, $this->idCliente);
             if($stmt->execute())
-            {
+            { 
+                
                 return(true);
 
             }
             else
             {
+                
                 return(false);
             }
             $conexion->close();
@@ -159,6 +161,14 @@ class orden{
      public function obtenerTodosidproduc($id)
     {
         $sql="SELECT * FROM producto where idProducto='$id';";
+        $conexion = Conectar::conectarBD();
+        $rows = $conexion->query($sql);
+        $conexion->close();
+        return($rows);
+    }
+      public function obteneridorden($id)
+    {
+        $sql="SELECT MAX(idOrden) FROM orden where idEmpresa='$id';";
         $conexion = Conectar::conectarBD();
         $rows = $conexion->query($sql);
         $conexion->close();
