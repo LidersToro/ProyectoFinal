@@ -38,6 +38,7 @@ print "            <a href=\"#pablo\" class=\"simple-text\">\n";
 print "                Delivery SLC (MOTOQUERO)\n";
 echo $_SESSION['userMot'];
 //echo $_SESSION['id'];
+
 print "            </a>\n";
 print "        </div>\n";
 print "        <ul class=\"nav\">\n";
