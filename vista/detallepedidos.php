@@ -39,7 +39,7 @@ print "    <meta charset=\"utf-8\" />\n";
 print "    <link rel=\"apple-touch-icon\" sizes=\"76x76\" href=\"../assets/img/apple-icon.png\">\n";
 print "    <link rel=\"icon\" type=\"image/png\" href=\"../assets/img/favicon.ico\">\n";
 print "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\" />\n";
-print "    <title>Light Bootstrap Dashboard - Free Bootstrap 4 Admin Dashboard by Creative Tim</title>\n";
+print "    <title>DELIVERY SLC</title>\n";
 print "    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />\n";
 print "    <!--     Fonts and icons     -->\n";
 print "    <link href=\"https://fonts.googleapis.com/css?family=Montserrat:400,700,200\" rel=\"stylesheet\" />\n";
