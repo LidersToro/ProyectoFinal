@@ -121,33 +121,10 @@ session_start();
     <section class="hero">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3">
-                    <div class="hero__categories">
-                        <div class="hero__categories__all">
-                            <i class="fa fa-bars"></i>
-                            <span>Empresas Top</span>
-                        </div>
-                        <ul>
-                            <li><a href="#">Casa de Camba - Makro</a></li>
-                            <li><a href="#">Pollos Kiky - UPSA</a></li>
-                            <li><a href="#">Tipical Chef - Makro</a></li>
-                            <li><a href="#">Cabernet - UPSA</a></li>
-                            <li><a href="#">Bitsacream - Makro</a></li>
-                            <li><a href="#">Burguer King - Makro</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-9">
+                
+                <div class="col-lg-12">
                     <div class="hero__search">
-                        <div class="hero__search__form">
-                            <form action="#">
-                                <div class="hero__search__categories">
-                                   Todas las Empresas
-                                </div>
-                                <input type="text" placeholder="¿Qué Empresa busca?">
-                                <button type="submit" class="site-btn">Buscar</button>
-                            </form>
-                        </div>
+                        
                         <div class="hero__search__phone">
                             <div class="hero__search__phone__icon">
                                 <i class="fa fa-phone"></i>
@@ -158,12 +135,11 @@ session_start();
                             </div>
                         </div>
                     </div>
-                    <div class="hero__item set-bg" data-setbg="img/hero/banner.jpg">
+                    <div class="hero__item set-bg" data-setbg="img/hero/fondo.png">
                         <div class="hero__text">
-                            <span>FRUIT FRESH</span>
-                            <h2>Vegetable <br />100% Organic</h2>
-                            <p>Free Pickup and Delivery Available</p>
-                            <a href="#" class="primary-btn">SHOP NOW</a>
+                            <span style="color:#FFFF00;">Delivery SLC</span><BR><BR><BR>
+                            <h2 style="color:#FFFF00;">Restaurantes de todo tipo <br />100% Delivery</h2>
+                            
                         </div>
                     </div>
                 </div>

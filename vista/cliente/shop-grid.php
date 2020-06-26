@@ -121,32 +121,10 @@ session_start();
     <section class="hero hero-normal">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3">
-                    <div class="hero__categories">
-                        <div class="hero__categories__all">
-                            <span>Empresas Top</span>
-                        </div>
-                        <ul>
-                            <li><a href="#">Casa de Camba - Makro</a></li>
-                            <li><a href="#">Pollos Kiky - UPSA</a></li>
-                            <li><a href="#">Tipical Chef - Makro</a></li>
-                            <li><a href="#">Cabernet - UPSA</a></li>
-                            <li><a href="#">Bitsacream - Makro</a></li>
-                            <li><a href="#">Burguer King - Makro</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-9">
+                
+                <div class="col-lg-12">
                     <div class="hero__search">
-                        <div class="hero__search__form">
-                            <form action="#">
-                                <div class="hero__search__categories">
-                                    Todas las Empresas 
-                                </div>
-                                <input type="text" placeholder="¿Qué Empresa busca?">
-                                <button type="submit" class="site-btn">Buscar</button>
-                            </form>
-                        </div>
+                        
                         <div class="hero__search__phone">
                             <div class="hero__search__phone__icon">
                                 <i class="fa fa-phone"></i>
@@ -190,12 +168,15 @@ session_start();
                         <div class="sidebar__item">
                             <h4>Empresas</h4>
                             <ul>
-                            <li><a href="#">Casa de Camba - Makro</a></li>
-                            <li><a href="#">Pollos Kiky - UPSA</a></li>
-                            <li><a href="#">Tipical Chef - Makro</a></li>
-                            <li><a href="#">Cabernet - UPSA</a></li>
-                            <li><a href="#">Bitsacream - Makro</a></li>
-                            <li><a href="#">Burguer King - Makro</a></li>
+                            <?php 
+                            $Obj1 = new empresa();
+                        $aux1 = $Obj1->obtenerTodos();
+                       while( $fila1= $aux1->fetch_row())
+                       {
+                      echo " <li><a href=\"./company-grid.php? pid=$fila1[0]\">$fila1[1]</a></li>";
+                       }
+                       ?>
+                            
                             </ul>
                         </div>
                     </div>
