@@ -5,7 +5,7 @@ require_once __DIR__.'/../modelo/OrdenModelo.php';
 require_once __DIR__.'/../modelo/MotoqueroModelo.php';
 $Obj = new orden();
 $ObjMot = new motoquero();
-$estado = 'recibido';
+$estado = 'finalizado';
 
 echo $_SESSION['userMot'];
 echo $_SESSION['id'];

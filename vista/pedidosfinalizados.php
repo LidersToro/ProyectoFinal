@@ -1,35 +1,8 @@
 <?php
 session_start();
-require_once __DIR__.'/../modelo/OrdenProductoModelo.php';
 require_once __DIR__.'/../modelo/OrdenModelo.php';
 require_once __DIR__.'/../modelo/EmpresaModelo.php';
-require_once __DIR__.'/../modelo/ClienteModelo.php';
-$id = $_GET['pid'];
-$_SESSION['id']=$id;
-$emp = $_GET['pempresa'];
-$cli = $_GET['pcliente'];
-$ObjDetalle = new ordenproducto();
-$a = $ObjDetalle->obtenerDetalle($id);
-//$detalle = $a->fetch_row();
-
-
-$Obj = new empresa();
-$aux = $Obj->obtenerDireccion($emp);
-$valor=$aux->fetch_row();
-$lat = floatval($valor[0]);
-$lon = floatval($valor[1]);
-$_SESSION['lat'] = $lat;
-$_SESSION['lon'] = $lon;
-
-
-$ObjCli = new cliente();
-$aux1 = $ObjCli->obtenerDireccion($cli);
-$valor1=$aux1->fetch_row();
-$latCli = floatval($valor1[0]);
-$lonCli = floatval($valor1[1]);
-$_SESSION['latCli'] = $latCli;
-$_SESSION['lonCli'] = $lonCli;
-
+require_once __DIR__.'/../modelo/MotoqueroModelo.php';
 //echo $_SESSION['idMot'];
 print "<!DOCTYPE html>\n";
 print "<html lang=\"en\">\n";
@@ -68,13 +41,13 @@ echo $_SESSION['userMot'];
 print "            </a>\n";
 print "        </div>\n";
 print "        <ul class=\"nav\">\n";
-print "            <li class=\"nav-item active\">\n";
+print "            <li class=\"nav-item\">\n";
 print "                <a class=\"nav-link\" href=\"pedidogestion.php\">\n";
 print "                    <i class=\"nc-icon nc-chart-pie-35\"></i>\n";
 print "                    <p>PEDIDOS DISPONIBLES</p>\n";
 print "                </a>\n";
 print "            </li>\n";
-print "            <li class=\"nav-item\">\n";
+print "            <li class=\"nav-item active\">\n";
 print "                <a class=\"nav-link\" href=\"./motoqueropedidos.php\">\n";
 print "                    <i class=\"nc-icon nc-chart-pie-35\"></i>\n";
 print "                    <p>MIS PEDIDOS</p>\n";
@@ -105,7 +78,7 @@ print "<div class=\"main-panel\">\n";
 print "    <!-- Navbar -->\n";
 print "    <nav class=\"navbar navbar-expand-lg \" color-on-scroll=\"500\">\n";
 print "        <div class=\"container-fluid\">\n";
-print "            <a class=\"navbar-brand\" href=\"categoriagestion.php\"> Lista de Pedidos </a>\n";
+print "            <a class=\"navbar-brand\" href=\"categoriagestion.php\"> Lista de Pedidos Finalizados </a>\n";
 print "            <button href=\"\" class=\"navbar-toggler navbar-toggler-right\" type=\"button\" data-toggle=\"collapse\" aria-controls=\"navigation-index\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n";
 print "                <span class=\"navbar-toggler-bar burger-lines\"></span>\n";
 print "                <span class=\"navbar-toggler-bar burger-lines\"></span>\n";
@@ -143,117 +116,54 @@ print "            <div class=\"row\">\n";
 print "                <div class=\"col-md-12\">\n";
 print "                    <div class=\"card strpied-tabled-with-hover\">\n";
 print "                        <div class=\"card-header \">\n";
-print "                            <h4 class=\"card-title\">Lista de Pedidos</h4>\n";
+print "                            <h4 class=\"card-title\">Mis Pedidos</h4>\n";
 print "                            <p class=\"card-category\">Delivery SLC</p>\n";
-print "                            <button type=\"submit\" onclick=\"location.href='/../proyectoFinal/controlador/detallepedidocontrolador.php'\" class=\"btn btn-info btn-fill pull-left\">Aceptar Pedido</button>\n";
-print "<br>";
-print "<br>";
-print "<br>";
-print "                            <button type=\"submit\" onclick=\"location.href='/../proyectoFinal/controlador/controladorgooglemaps.php'\" class=\"btn btn-info btn-fill pull-left\">Ver Trayectoria</button>\n";
+//print "                            <button type=\"submit\" onclick=\"location.href='pedidosfinalizados.php'\" class=\"btn btn-info btn-fill pull-left\">Ver Pedidos Finalizados</button>\n";
 print "                        </div>\n";
 print "                        <div class=\"card-body table-full-width table-responsive\">\n";
 
-//$Obj = new orden();
-//$ObjEmp = new Empresa();
-//$estado = 'recibido';
-//$estado1 = 'finalizado';
+$Obj = new orden();
+$ObjEmp = new Empresa();
+$ObjMot = new Motoquero();
+$estado = 'recibido';
+$estado1 = 'finalizado';
+$a = $ObjMot->obtenerMotoquero($_SESSION['userMot']);
+$rec = $a->fetch_row();
+$aux = $Obj->misPedidos($estado1,$rec[0]);
 //$aux = $Obj->obtenerTodos($estado,$estado1);
 //$aux1 = $Obj->ultimoCodigo();
-?>
-<div id="map_canvas" style="height: 500px;width: 1550px;margin: 0.6em;"></div>
-
-    <script>
-function initMap() {
-      var geocoder = new google.maps.Geocoder();
-  var lat = -17.749,
-      lng = -63.176,
-      latlng = new google.maps.LatLng(<?php echo $lat;?>,<?php echo $lon;?>),
-      latlng1 = new google.maps.LatLng(<?php echo $latCli;?>,<?php echo $lonCli;?>),
-      image = 'http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png';
-  var mapOptions = {
-      center: new google.maps.LatLng(<?php echo $lat;?>,<?php echo $lon;?>),
-      zoom: 13,
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      panControl: true,
-      panControlOptions: {
-          position: google.maps.ControlPosition.TOP_RIGHT
-      },
-      zoomControl: true,
-      zoomControlOptions: {
-          style: google.maps.ZoomControlStyle.LARGE,
-          position: google.maps.ControlPosition.TOP_left
-      }
-  },
-      map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions),
-
-      marker = new google.maps.Marker({
-          position: latlng,
-          map: map,
-          icon: image,
-          title: "Empresa",
-          draggable: false,
-      });
-          marker = new google.maps.Marker({
-          position: latlng1,
-          map: map,
-              icon: image,
-          title: "Cliente",
-          draggable: false,
-      });
-
-   var input = document.getElementById('searchTextField');
-    var infowindow = new google.maps.InfoWindow();
-
-        google.maps.event.addListener(marker, 'dragend', function () {
-            var lat = marker.getPosition().lat();
-            var lng = marker.getPosition().lng();
-
-document.getElementById('MapLat').value = lat;
-document.getElementById('MapLon').value = lng;
-
-   });
-        }
-
-    </script>
-
-               <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCirmC7s8JbiGHJCCC_nYFp30xg2Ozzy1I&callback=initMap">
-    </script>
-
-
-<?php
 print "                            <table class=\"table table-hover table-striped\">\n";
 print "                                <thead>\n";
-print "                                    <th>Nombre</th>\n";
-print "                                    <th>Cantidad</th>\n";
-print "                                    <th>Precio</th>\n";
-//print "                                    <th>Empresa</th>\n";
+print "                                    <th>ID</th>\n";
+print "                                    <th>Monto Total</th>\n";
+print "                                    <th>Estado</th>\n";
+print "                                    <th>Empresa</th>\n";
 //print "                                    <th>IDEMPRESA</th>\n";
 print "                                </thead>\n";
 print "                                <tbody>\n";
-while($detalle = $a->fetch_row()){
+while($fila = $aux->fetch_row()){
 
 print "                                    <tr>\n";
-print "                                         <td> $detalle[0] </td>\n";
-print "                                         <td> $detalle[2]  </td>\n";
-print "                                        <td><b>$detalle[1] bs</b></td>\n";
-//print "                                        <td style='display:none;'>$fila[3]</td>\n";
-//$auxEmp = $ObjEmp->obtenerNombre($fila[4]);
-//$filaEmp = $auxEmp->fetch_row();
-//print "                                         <td> $id </td>\n";
-//print "                                        <td style='display:none;'>$fila[5]</td>\n";
+print "                                         <td> $fila[0] </td>\n";
+print "                                         <td> $fila[1] bs </td>\n";
+print "                                        <td><b>$fila[2]</b></td>\n";
+print "                                        <td style='display:none;'>$fila[3]</td>\n";
+$auxEmp = $ObjEmp->obtenerNombre($fila[4]);
+$filaEmp = $auxEmp->fetch_row();
+print "                                         <td> $filaEmp[0] </td>\n";
+print "                                        <td style='display:none;'>$fila[5]</td>\n";
 //echo $fila[4];
 //print "                                        <td>$fila[4]</td>\n";
-//print "                                        <td class=\"td-actions text-right\">\n";
+print "                                        <td class=\"td-actions text-right\">\n";
 //$_SESSION['id'] = $fila[0];
 //$_SESSION['nomb'] = $fila[1];
 //$_SESSION['pass'] = $fila[2];
-//print "                                            <button type=\"submit\" onclick=\"location.href='detallepedidos.php ? pid=$fila[0]&pnombre=$fila[1]&pdescripcion=$fila[2]'\" rel=\"tooltip\" title=\"Editar\" name = \"editar$fila[0]\" value = \"$fila[0]\" class=\"btn btn-info btn-simple btn-link\">\n";
+//print "                                            <button type=\"submit\" onclick=\"location.href='detallepedidos1.php ? pid=$fila[0]&pnombre=$fila[1]&pdescripcion=$fila[2]&pempresa=$fila[4]&pcliente=$fila[5]'\" rel=\"tooltip\" title=\"Editar\" name = \"editar$fila[0]\" value = \"$fila[0]\" class=\"btn btn-info btn-simple btn-link\">\n";
 //print "                                                <i class=\"fa fa-edit\">Ver Detalles</i>\n";
 //print "                                            </button>\n";
 //print "                                            <button type=\"button\" onclick=\"location.href='../controlador/controladorBorrarCategoria.php ? pid=$fila[0]'\" rel=\"tooltip\" title=\"Eliminar\" name = \"eliminar$fila[0]\" class=\"btn btn-danger btn-simple btn-link\">\n";
 //print "                                                <i class=\"fa fa-times\"></i>\n";
-//print "                                            </button>\n";
+print "                                            </button>\n";
 print "                                        </td>\n";
 print "                                    </tr>\n";
 print "                                    <tr>\n";
@@ -280,6 +190,7 @@ if(isset($_POST['editar'.$i]))
     $_SESSION['nomb'] = $ej[1];
     }
   }*/
+
 print "                                </tbody>\n";
 print "                            </table>\n";
 print "                        </div>\n";

@@ -127,7 +127,13 @@ class cliente{
             $conexion->close();
         }
     }
-
+        public function obtenerDireccion($id) {
+        $sql = "SELECT latitud,longitud FROM cliente WHERE idCliente= '$id';";
+         $conexion = Conectar::conectarBD();
+        $rows = $conexion->query($sql);
+        $conexion->close();
+        return ($rows);
+     }
 
     public function obtenerTodos()
     {

@@ -173,6 +173,15 @@ class orden{
         $conexion->close();
         return($rows);
     }
+    public function misPedidos($criterio,$id)
+    {
+        $sql="select * from orden where estado = '$criterio' and idMotoquero = '$id';";
+        $conexion = Conectar::conectarBD();
+        $rows = $conexion->query($sql);
+        $conexion->close();
+        return($rows);
+    }
+
     public function obtenerProductos($id)
     {
         $sql="SELECT * FROM producto where idEmpresa='$id';";

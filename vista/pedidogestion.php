@@ -153,7 +153,7 @@ print "                                        <td class=\"td-actions text-right
 //$_SESSION['id'] = $fila[0];
 //$_SESSION['nomb'] = $fila[1];
 //$_SESSION['pass'] = $fila[2];
-print "                                            <button type=\"submit\" onclick=\"location.href='detallepedidos.php ? pid=$fila[0]&pnombre=$fila[1]&pdescripcion=$fila[2]'\" rel=\"tooltip\" title=\"Editar\" name = \"editar$fila[0]\" value = \"$fila[0]\" class=\"btn btn-info btn-simple btn-link\">\n";
+print "                                            <button type=\"submit\" onclick=\"location.href='detallepedidos.php ? pid=$fila[0]&pnombre=$fila[1]&pdescripcion=$fila[2]&pempresa=$fila[4]&pcliente=$fila[5]'\" rel=\"tooltip\" title=\"Editar\" name = \"editar$fila[0]\" value = \"$fila[0]\" class=\"btn btn-info btn-simple btn-link\">\n";
 print "                                                <i class=\"fa fa-edit\">Ver Detalles</i>\n";
 print "                                            </button>\n";
 //print "                                            <button type=\"button\" onclick=\"location.href='../controlador/controladorBorrarCategoria.php ? pid=$fila[0]'\" rel=\"tooltip\" title=\"Eliminar\" name = \"eliminar$fila[0]\" class=\"btn btn-danger btn-simple btn-link\">\n";
