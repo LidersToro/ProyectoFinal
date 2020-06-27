@@ -237,9 +237,9 @@ echo "                                 </tr>";
                     <div class="shoping__checkout">
                         <h5>Cart Total</h5>
                         <ul>
-                            <li>Subtotal <span><?php echo $total;?></span></li>
+                            <li>Subtotal <span><?php echo $total;?> Bs</span></li>
                             *Más el precio del delivey 10 bs
-                            <li>Total <span><?php echo $total+10; ?></span></li>
+                            <li>Total <span><?php echo $total+10; ?> Bs</span></li>
                         </ul>
                         <?php
                        echo" <a href=\"./../../controlador/controladorpagar.php? pidempre=".$_SESSION['empresa']."&pidcliente=".$_SESSION['usuario']."&ptotalapagar=".$total."\" class=\"primary-btn\" onclick=\"return verificar();\">Proceder a comprar</a>";

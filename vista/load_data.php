@@ -31,7 +31,7 @@ print "                                <tbody>\n";
         $output .= ' <td><img src="data:image/jpeg;base64,'.base64_encode( $row[4] ).'"height="200" width="200" class="img-thumnail"/></td>';
         $output .= "<td>$row[1]</td>\n";
         $output .= "<td>$row[2]</td>\n";
-        $output .= "<td>$row[3]</td>\n";
+        $output .= "<td>$row[3] bs</td>\n";
         $output .= "<td style='display:none;'>$row[5]</td>\n";
         $output .= "<td style='display:none;'>$row[6]</td>\n";
         $output .= "<td class=\"td-actions text-right\">\n";
