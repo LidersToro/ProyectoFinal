@@ -250,7 +250,7 @@ $usuario = $_GET['pusuario'];
                                             </div>                                          
                                        
 
-                                        <input type="submit" name ="btnModificar" id="btnModificar" class="btn btn-info btn-fill pull-right" value="Modificar Empresa" onclick="return verificar();">
+                                        <input type="submit" name ="btnModificar" id="btnModificar" class="btn btn-info btn-fill pull-right" value="Modificar Motoquero" onclick="return verificar();">
                                          <!--<div id="map_canvas" style="height: 350px;width: 500px;margin: 0.6em;"></div>-->
 
 
