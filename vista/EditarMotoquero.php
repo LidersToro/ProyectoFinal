@@ -130,7 +130,7 @@ $usuario = $_GET['pusuario'];
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Modificar Empresa</h4>
+                                    <h4 class="card-title">Modificar Motoquero</h4>
                                 </div>
                                 <div class="card-body">
 
