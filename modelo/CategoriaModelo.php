@@ -11,6 +11,7 @@ class categoria{
 
 
 
+
     public function __construct($nom="",$desc="",$imag="",$idEmp="")
     {
         $this->idCategoria = 0;
